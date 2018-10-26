@@ -1,4 +1,4 @@
-package kr.co.codin.repository.service;
+package kr.co.codin.test.service;
 
 import org.springframework.stereotype.Service;
 

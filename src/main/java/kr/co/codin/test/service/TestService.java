@@ -1,4 +1,4 @@
-package kr.co.codin.repository.service;
+package kr.co.codin.test.service;
 
 public interface TestService {
 

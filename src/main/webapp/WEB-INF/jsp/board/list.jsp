@@ -89,7 +89,7 @@
                         <option>최근 1년</option>
                         <option>전체검색</option>
                     </select>
-                <button id="button" style="float:right;"><img src="C:/git/codin-mini2/src/main/webapp/WEB-INF/img/KakaoTalk_20181028_222543606.gif" style="height: 25px;"></button>
+                <button id="button" style="float:right;"><img src="/codin_mini/img/KakaoTalk_20181028_222543606.gif" style="height: 25px;"></button>
             </form>
         </span>  
     </div>
@@ -261,7 +261,7 @@
 
     <hr>
 
-    <a class="btn btn-default pull-right"><img src="/codin_mini/src/main/webapp/img/KakaoTalk20181028221348368.gif" style="height:25px;"/></a><br>
+    <a class="btn btn-default pull-right"><img src="/codin_mini/img/KakaoTalk20181028221348368.gif" style="height:25px;"/></a><br>
     <div class="text-center">
         <ul class="pagination">
             <li><a href="#"><<</a></li>

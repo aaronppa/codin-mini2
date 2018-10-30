@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="kr.co.codin.repository.mapper.GallaryMapper">
+	<resultMap id="gallaryMap" type="gallary">
+		<result column="gall_no" property="gallNo"/>
+		<result column="gall_writer" property="gallWriter"/>
+		<result column="gall_title" property="gallTitle"/>
+		<result column="gall_content" property="gallContent"/>
+		<result column="gall_reg_date" property="gallRegDate"/>
+		<result column="gall_view_cnt" property="gallViewCnt"/>
+	</resultMap>
+	
+	<select id="selectGall" resultMap="gallaryMap">
+		select *
+		  from gallary
+		order by gall_no desc
+	</select>
+	
+	<select id="selectGallByNo" parameterType="int" resultMap="gallaryMap">
+		select * 
+		  from gallary
+		 where no=#{no}
+	</select>
+
+</mapper>

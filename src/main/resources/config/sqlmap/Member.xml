@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.codin.repository.mapper.MemberMapper">
+	<resultMap id="memberMap" type="Member">
+		<result column="member_no" property="memberNo" />
+		<result column="member_id" property="memberId" />
+		<result column="member_password" property="memberPassword" />
+		<result column="member_email" property="memberEmail" />
+		<result column="member_name" property="memberName" />
+		<result column="member_grade" property="memberGrade" />
+		<result column="member_reg_date" property="memberRegDate" />
+		<result column="member_age" property="memberAge" />
+		<result column="member_gender" property="memberGender" />
+	</resultMap>
+	
+	<select id="selectMember" resultMap="memberMap">
+		select *
+		from member
+	</select>
+</mapper>

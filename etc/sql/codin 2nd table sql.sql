@@ -6,7 +6,7 @@ CREATE TABLE ticket (
 	ticket_start datetime NOT NULL, 
 	ticket_end datetime NOT NULL, 
 	ticket_text VARCHAR(255),
-	ticket_progress INT NOT NULL 
+	ticket_progress INT default 0 NOT NULL 
 );
 
 CREATE TABLE ticket_group (
@@ -32,8 +32,8 @@ CREATE TABLE member (
 	member_password VARCHAR(50) NOT NULL, 
 	member_email VARCHAR(50) NOT NULL, 
 	member_name VARCHAR(50) NOT NULL, 
-	member_grade char(1) NOT NULL,
-	member_reg_date datetime NOT NULL,
+	member_grade char(1) default '1' NOT NULL,
+	member_reg_date datetime default now() NOT NULL,
 	member_age INT, 
 	member_gender char(1)
 );
@@ -73,7 +73,7 @@ CREATE TABLE message (
 	from_user_no INT NOT NULL, 
 	subject VARCHAR(50), 
 	message_body VARCHAR(1000),
-	date_sent datetime,
+	date_sent datetime default now(),
 	thread INT
 );
 
@@ -98,8 +98,8 @@ CREATE TABLE gallary (
 	gall_writer VARCHAR(20), 
 	gall_title VARCHAR(30),
 	gall_content VARCHAR(600),
-	gall_reg_date datetime, 
-	gall_view_cnt INT
+	gall_reg_date datetime default now(), 
+	gall_view_cnt INT default 0
 );
 
 CREATE TABLE gall_file (
@@ -116,7 +116,7 @@ CREATE TABLE gall_comment (
 	gall_com_content VARCHAR(50),
 	gall_no INT,
 	gall_com_writer varchar(20),
-	gall_com_reg_date datetime
+	gall_com_reg_date datetime default now()
 );
 
 CREATE TABLE gall_like (
@@ -130,15 +130,16 @@ CREATE TABLE board (
 	board_title VARCHAR(50) NOT NULL,
 	board_content varchar(4000) NOT NULL,
 	board_id varchar(50) NOT NULL, 
-	board_date datetime NOT NULL, 
-	category_no INT 
+	board_date datetime default now() NOT NULL, 
+    board_view_cnt int default 0,
+	category_no INT
 );
 
 CREATE TABLE board_comment (
 	comment_no INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 	comment_id VARCHAR(50) NOT NULL, 
 	comment_content VARCHAR(500) NOT NULL, 
-	comment_date datetime NOT NULL,
+	comment_date datetime default now() NOT NULL,
 	board_no INT NOT NULL 
 );
 

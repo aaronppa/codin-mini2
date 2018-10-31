@@ -38,10 +38,10 @@
 	<table>
 	<div class="table">
 	    <tr>
-			<td><a href="./detail.jsp"><img src="./img/aaaa.jpg" alt="경로 무엇..??" class="img-rounded"></a></td>
-			<td><img src="/codin_mini/img/KakaoTalk20181028221348368.gif" alt="경로 무엇..??" class="img-rounded"></td>
-			<td><img src="./img/sea.jpg" alt="경로 무엇..??" class="img-rounded"></td>
-			<td><img src="./img/sea2.jpg" alt="경로 무엇..??" class="img-rounded"></td>
+			<td><a href="/detail.jsp"><img src="/codin_mini/gallimg/aaaa.jpg" alt="경로 무엇..??" class="img-rounded"></a></td>
+			<td><img src="/codin_mini/gallimg/camel.jpg" alt="경로 무엇..??" class="img-rounded"></td>
+			<td><img src="/codin_mini/gallimg/sea.jpg" alt="경로 무엇..??" class="img-rounded"></td>
+			<td><img src="/codin_mini/gallimg/sea2.jpg" alt="경로 무엇..??" class="img-rounded"></td>
 		</tr>    
 	</div>
 	</table>

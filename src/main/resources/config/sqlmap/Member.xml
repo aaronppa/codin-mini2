@@ -18,4 +18,12 @@
 		select *
 		from member
 	</select>
+	
+	<insert id="insertMember" parameterType="Member">
+		insert into member (
+			member_id, member_password, member_email, member_name
+		) values (
+			#{memberId}, #{memberPassword}, #{memberEmail}, #{memberName}
+		)
+	</insert>
 </mapper>

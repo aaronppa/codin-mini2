@@ -1,4 +1,4 @@
-package kr.co.codin.test.service;
+package kr.co.codin.member.service;
 
 import java.util.List;
 
@@ -10,12 +10,17 @@ import kr.co.codin.repository.mapper.MemberMapper;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-
-	@Autowired
-	MemberMapper mapper;
 	
+	@Autowired
+	private MemberMapper mapper;
+
 	@Override
-	public List<Member> selectMember() {
+	public void signup(Member member) {
+		mapper.insertMember(member);
+	}
+
+	@Override
+	public List<Member> list() {
 		return mapper.selectMember();
 	}
 

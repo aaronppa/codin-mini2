@@ -11,7 +11,7 @@ import kr.co.codin.repository.domain.Member;
 import kr.co.codin.test.service.MemberService;
 
 @Controller
-@RequestMapping("member")
+@RequestMapping("ticket")
 public class TicketController {
 
 	@Autowired

@@ -8,8 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("gallary")
 public class GallaryController {
 
+	
 	@RequestMapping("list.do")
-	public void test(Model model) throws Exception{
+	public void list(Model model) throws Exception{
 		model.addAttribute("gall");
 	}
+	@RequestMapping("detail.do")
+	public void detail(int no) throws Exception{
+		
+	}
+
 }

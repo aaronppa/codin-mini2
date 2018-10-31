@@ -10,7 +10,7 @@
 <%@ include file="/WEB-INF/jsp/include/basicInclude.jsp" %>
 </head>
 <body>
-<c:import url="/jsp/include/top.html" />
+<c:import url="/WEB-INF/jsp/include/top.jsp" />
     <div class="container-fluid">
         <div class="container-sidebar col-2">
             <div class="sidebar icon">
@@ -78,6 +78,45 @@
             </div>
         </div>
     </div>
+    
+    	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">New message</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<!-- 수신자 검색 자동완성 추가 필요 -->
+							<label for="toUserNo" class="col-form-label">수신자:</label>
+							<input type="text" class="form-control" id="toUser-name" name="toUserName">
+							<input type="hidden" class="form-control" id="toUserNo" name="toUserNo">
+							<label for="subject" class="col-form-label">제목/쪽지메세지:</label>
+							<input type="text" class="form-control" id="subject" name="subject" maxlength="50">
+						</div>
+						<div class="form-group">
+							<label for="message-body" class="col-form-label">본문내용:</label>
+							<textarea class="form-control" id="message-body"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">임시저장</button>
+					<button type="button" class="btn btn-primary">발신</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    
     <script>
         var navigation = $('#nav-main').okayNav();
         function doSearch(){

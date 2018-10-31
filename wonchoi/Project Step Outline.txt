@@ -1,0 +1,22 @@
+Codin Mini Project 2
+
+Message Communication Module
+
+1. UI Design
+
+2. HTML Frame Build
+    1) HTML coding
+        a) Main Inbox (other inbox UI HTML equivalent)
+        b) Write Email HTML Modal
+        c) Detail Mail view
+    2) CSS coding
+
+3. JSP
+
+4. Mapper XML
+
+5. Mapper.class
+
+6. Controller
+
+7. Service 

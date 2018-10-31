@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.codin.repository.mapper.MsgMapper">
+	<resultMap type="Message" id="MessageMap">
+		<result column="msg_id" property="msgId"/>
+		<result column="type_id" property="typeId"/>
+		<result column="from_user_no" property="fromUserNo"/>
+		<result column="subject" property="subject"/>
+		<result column="message_body" property="body"/>
+	</resultMap>
+</mapper>

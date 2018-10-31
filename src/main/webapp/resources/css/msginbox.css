@@ -1,0 +1,148 @@
+@charset "UTF-8";
+.container-fluid{
+    position: absolute;
+    top: 50px;
+    padding: 0px;
+}
+
+.container-body, .container-sidebar{
+    position: relative;
+    border: 1px black dotted;
+    border-radius: 15px;
+    float:left;
+    height: 660px;
+    padding: 10px;
+    margin: 0px;
+}
+
+.sidebar.icon *{
+    margin-right: auto;
+    margin-left: 33%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container-body{
+    background-color: rgb(212, 236, 255);
+}
+
+.msg-menu-btn{
+    padding: 0px;
+}
+
+.msg-menu-btn > li{
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 15px;
+    width: 150px;
+    padding: 7px;
+    list-style-type: none;
+    text-align: center;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+li.msg-menu-btn:hover{
+    box-shadow: 0 2px 2px 2px grey;
+}
+
+.msg-menu-btn > li:nth-child(1){
+    background-color: rgb(51, 64, 138);
+    width: 170px; height: 50px;
+    line-height: 38px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+.msg-menu-btn > li:nth-child(2){
+    background-color: magenta;
+}
+.msg-menu-btn > li:nth-child(3){
+    background-color: aquamarine
+}
+.msg-menu-btn > li:nth-child(4){
+    background-color: rgb(150, 228, 105);
+}
+.msg-menu-btn > li:nth-child(5){
+    background-color: rgb(214, 73, 73);
+}
+.msg-menu-btn > li:nth-child(6){
+    background-color: rgb(173, 178, 255);
+}
+.msg-menu-btn > li:nth-child(7){
+    background-color: rgb(124, 124, 124);
+}
+.msg-menu-btn > li:nth-child(8){
+    background-color: rgb(172, 172, 172);
+}
+
+.searchkeyword{
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 40%;
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+form.searchform button{
+    float: left;
+    width: 4%;
+    padding: 10px;
+    background: #f1f1f1;
+    color: darkgreen;
+    font-size: 17px;
+    /* border: 1px solid grey; */
+    border-left: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+div.msglist{
+    margin-top: 55px;
+    height: 550px;
+}
+
+div.msglist table * {
+  border: 1px solid #5a5a5a !important;
+}
+div.msglist table thead th {
+    text-align: center;
+    height: 15px !important;
+    padding: 0px  !important;
+    font-weight:500;
+}
+
+table {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+}
+
+table thead {
+    /* head takes the height it requires, 
+    and it's not scaled when table is resized */
+    flex: 0 0 auto;
+    width: calc(100% - 0.9em);
+}
+
+table tbody {
+    /* body takes all the remaining available space */
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: scroll;
+}
+
+thead > tr{
+    height: 10%;
+    width: 100%
+}
+
+table thead,
+table tbody tr {
+    display: table;
+    table-layout: fixed;
+}

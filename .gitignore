@@ -1,5 +1,5 @@
 target/
 *.properties
-*.classpath
+.classpath
 *.class
 Thumbs.db

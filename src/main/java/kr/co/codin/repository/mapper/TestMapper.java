@@ -1,5 +1,9 @@
 package kr.co.codin.repository.mapper;
 
-public class TestMapper {
+import kr.co.codin.repository.domain.Member;
 
+public interface TestMapper {
+
+	Member selectMember1(int no);
+	
 }

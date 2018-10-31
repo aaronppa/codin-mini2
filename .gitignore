@@ -1,2 +1,5 @@
 target/
-.properties
+*.properties
+*.classpath
+*.class
+Thumbs.db

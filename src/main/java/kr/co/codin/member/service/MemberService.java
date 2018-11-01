@@ -15,7 +15,7 @@ import kr.co.codin.repository.domain.Member;
 public interface MemberService {
 	/**
 	 * 회원 가입에 대한 비즈니스 로직 처리
-	 * @param member
+	 * @param Member 객체
 	 */
 	void signup(Member member);
 	
@@ -24,4 +24,11 @@ public interface MemberService {
 	 * @return List<Member>
 	 */
 	List<Member> list();
+	
+	/**
+	 * 로그인에 대한 비즈니스 로직 처리
+	 * @param Member 객체
+	 * @return Member 객체
+	 */
+	Member login(Member member);
 }

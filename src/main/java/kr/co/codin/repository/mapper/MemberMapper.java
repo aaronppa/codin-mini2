@@ -7,4 +7,5 @@ import kr.co.codin.repository.domain.Member;
 public interface MemberMapper {
 	List<Member> selectMember();
 	void insertMember(Member member);
+	Member selectMemberById(Member member);
 }

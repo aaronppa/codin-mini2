@@ -2,6 +2,8 @@ package kr.co.codin.repository.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Member {
 	private int memberNo;
 	private String memberId;
@@ -9,7 +11,10 @@ public class Member {
 	private String memberEmail;
 	private String memberName;
 	private char memberGrade;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date memberRegDate;
+	
 	private int memberAge;
 	private char memberGender;
 	
@@ -49,6 +54,7 @@ public class Member {
 	public void setMemberGrade(char memberGrade) {
 		this.memberGrade = memberGrade;
 	}
+	
 	public Date getMemberRegDate() {
 		return memberRegDate;
 	}

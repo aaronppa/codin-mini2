@@ -16,7 +16,8 @@
 	
 	<select id="selectMember" resultMap="memberMap">
 		select *
-		from member
+		  from member
+		 order by member_no
 	</select>
 	
 	<insert id="insertMember" parameterType="Member">
@@ -26,4 +27,11 @@
 			#{memberId}, #{memberPassword}, #{memberEmail}, #{memberName}
 		)
 	</insert>
+	
+	<select id="selectMemberById" parameterType="Member" resultMap="memberMap">
+		select *
+		  from member
+		 where member_id = #{memberId}
+		   and member_password = #{memberPassword}
+	</select>
 </mapper>

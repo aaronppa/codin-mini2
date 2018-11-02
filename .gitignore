@@ -1,7 +1,0 @@
-*/target/**
-*.properties
-.classpath
-*.class
-Thumbs.db
-/target/
-db.properties

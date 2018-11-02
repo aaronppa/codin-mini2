@@ -3,3 +3,5 @@
 .classpath
 *.class
 Thumbs.db
+/target/
+db.properties

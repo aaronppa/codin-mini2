@@ -146,3 +146,42 @@ table tbody tr {
     display: table;
     table-layout: fixed;
 }
+
+/* Modal Size */
+.modal-dialog.writeForm{
+	width: 900px !important;
+} 
+
+.modal-dialog{
+	max-width: 1200px !important;
+	height: 100%;
+} 
+
+.modal-content{
+	height: 90%;
+	overflow-y: auto;
+}
+
+.modal-header, .modal-body{
+	padding-bottom: 0px;
+}
+
+.form-control.info{
+	display: inline-block !important;
+	width: 90% !important;
+}
+
+input#wToUser-name{
+	margin-left: 60px;
+}
+input{
+	padding: 0px;
+}
+
+.modal-header, .modal-footer {
+	border: none;
+}
+
+textarea#message-body{
+	height: 300px;
+}

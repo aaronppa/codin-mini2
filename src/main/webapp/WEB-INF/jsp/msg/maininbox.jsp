@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Message Main Inbox</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/msginbox.css">
 <%@ include file="/WEB-INF/jsp/include/basicInclude.jsp" %>
+<link rel="stylesheet" href="<c:url value="/resources/css/msginbox.css"/>">
+<style>
+</style>
 </head>
 <body>
 <c:import url="/WEB-INF/jsp/include/top.jsp" />
@@ -16,7 +18,6 @@
             <div class="sidebar icon">
                 <i class="fas fa-envelope fa-5x"></i>
             </div>
-            
             <span class="glyphicon glyphicon-pencil"></span>
             <ul class="msg-menu-btn">
                 <li class="msg-menu-btn writemsg"><i class="fas fa-pencil-alt">&nbsp;&nbsp;&nbsp;</i>메세지 작성</li>
@@ -25,6 +26,7 @@
                 <li class="msg-menu-btn memoinbox"><i class="fas fa-comment-alt">&nbsp;&nbsp;&nbsp;</i>쪽지 Inbox</li>
                 <li class="msg-menu-btn announceinbox"><i class="far fa-bell">&nbsp;&nbsp;&nbsp;</i>공지 Inbox</li>
                 <li class="msg-menu-btn draftbox"><i class="far fa-edit">&nbsp;&nbsp;&nbsp;</i>Draft</li>
+                <li class="msg-menu-btn sentbox"><i class="far fa-paper-plane">&nbsp;&nbsp;&nbsp;</i>보낸메세지</li>
                 <li class="msg-menu-btn trash"><i class="far fa-trash-alt">&nbsp;&nbsp;&nbsp;</i>휴지통</li>
 
             </ul>
@@ -77,14 +79,15 @@
                 </div>
             </div>
         </div>
-    </div>
-    
-    	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+       </div>
+       
+ <!-- Modal WriteForm -->
+	<div class="modal fade" id="writeFormModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog writeForm" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">New message</h5>
+					<h5 class="modal-title" id="exampleModalLabel">메세지 작성</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -92,37 +95,35 @@
 				</div>
 				<div class="modal-body">
 					<form>
-						<div class="form-group">
+						<div class="form-group info">
 							<!-- 수신자 검색 자동완성 추가 필요 -->
-							<label for="toUserNo" class="col-form-label">수신자:</label>
-							<input type="text" class="form-control" id="toUser-name" name="toUserName">
-							<input type="hidden" class="form-control" id="toUserNo" name="toUserNo">
-							<label for="subject" class="col-form-label">제목/쪽지메세지:</label>
-							<input type="text" class="form-control" id="subject" name="subject" maxlength="50">
+							<label for="toUserNo" class="col-form-label">수신자:</label> 
+							<input type="text" class="form-control info" id="wToUser-name" name="toUserName">
+							<input type="hidden" class="form-control info" id="wToUserNo" name="toUserNo"> 
+							<label for="subject" class="col-form-label">제목/쪽지메세지:</label> 
+							<input type="text" class="form-control info" id="wSubject" name="subject" maxlength="50">
 						</div>
-						<div class="form-group">
+						<div class="form-group body">
 							<label for="message-body" class="col-form-label">본문내용:</label>
-							<textarea class="form-control" id="message-body"></textarea>
+							<textarea class="form-control" id="message-body" placeholder="제목만 입력하고 내용이 없으면 쪽지 형태로 발송됩니다."></textarea>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 					<button type="button" class="btn btn-primary">임시저장</button>
 					<button type="button" class="btn btn-primary">발신</button>
 				</div>
 			</div>
 		</div>
 	</div>
-    
-    
-    <script>
-        var navigation = $('#nav-main').okayNav();
-        function doSearch(){
-            var f = document.mForm 
-            f.submit()
-        }
+
+
+
+	<script>
+    $("li.msg-menu-btn.writemsg").on("click", function(){
+		$("#writeFormModal").modal('show');   	
+    });
     </script>
 </body>
 </html>

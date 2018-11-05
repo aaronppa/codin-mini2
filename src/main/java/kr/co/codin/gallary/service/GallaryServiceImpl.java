@@ -4,7 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
+import kr.co.codin.repository.domain.GallComment;
+import kr.co.codin.repository.domain.GallFile;
 import kr.co.codin.repository.domain.Gallary;
 import kr.co.codin.repository.mapper.GallaryMapper;
 
@@ -12,38 +16,99 @@ import kr.co.codin.repository.mapper.GallaryMapper;
 public class GallaryServiceImpl implements GallaryService{
 
 	@Autowired
-	GallaryMapper mapper;
+	private GallaryMapper mapper;
+
+	@Override
+	public List<Gallary> gallList() {
+		return mapper.selectGall();
+	}
+
+	
+	
+//	@Override
+//	public Integer updateViewCnt(Integer gallViewCnt) {
+//		mapper.updateViewCnt(gallViewCnt);
+//	
+//	}
+
+
 
 	@Override
 	public void writeGall(Gallary gallary) {
-		// TODO Auto-generated method stub
-		
+		mapper.insertGall(gallary);
+	}
+
+	
+	@Override
+	public Gallary updateForm(int gallNo) {
+		return mapper.selectGallByNo(gallNo);
 	}
 
 	@Override
-	public void updateGall(int gallNo) {
-		// TODO Auto-generated method stub
-		
+	public void updateGall(Gallary gallary) {
+		mapper.updateGall(gallary);
 	}
 
+	
 	@Override
 	public void deleteGall(int gallNo) {
-		// TODO Auto-generated method stub
+		mapper.deleteGall(gallNo);
 		
-	}
-
-	@Override
-	public List<Gallary> gallList(Gallary gallary) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
 	public Gallary detailGall(int gallNo) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return mapper.selectGallByNo(gallNo);
 	}
 
+	@Override
+	public void insertGallComment(GallComment gallComment) {
+		 mapper.insertGallComment(gallComment);
+	}
+
+
+
+
+	@Override
+	public List<GallComment> selectCommentList(int gallNo) {
+		return mapper.selectCommentList(gallNo);
+	}
+
+
+
+	@Override
+	public void uploadFile(GallFile gallFile) {
+		
+		mapper.uploadFile(gallFile);
+	}
+	
+	
+
+
+	
+	
+
+	
+	
+
+
+	
+	
+//	@Override
+//	public void insertFile(GallFile gallFile) {
+//		mapper.insertFile(gallFile);
+//	}
+
+	
+	
+	
+
+		
+
+	
+
+	
 
 	
 	

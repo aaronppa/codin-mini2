@@ -48,57 +48,99 @@
 
 	<h2>자유 게시판</h2>
 	<hr>
-	<form action="write.do" method="post">
-	<div id="header">
-	 <h2>WRITE</h2>
-	 <hr> 	 
-	 <div id="title">
-		<input class="form-control" type="text" placeholder="title">
-	 </div>
-	 <hr>
-	</div>
-	<!-- 이미지가 보이는 영역 -->
-	<div id="imgPre">
-		<img type="hidden" id="preview" src="" width="300" alt="pic">
-	</div>
-	<br>
-	<br>
-	<div id="main">
-		 <textarea cols="130" rows="7">내용을 입력하세요</textarea>
+	<form action="<c:url value='/gallary/write.do' />" method="post">
+		<div id="header">
+		 <h2>WRITE</h2>
 		 <hr>
-	</div>
-	<!-- 이미지등록 -->
-	<div class="custom-file" id="fileContent">
-	  <input type="file" class="custom-file-input" id="customFile">
-	  <label class="custom-file-label" for="customFile">file</label>
-	</div>
-	<br>
-	<br>
-	<div id="il">
-		 <button type="button" class="btn btn-outline-secondary"><a href='write.do'>insert</a></button>
-		 <button type="button" class="btn btn-outline-secondary"><a href='list.do'>list</a></button>
-	</div>
+		 <!-- ID value값을 표시 -->
+		 <h2>${user.memberName }</h2>
+			<%-- 		  
+			readonly : 값을 변경 못하게 고정시켜놓음
+			<input name="gallWriter" value="${user.memberName }" readonly> 
+			--%>
+			<!-- id value값을 제출 -->
+		  <input name="gallWriter" value="${user.memberName }" type="hidden">
+		 <div id="title">
+			<input name="gallTitle" class="form-control" type="text" placeholder="title">
+		 </div>
+		 <hr>
+		</div>
+		<!-- 이미지가 보이는 영역 -->
+		<div id="imgPre">
+			<img type="hidden" id="preview1" src="" width="300" alt="pic" >
+		</div>
+		<br>
+		<br>
+		<div id="main">
+			 <textarea name="gallContent" cols="130" rows="7" placeholder="내용을 입력하세요"></textarea>
+		</div>
+			 <hr>
+		<!-- 이미지등록 -->
+		<br>
+		<br>
+		<div id="il">
+			 <a href='list.do'><input class="btn btn-primary" type="submit" value="Submit"></a>
+			 <button type="button" class="btn btn-outline-secondary"><a href='list.do'>list</a></button>
+		</div>
+	</form>
+	<form action="<c:url value='/gallary/insertFile.do'/>" 
+		  method="post"
+		  enctype="multipart/form-data">
+		<div class="custom-file" id="fileContent">
+		  <input type="file" class="custom-file-input" name="fileOriName" id="customFile" multiple="multiple">
+		  <label class="custom-file-label" for="#customFile" name="msg">file</label>
+		  <button type="button" id="fileUpload">업로드</button>
+		</div>
+	</form>
 	<hr>
 	<br>
 	<br>
 	<br>
-	</form>
+
 </body>
 <script>
-var file = document.querySelector('#customFile');
+	var file = document.querySelector('#customFile');
+	
+	file.onchange = function () { 
+	    var fileList = file.files ;
+	    
+	    // 읽기
+	    var reader = new FileReader();
+	    reader.readAsDataURL(fileList [0]);
+	
+	    //로드 한 후
+	   
+	    reader.onload = function  () {
+	        document.querySelector('#preview1').src = reader.result ;
+	    	
+	    }; 
 
-file.onchange = function () { 
-    var fileList = file.files ;
-    
-    // 읽기
-    var reader = new FileReader();
-    reader.readAsDataURL(fileList [0]);
+	}; 
+	//파일등록
+	$("#fileUpload").click(function(){
+		var files = $("input[name='fileOriName']")[0].files;
+		var fd = new FormData();
+		
 
-    //로드 한 후
-    reader.onload = function  () {
-        document.querySelector('#preview').src = reader.result ;
-    }; 
-}; 
+		function sendFile(file, el){
+		$.ajax({
+			url : "/codin_mini/gallary/insertFile.do",
+			data : fd,
+			type : "post",
+			cache : false,
+			contentType :  false,
+			processData : false,
+			encType: 'multipart/form-data',
+			success : function(fileOriName){
+				alert("업로드성공");
+				$("#customFile").val(fileOriName);
+			}
+		});
+		};
+	});
+	
+
+
 
 </script>
 

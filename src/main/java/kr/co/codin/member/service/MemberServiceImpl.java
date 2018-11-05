@@ -55,4 +55,9 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.selectMemberSkillByNo(memberNo);
 	}
 
+	@Override
+	public Member memberInfo(int memberNo) {
+		return mapper.selectMemberByNo(memberNo);
+	}
+
 }

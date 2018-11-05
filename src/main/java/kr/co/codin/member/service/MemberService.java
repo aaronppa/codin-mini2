@@ -52,4 +52,11 @@ public interface MemberService {
 	 * @param member
 	 */
 	void editProfile(Member member, MemberSkill memberSkill);
+	
+	/**
+	 * 관리자의 회원 정보 조회에 관한 비즈니스 로직 처리
+	 * @param memberNo
+	 * @return Member 객체
+	 */
+	Member memberInfo(int memberNo);
 }

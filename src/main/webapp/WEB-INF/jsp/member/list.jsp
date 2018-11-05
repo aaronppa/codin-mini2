@@ -81,7 +81,7 @@
             <c:forEach var="member" items="${list}">
             	<tr>
             		<td>${member.memberNo}</td>
-            		<td>${member.memberName}</td>
+            		<td><a href="<c:url value='/member/detail.do?memberNo='/>${member.memberNo}">${member.memberName}</a></td>
             		<td>${member.memberEmail}</td>
             		<td>${member.memberGender}</td>
             		<td>${member.memberRegDate}</td>

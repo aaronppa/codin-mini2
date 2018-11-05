@@ -81,4 +81,16 @@ public class MemberController {
 		service.editProfile(member, memberSkill);
 		return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "myPage.do";
 	}
+	
+	@RequestMapping("/detail.do")
+	public void detail(int memberNo, Model model) {
+		model.addAttribute("member", service.memberInfo(memberNo));
+		model.addAttribute("memberSkill", service.myskill(memberNo));
+	}
+	
+	@RequestMapping("/updateMemberForm.do")
+	public void updateMemberForm (int memberNo, Model model) {
+		model.addAttribute("member", service.memberInfo(memberNo));
+		model.addAttribute("memberSkill", service.myskill(memberNo));
+	}
 }

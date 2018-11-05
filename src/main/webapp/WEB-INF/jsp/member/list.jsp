@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <title>회원목록</title>
+<link rel="stylesheet" type="text/css" href="/codin_mini/resources/css/top.css" />
 <style>
     #test {
         border: 1px solid black;
@@ -22,9 +23,16 @@
     .align-center {
         text-align: center;
     }
+    
+    #top-menu {
+    	height: 50px;
+    }
 </style>
 </head>
 <body>
+	<div id="top-menu">
+	<c:import url="../include/top.jsp" />
+	</div>
 	<form class="form-horizontal">
         <div class="form-group">
             <label for="searchText" class="col-md-2 control-label">검색어</label>

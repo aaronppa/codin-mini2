@@ -16,7 +16,7 @@ public class Member {
 	private Date memberRegDate;
 	
 	private int memberAge;
-	private char memberGender;
+	private String memberGender;
 	
 	public int getMemberNo() {
 		return memberNo;
@@ -67,10 +67,10 @@ public class Member {
 	public void setMemberAge(int memberAge) {
 		this.memberAge = memberAge;
 	}
-	public char getMemberGender() {
+	public String getMemberGender() {
 		return memberGender;
 	}
-	public void setMemberGender(char memberGender) {
+	public void setMemberGender(String memberGender) {
 		this.memberGender = memberGender;
 	}
 	

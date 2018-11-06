@@ -12,6 +12,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import kr.co.codin.member.service.MemberService;
 import kr.co.codin.repository.domain.Member;
+import kr.co.codin.repository.domain.MemberCareer;
 import kr.co.codin.repository.domain.MemberSkill;
 
 @Controller
@@ -59,6 +60,7 @@ public class MemberController {
 		int memberNo = member.getMemberNo();
 		model.addAttribute("member", service.mypage(memberNo));
 		model.addAttribute("memberSkill", service.myskill(memberNo));
+		model.addAttribute("memberCareer", service.mycareer(memberNo));
 	}
 	
 	@RequestMapping("/updateForm.do")
@@ -66,6 +68,8 @@ public class MemberController {
 		Member member = (Member)session.getAttribute("user");
 		int memberNo = member.getMemberNo();
 		model.addAttribute("member", service.mypage(memberNo));
+		model.addAttribute("memberSkill", service.myskill(memberNo));
+		model.addAttribute("memberCareer", service.mycareer(memberNo));
 	}
 	
 	@RequestMapping("/logout.do")
@@ -75,10 +79,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/edit.do")
-	public String editProfile(Member member, MemberSkill memberSkill) {
+	public String editProfile(Member member, MemberSkill memberSkill, MemberCareer memberCareer) {
 //		System.out.println(member);
 //		System.out.println(memberSkill);
-		service.editProfile(member, memberSkill);
+		service.editProfile(member, memberSkill, memberCareer);
 		return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "myPage.do";
 	}
 	
@@ -86,11 +90,47 @@ public class MemberController {
 	public void detail(int memberNo, Model model) {
 		model.addAttribute("member", service.memberInfo(memberNo));
 		model.addAttribute("memberSkill", service.myskill(memberNo));
+		model.addAttribute("memberCareer", service.mycareer(memberNo));
 	}
 	
 	@RequestMapping("/updateMemberForm.do")
 	public void updateMemberForm (int memberNo, Model model) {
 		model.addAttribute("member", service.memberInfo(memberNo));
 		model.addAttribute("memberSkill", service.myskill(memberNo));
+	}
+	
+	@RequestMapping("/upgrade.do")
+	public String editGrade(Member member) {
+		service.editGrade(member);
+		return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "detail.do?memberNo=" + member.getMemberNo();
+	}
+	
+	@RequestMapping("/insertCareerForm.do")
+	public void insertCareerForm(HttpSession session, Model model) {
+		Member member = (Member)session.getAttribute("user");
+		int memberNo = member.getMemberNo();
+		model.addAttribute("member", service.mypage(memberNo));
+		model.addAttribute("memberSkill", service.myskill(memberNo));
+		model.addAttribute("memberCareer", service.mycareer(memberNo));
+	}
+	
+	@RequestMapping("/addCareer.do")
+	public String addCareer(MemberCareer memberCareer) {
+//		System.out.println(memberCareer);
+		service.addCareer(memberCareer);
+		return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "myPage.do";
+	}
+	
+	@RequestMapping("/deleteCareerAll.do")
+	public String deleteCareerAll(HttpSession session) {
+		Member member = (Member)session.getAttribute("user");
+		int memberNo = member.getMemberNo();
+		service.deleteCareerAll(memberNo);
+		return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "myPage.do";
+	}
+	
+	@RequestMapping("/deleteCareer.do")
+	public void deleteCareer(MemberCareer memberCareer) {
+		service.deleteCareer(memberCareer);
 	}
 }

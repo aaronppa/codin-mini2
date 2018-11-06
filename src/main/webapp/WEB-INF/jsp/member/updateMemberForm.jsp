@@ -74,7 +74,7 @@
 	<div id="top-menu">
 	<c:import url="../include/top.jsp" />
 	</div>
-	<form action="edit.do" method="post">
+	<form action="upgrade.do" method="post">
 	                <input type="hidden" name="memberNo" value="${member.memberNo}" />
 		<h2>기본 정보</h2>
 	    <hr>

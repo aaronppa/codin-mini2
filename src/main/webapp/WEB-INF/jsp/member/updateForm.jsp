@@ -143,22 +143,46 @@
 	                    <div id="tools">
 	                        <h4>주요 사용 툴</h4>
 	                        <label class="checkbox-inline">
-	                            <input type="checkbox" id="inlineCheckbox1" name="memberSkillNoList" value="1"> Java
+	                            <input type="checkbox" id="inlineCheckbox1" name="memberSkillNo" value="1"
+	                            <c:forEach var="skill" items="${memberSkill}">
+	                            	<c:if test="${skill.memberSkillNo eq 1}">checked</c:if>
+	                            </c:forEach>
+	                            > Java
 	                        </label>
 	                        <label class="checkbox-inline">
-	                            <input type="checkbox" id="inlineCheckbox2" name="memberSkillNoList" value="2"> HTML
+	                            <input type="checkbox" id="inlineCheckbox2" name="memberSkillNo" value="2"
+	                            <c:forEach var="skill" items="${memberSkill}">
+	                            	<c:if test="${skill.memberSkillNo eq 2}">checked</c:if>
+	                            </c:forEach>
+	                            > HTML
 	                        </label>
 	                        <label class="checkbox-inline">
-	                            <input type="checkbox" id="inlineCheckbox3" name="memberSkillNoList" value="3"> JSP
+	                            <input type="checkbox" id="inlineCheckbox3" name="memberSkillNo" value="3"
+	                            <c:forEach var="skill" items="${memberSkill}">
+	                            	<c:if test="${skill.memberSkillNo eq 3}">checked</c:if>
+	                            </c:forEach>
+	                            > JSP
 	                        </label>
 	                        <label class="checkbox-inline">
-	                            <input type="checkbox" id="inlineCheckbox4" name="memberSkillNoList" value="4"> Oracle
+	                            <input type="checkbox" id="inlineCheckbox4" name="memberSkillNo" value="4"
+	                            <c:forEach var="skill" items="${memberSkill}">
+	                            	<c:if test="${skill.memberSkillNo eq 4}">checked</c:if>
+	                            </c:forEach>
+	                            > Oracle
 	                        </label>
 	                        <label class="checkbox-inline">
-	                            <input type="checkbox" id="inlineCheckbox5" name="memberSkillNoList" value="5"> MySQL
+	                            <input type="checkbox" id="inlineCheckbox5" name="memberSkillNo" value="5"
+	                            <c:forEach var="skill" items="${memberSkill}">
+	                            	<c:if test="${skill.memberSkillNo eq 5}">checked</c:if>
+	                            </c:forEach>
+	                            > MySQL
 	                        </label>
 	                        <label class="checkbox-inline">
-	                            <input type="checkbox" id="inlineCheckbox6" name="memberSkillNoList" value="6"> Javascript
+	                            <input type="checkbox" id="inlineCheckbox6" name="memberSkillNo" value="6"
+	                            <c:forEach var="skill" items="${memberSkill}">
+	                            	<c:if test="${skill.memberSkillNo eq 6}">checked</c:if>
+	                            </c:forEach>
+	                            > Javascript
 	                        </label>
 	                    </div>
 	                </td>
@@ -168,26 +192,28 @@
 	    <h2>경력 사항</h2>
 	    <hr>
 	    <table class="info career">
-	        <tr>
-	                    <td rowspan="4" class="imgTd">
-	                    </td>
-	            <th>회사명</th>
-	            <td>비트캠프</td>
-	            <th>직위</th>
-	            <td>사원</td>
-	        </tr>
-	        <tr>
-	            <th>부서</th>
-	            <td>개발</td>
-	            <th>근무기간</th>
-	            <td>2017-01-01 ~ 2018-01-01</td>
-	        </tr>
-	        <tr>
-	            <th>담당업무</th>
-	            <td>유지보수</td>
-	            <th></th>
-	            <td></td>
-	        </tr>
+	        <c:forEach var="career" items="${memberCareer}">
+		        <tr>
+		            <td rowspan="4" class="imgTd">
+		            </td>
+		            <th>회사명</th>
+		            <td><input type="text" name="careerCompany" value="${career.careerCompany}" /></td>
+		            <th>직위</th>
+		            <td><input type="text" name="careerPosition" value="${career.careerPosition}" /></td>
+		        </tr>
+		        <tr>
+		            <th>부서</th>
+		            <td><input type="text" name="careerDepartment" value="${career.careerDepartment}" /></td>
+		            <th>근무기간</th>
+		            <td><input type="text" name="careerStart" value="<fmt:formatDate value='${career.careerStart}' pattern='yyyy-MM-dd'/>" /> ~ <input type="text" name="careerEnd" value="<fmt:formatDate value='${career.careerEnd}' pattern='yyyy-MM-dd'/>" /></td>
+		        </tr>
+		        <tr>
+		            <th>담당업무</th>
+		            <td><input type="text" name="careerJob" value="${career.careerJob}" /></td>
+		            <th></th>
+		            <td></td>
+		        </tr>
+		    </c:forEach>
 	        <tr>
 	            <th>개발언어</th>
 	            <td>

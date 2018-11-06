@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.codin.repository.domain.Member;
+import kr.co.codin.repository.domain.MemberCareer;
 import kr.co.codin.repository.domain.MemberSkill;
 import kr.co.codin.repository.mapper.MemberMapper;
 
@@ -31,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void editProfile(Member member, MemberSkill memberSkill) {
+	public void editProfile(Member member, MemberSkill memberSkill, MemberCareer memberCareer) {
 		mapper.updateMember(member);
 		mapper.deleteMemberSkill();
 //		System.out.println(memberSkill.getMemberSkillNoList());
@@ -43,6 +44,7 @@ public class MemberServiceImpl implements MemberService {
 				mapper.insertMemberSkill(ms);
 			};
 		};
+		mapper.updateMemberCareer(memberCareer);
 	}
 
 	@Override
@@ -58,6 +60,31 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member memberInfo(int memberNo) {
 		return mapper.selectMemberByNo(memberNo);
+	}
+
+	@Override
+	public void editGrade(Member member) {
+		mapper.updateGrade(member);
+	}
+
+	@Override
+	public List<MemberCareer> mycareer(int memberNo) {
+		return mapper.selectMemberCareerByNo(memberNo);
+	}
+
+	@Override
+	public void addCareer(MemberCareer memberCareer) {
+		mapper.insertMemberCareer(memberCareer);
+	}
+
+	@Override
+	public void deleteCareerAll(int memberNo) {
+		mapper.deleteCareerAll(memberNo);
+	}
+
+	@Override
+	public void deleteCareer(MemberCareer memberCareer) {
+		mapper.deleteCareer(memberCareer);
 	}
 
 }

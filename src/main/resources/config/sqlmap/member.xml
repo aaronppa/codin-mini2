@@ -20,6 +20,17 @@
 		<result column="skill_code" property="skillCode" />
 	</resultMap>
 	
+	<resultMap id="careerMap" type="MemberCareer">
+		<result column="career_no" property="careerNo" />
+		<result column="member_no" property="memberNo" />
+		<result column="career_company" property="careerCompany" />
+		<result column="career_position" property="careerPosition" />
+		<result column="career_department" property="careerDepartment" />
+		<result column="career_start" property="careerStart" />
+		<result column="career_end" property="careerEnd" />
+		<result column="career_job" property="careerJob" />
+	</resultMap>
+	
 	<select id="selectMember" resultMap="memberMap">
 		select *
 		  from member
@@ -61,6 +72,12 @@
 		 where member_no = #{memberNo}
 	</update>
 	
+	<update id="updateGrade" parameterType="Member">
+		update member
+		   set member_grade = #{memberGrade}
+		 where member_no = #{memberNo}
+	</update>
+	
 	<delete id="deleteMemberSkill">
 		delete from member_skill
 	</delete>
@@ -72,4 +89,42 @@
 			#{memberNo}, #{memberSkillNo}
 		)
 	</insert>
+	
+	<select id="selectMemberCareerByNo" parameterType="int" resultMap="careerMap">
+		select *
+		  from member_career
+		 where member_no = #{memberNo}
+	</select>
+	
+	<insert id="insertMemberCareer" parameterType="MemberCareer">
+		insert into member_career(
+			member_no, career_company, career_position, career_department,
+			career_start, career_end, career_job
+		) values (
+			#{memberNo}, #{careerCompany}, #{careerPosition}, #{careerDepartment},
+			#{careerStart}, #{careerEnd}, #{careerJob}
+		)
+	</insert>
+	
+	<update id="updateMemberCareer" parameterType="MemberCareer">
+		update member_career
+		   set career_company = #{careerCompany},
+		   	   career_position = #{careerPosition},
+		   	   career_department = #{careerDepartment},
+		   	   career_start = #{careerStart},
+		   	   career_end = #{careerEnd},
+		   	   career_job = #{careerJob}
+		 where member_no = #{memberNo}
+	</update>
+	
+	<delete id="deleteCareerAll" parameterType="int">
+		delete from member_career
+		 where member_no = #{memberNo}
+	</delete>
+	
+	<delete id="deleteCareer" parameterType="MemberCareer">
+		delete from member_career
+		 where career_no = #{careerNo}
+		   and member_no = #{memberNo}
+	</delete>
 </mapper>

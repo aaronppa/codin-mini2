@@ -7,6 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
 <title>회원 상세 페이지입니다.</title>
 <link rel="stylesheet" type="text/css" href="/codin_mini/resources/css/top.css" />
 <style>
@@ -59,6 +63,10 @@
     .update-delete {
     	text-align: right;
     	margin-top: 50px;
+    }
+    
+    .career {
+    	text-align: right;
     }
     
     #top-menu {
@@ -170,28 +178,39 @@
     </div>
     <h2>경력 사항</h2>
     <hr>
+   	<button class="btn btn-primary col-md-offset-9"><a href="<c:url value='/member/insertCareerForm.do' />">추가</a></button>
+   	<c:choose>
+   		<c:when test="${empty memberCareer[0]}">
+   		</c:when>
+   		<c:otherwise>
+	    	<button class="btn btn-primary"><a href="<c:url value='/member/updateForm.do' />">수정</a></button>
+	    	<button class="btn btn-primary"><a href="<c:url value='/member/deleteCareerAll.do' />">일괄삭제</a></button>
+   		</c:otherwise>
+   	</c:choose>
     <table class="info career">
+	    <c:forEach var="career" items="${memberCareer}">
+	        <tr>
+	        	<td rowspan="3"><button class="btn btn-primary" id="deleteCareer" data-no="${career.careerNo}" data-writer="${member.memberNo}">삭제</button></td>
+	            <th>회사명</th>
+	            <td>${career.careerCompany}</td>
+	            <th>직위</th>
+	            <td>${career.careerPosition}</td>
+	        </tr>
+	        <tr>
+	            <th>부서</th>
+	            <td>${career.careerDepartment}</td>
+	            <th>근무기간</th>
+	            <td><fmt:formatDate value="${career.careerStart}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${career.careerEnd}" pattern="yyyy-MM-dd"/></td>
+	        </tr>
+	        <tr>
+	            <th>담당업무</th>
+	            <td>${career.careerJob}</td>
+	            <th></th>
+	            <td></td>
+	        </tr>
+	    </c:forEach>
         <tr>
-                    <td rowspan="4" class="imgTd">
-                    </td>
-            <th>회사명</th>
-            <td>비트캠프</td>
-            <th>직위</th>
-            <td>사원</td>
-        </tr>
-        <tr>
-            <th>부서</th>
-            <td>개발</td>
-            <th>근무기간</th>
-            <td>2017-01-01 ~ 2018-01-01</td>
-        </tr>
-        <tr>
-            <th>담당업무</th>
-            <td>유지보수</td>
-            <th></th>
-            <td></td>
-        </tr>
-        <tr>
+        	<td></td>
             <th>개발언어</th>
             <td>
                 <select class="form-control">
@@ -212,9 +231,21 @@
             </td>
         </tr>
     </table>
-    <div class="col-md-offset-9 col-md-2 update-delete">
+    <div class="col-md-offset-10 col-md-2 update-delete">
     	<button class="btn btn-primary"><a href="<c:url value='/member/updateForm.do' />">수정</a></button>
     	<button class="btn btn-primary"><a href="<c:url value='/member/logout.do' />">로그아웃</a></button>
     </div>
+    <script>
+    	$("#deleteCareer").click(function() {
+			var memberNo = $(this).data('writer');
+    		var no = $(this).data('no');
+    		$.ajax({
+    			url: "/codin/member/deleteCareer.do",
+    			data: {no: no, memberNo:memberNo}
+    		}).done(function() {
+    			alert("삭제되었습니다.");
+    		});
+    	});
+    </script>
 </body>
 </html>

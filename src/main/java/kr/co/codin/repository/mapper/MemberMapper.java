@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import kr.co.codin.repository.domain.Member;
+import kr.co.codin.repository.domain.MemberCareer;
 import kr.co.codin.repository.domain.MemberSkill;
 
 public interface MemberMapper {
@@ -14,7 +15,13 @@ public interface MemberMapper {
 	Member selectMemberByNo(int memberNo);
 	List<MemberSkill> selectMemberSkillByNo(int memberNo);
 	void updateMember(Member member);
+	void updateGrade(Member member);
 	void deleteMemberSkill();
 	void insertMemberSkill(MemberSkill memberSkill);
 	void insertMemberSkill(int memberNo, int memberSkillNo);
+	List<MemberCareer> selectMemberCareerByNo(int memberNo);
+	void insertMemberCareer(MemberCareer memberCareer);
+	void updateMemberCareer(MemberCareer memberCareer);
+	void deleteCareerAll(int memberNo);
+	void deleteCareer(MemberCareer memberCareer);
 }

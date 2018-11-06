@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -59,6 +59,10 @@
     .update-delete {
     	text-align: right;
     	margin-top: 50px;
+    }
+    
+    .career {
+    	text-align: right;
     }
     
     #top-menu {
@@ -170,11 +174,10 @@
     </div>
     <h2>경력 사항</h2>
     <hr>
+	<button type="submit" form="addCareer" class="btn btn-primary col-md-offset-11 col-md-1">저장</button>
     <table class="info career">
 	    <c:forEach var="career" items="${memberCareer}">
 	        <tr>
-                <td rowspan="4" class="imgTd">
-                </td>
 	            <th>회사명</th>
 	            <td>${career.careerCompany}</td>
 	            <th>직위</th>
@@ -184,7 +187,7 @@
 	            <th>부서</th>
 	            <td>${career.careerDepartment}</td>
 	            <th>근무기간</th>
-	            <td>${career.careerStart} ~ ${career.careerEnd}</td>
+	            <td><fmt:formatDate value="${career.careerStart}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${career.careerEnd}" pattern="yyyy-MM-dd"/></td>
 	        </tr>
 	        <tr>
 	            <th>담당업무</th>
@@ -192,30 +195,51 @@
 	            <th></th>
 	            <td></td>
 	        </tr>
-	        <tr>
-	            <th>개발언어</th>
-	            <td>
-	                <select class="form-control">
-	                    <option>Java</option>
-	                    <option>Python</option>
-	                    <option>Javascript</option>
-	                    <option>PHP</option>
-	                    <option>C++</option>
-	                </select>
-	            </td>
-	            <th>수준</th>
-	            <td>
-	                <select class="form-control">
-	                    <option>상</option>
-	                    <option>중</option>
-	                    <option>하</option>
-	                </select>
-	            </td>
-	        </tr>
 	    </c:forEach>
+	    <form action="addCareer.do" method="post" id="addCareer">
+		    <input type="hidden" name="memberNo" value="${member.memberNo}" />
+	        <tr>
+	            <th>회사명</th>
+	            <td><input type="text" name="careerCompany"/></td>
+	            <th>직위</th>
+	            <td><input type="text" name="careerPosition"/></td>
+	        </tr>
+	        <tr>
+	            <th>부서</th>
+	            <td><input type="text" name="careerDepartment"/></td>
+	            <th>근무기간</th>
+	            <td><input type="text" name="careerStart"/> ~ <input type="text" name="careerEnd"/></td>
+	        </tr>
+	        <tr>
+	            <th>담당업무</th>
+	            <td><input type="text" name="careerJob"/></td>
+	            <th></th>
+	            <td></td>
+	        </tr>
+        </form>
+        <tr>
+            <th>개발언어</th>
+            <td>
+                <select class="form-control">
+                    <option>Java</option>
+                    <option>Python</option>
+                    <option>Javascript</option>
+                    <option>PHP</option>
+                    <option>C++</option>
+                </select>
+            </td>
+            <th>수준</th>
+            <td>
+                <select class="form-control">
+                    <option>상</option>
+                    <option>중</option>
+                    <option>하</option>
+                </select>
+            </td>
+        </tr>
     </table>
-    <div class="col-md-offset-9 col-md-2 update-delete">
-    	<button class="btn btn-primary"><a href="<c:url value='/member/updateMemberForm.do?memberNo='/>${member.memberNo}">수정</a></button>
+    <div class="col-md-offset-10 col-md-2 update-delete">
+    	<button class="btn btn-primary"><a href="<c:url value='/member/updateForm.do' />">수정</a></button>
     	<button class="btn btn-primary"><a href="<c:url value='/member/logout.do' />">로그아웃</a></button>
     </div>
 </body>

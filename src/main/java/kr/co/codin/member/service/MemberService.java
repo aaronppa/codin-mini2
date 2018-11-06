@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import kr.co.codin.repository.domain.Member;
+import kr.co.codin.repository.domain.MemberCareer;
 import kr.co.codin.repository.domain.MemberSkill;
 
 /**
@@ -51,7 +52,7 @@ public interface MemberService {
 	 * 회원 정보 수정 (본인)에 대한 비즈니스 로직 처리
 	 * @param member
 	 */
-	void editProfile(Member member, MemberSkill memberSkill);
+	void editProfile(Member member, MemberSkill memberSkill, MemberCareer memberCareer);
 	
 	/**
 	 * 관리자의 회원 정보 조회에 관한 비즈니스 로직 처리
@@ -59,4 +60,35 @@ public interface MemberService {
 	 * @return Member 객체
 	 */
 	Member memberInfo(int memberNo);
+	
+	/**
+	 * 관리자의 회원 등급 조정에 대한 비즈니스 로직 처리
+	 * @param member
+	 */
+	void editGrade(Member member);
+	
+	/**
+	 * 본인 이력 조회에 대한 비즈니스 로직 처리
+	 * @param memberNo
+	 * @return List<MemberCareer>
+	 */
+	List<MemberCareer> mycareer(int memberNo);
+	
+	/**
+	 * 본인 이력 추가에 대한 비즈니스 로직 처리
+	 * @param memberCareer
+	 */
+	void addCareer(MemberCareer memberCareer);
+	
+	/**
+	 * 본인 이력 전부 삭제에 대한 비즈니스 로직 처리
+	 * @param memberNo
+	 */
+	void deleteCareerAll(int memberNo);
+	
+	/**
+	 * 본인 이력 삭제에 대한 비즈니스 로직 처리
+	 * @param memberCareer
+	 */
+	void deleteCareer(MemberCareer memberCareer);
 }

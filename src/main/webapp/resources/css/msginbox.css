@@ -7,7 +7,6 @@
 
 .container-body, .container-sidebar{
     position: relative;
-    border: 1px black dotted;
     border-radius: 15px;
     float:left;
     height: 660px;
@@ -23,7 +22,7 @@
 }
 
 .container-body{
-    background-color: rgb(212, 236, 255);
+    background-color: #f8ffec212236255;
 }
 
 .msg-menu-btn{
@@ -45,6 +44,7 @@
 
 li.msg-menu-btn:hover{
     box-shadow: 0 2px 2px 2px grey;
+    cursor: pointer;
 }
 
 .msg-menu-btn > li:nth-child(1){
@@ -106,7 +106,7 @@ div.msglist{
 }
 
 div.msglist table * {
-  border: 1px solid #5a5a5a !important;
+  border: 1px solid #c6c8d1;
 }
 div.msglist table thead th {
     text-align: center;
@@ -119,26 +119,60 @@ table {
     display: flex;
     flex-flow: column;
     height: 100%;
-    width: 100%;
+    width: 1100px;
 }
 
 table thead {
     /* head takes the height it requires, 
     and it's not scaled when table is resized */
     flex: 0 0 auto;
-    width: calc(100% - 0.9em);
+    width: calc(100% - 0.1em);
 }
 
 table tbody {
     /* body takes all the remaining available space */
     flex: 1 1 auto;
     display: block;
-    overflow-y: scroll;
+    overflow-y: auto;
+    border-top-width: 0px;
 }
 
 thead > tr{
     height: 10%;
-    width: 100%
+    width: 1100px;
+}
+
+td.msgitem {
+	height: 15%;
+	padding: 0px;
+	border: none;
+}
+
+#thtrwidth-1{
+	width: 30px;
+    padding-left: 5px;
+    padding-top: 4px;
+	}
+#thtrwidth-2{
+	width: 62px;
+    padding-left: 18px;
+    padding-top: 5px;
+    height: 15px;
+    
+	}
+#thtrwidth-3{
+	width: 62px;
+	padding-left: 18px;
+    padding-top: 5px;
+    height: 15px;
+  
+    }
+#thtrwidth-4{width: 190px;}
+#thtrwidth-5{width: 643px;}
+#thtrwidth-6{width: 150px;}
+
+th{
+	background-color: #65ff60; 
 }
 
 table thead,
@@ -149,7 +183,7 @@ table tbody tr {
 
 /* Modal Size */
 .modal-dialog.writeForm{
-	width: 900px !important;
+	width: 100% !important;
 } 
 
 .modal-dialog{
@@ -163,17 +197,22 @@ table tbody tr {
 }
 
 .modal-header, .modal-body{
+	margin-top: 16px;
 	padding-bottom: 0px;
+	margin-bottom: 5px;
 }
 
 .form-control.info{
-	display: inline-block !important;
-	width: 90% !important;
+	display: inline-block;
+	width: 90%;
 }
 
-input#wToUser-name{
+input#searchRecipient{
+	display: inline-block;
+	width: 10%;
 	margin-left: 60px;
 }
+
 input{
 	padding: 0px;
 }
@@ -183,5 +222,57 @@ input{
 }
 
 textarea#message-body{
-	height: 300px;
+	height: 430px;
 }
+
+.modal-footer{
+	margin-bottom: 16px;
+}
+
+.modal-header{
+	padding-top: 0px;
+}
+
+div.checkbox, i{
+	border: none !important;
+	padding-bottom: 4px;
+}
+
+tbody, th, thead{
+	 border: none !important;
+}
+
+/* Recipient Search Loading */
+.ui-autocomplete-loading{ 
+	background: white url('http://f.goodkiss.co.kr/sample/images/waiting.gif') right center no-repeat;
+}
+
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;   /* prevent horizontal scrollbar */
+    overflow-x: hidden; /* add padding to account for vertical scrollbar */
+    position: relative;
+    z-index:1060;
+}
+
+ /* Recipient Label Adding */
+ .recipientadded{
+ 	display: inline-block;
+ }
+ 
+ul#recipientAddedLabel > li{
+ 	list-style-type: none;
+ 	text-align: center;
+ 	width: auto;
+ 	background-color: #87ff44;
+ 	border-radius: 10px;
+ 	opacity: 50%;
+ 	padding-right: 5px;
+ 	padding-left: 5px;
+ 	float: left;
+ }
+ 
+ .removelabel{
+	cursor: pointer;
+	outline:none;
+ }

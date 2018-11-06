@@ -52,29 +52,19 @@
                     <table class="table table-hover">
                         <thead>
                             <tr> 
-                                <th style="width: 3%"><input type="checkbox"></th>
-                                <th style="width: 5%">유형</th>
-                                <th style="width: 5%">상태</th>
-                                <th style="width: 20%">보낸사람</th>
-                                <th style="width: 70%">제목/메세지</th>
-                                <th style="width: 15%">날짜/시간</th>
+                                <th id="thtrwidth-1"><div class="checkbox"><input type="checkbox"></div></th>
+                                <th id="thtrwidth-2">유형</th>
+                                <th id="thtrwidth-3">상태</th>
+                                <th id="thtrwidth-4">보낸사람</th>
+                                <th id="thtrwidth-5">제목/메세지</th>
+                                <th id="thtrwidth-6">날짜/시간</th>
                             </tr>
                         </thead>
-                        <tbody>
-                                <tr> <td>1, 0</td> <td>2, 0</td> <td>3, 0</td> </tr>
-                                <tr> <td>1, 1</td> <td>2, 1</td> <td>3, 1</td> </tr>
-                                <tr> <td>1, 2</td> <td>2, 2</td> <td>3, 2</td> </tr>
-                                <tr> <td>1, 3</td> <td>2, 3</td> <td>3, 3</td> </tr>
-                                <tr> <td>1, 4</td> <td>2, 4</td> <td>3, 4</td> </tr>
-                                <tr> <td>1, 5</td> <td>2, 5</td> <td>3, 5</td> </tr>
-                                <tr> <td>1, 6</td> <td>2, 6</td> <td>3, 6</td> </tr>
-                                <tr> <td>1, 7</td> <td>2, 7</td> <td>3, 7</td> </tr>
-                                <tr> <td>1, 8</td> <td>2, 8</td> <td>3, 8</td> </tr>
-                                <tr> <td>1, 9</td> <td>2, 9</td> <td>3, 9</td> </tr>
-                                <tr> <td>1, 10</td> <td>2, 10</td> <td>3, 10</td> </tr>
-                                <!-- etc... -->
-                                <tr> <td>1, 99</td> <td>2, 99</td> <td>3, 99</td> </tr>
+                        <form action="">
+                        <tbody id="msglistresult">
+                               
                         </tbody>
+                        </form>
                     </table>
                 </div>
             </div>
@@ -83,46 +73,110 @@
        
  <!-- Modal WriteForm -->
 	<div class="modal fade" id="writeFormModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		aria-labelledby="writeMsgFormModal" aria-hidden="true">
 		<div class="modal-dialog writeForm" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">메세지 작성</h5>
+					<h5 class="modal-title" id=writeMsgFormModal">메세지 작성</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form>
-						<div class="form-group info">
+					<form action="<c:url value='/msg/write.do'/>" method="post" autocomplete="off">
+						<div class="form-group info ui-front">
 							<!-- 수신자 검색 자동완성 추가 필요 -->
-							<label for="toUserNo" class="col-form-label">수신자:</label> 
-							<input type="text" class="form-control info" id="wToUser-name" name="toUserName">
-							<input type="hidden" class="form-control info" id="wToUserNo" name="toUserNo"> 
+							<input type="hidden" class="form-control info" id="wfromUserNo" name="fromUserNo" value="${user.memberNo}">
+							<label for="searchRecipient" class="col-form-label">수신자:</label> 
+							<input type="text" class="form-control info" id="searchRecipient" name="searchStr">
+							<div class="recipientadded">
+							<ul id='recipientAddedLabel'></ul>
+							</div><br>
 							<label for="subject" class="col-form-label">제목/쪽지메세지:</label> 
 							<input type="text" class="form-control info" id="wSubject" name="subject" maxlength="50">
 						</div>
 						<div class="form-group body">
 							<label for="message-body" class="col-form-label">본문내용:</label>
-							<textarea class="form-control" id="message-body" placeholder="제목만 입력하고 내용이 없으면 쪽지 형태로 발송됩니다."></textarea>
+							<textarea class="form-control" id="message-body" name="body" placeholder="제목만 입력하고 내용이 없으면 쪽지 형태로 발송됩니다."></textarea>
 						</div>
-					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 					<button type="button" class="btn btn-primary">임시저장</button>
-					<button type="button" class="btn btn-primary">발신</button>
+					<button type="submit" class="btn btn-primary">발신</button>
 				</div>
+					</form>
 			</div>
 		</div>
 	</div>
 
+<!-- Display All Msg Script-->
 
+<script>
+window.onload = displayinbox => $.ajax({
+	url: "displayallmsg.do",
+	data: "memberNo="+${user.memberNo},
+	dataType:"json"
+})
+.done(function(data){
+	console.dir(data);
+	for(var msgitem of data){
+		console.dir(msgitem);
+		/* Msg Type Icon Select */
+		var typeIcon;
+		switch(msgitem.typeId){
+		case 1 : typeIcon = "<i class='fab fa-stack-exchange'></i>";
+				break;
+		case 2 : typeIcon = "<i class='far fa-file-alt'></i>";
+				break;
+		case 3 : typeIcon = "<i class='fas fa-bullhorn'></i>";
+				break;
+		case 4 : typeIcon = "<i class='far fa-edit'></i>";
+				break;
+		default : typeIcon = "<i class='fas fa-question'></i>";
+		}
+		
+		/* Msg Read-Status Icon Select */
+		var statusIcon;
+		if(msgitem.dateRead!=null){
+			statusIcon = "<i class='far fa-envelope-open'></i>";
+		} else {
+			statusIcon = "<i class='far fa-envelope'></i>";
+			if(msgitem.trashRecipient!=0){
+				statusIcon = "<i class='far fa-trash-alt'></i>";
+			}
+		}
+		var html = "<tr class='msgitem clickable-row' data-msgid='"+msgitem.msgId+"'>"+
+				    "<td class='msgitem chkbox'id='thtrwidth-1'><div class='checkbox'><input type='checkbox' name='msgId' value='"+msgitem.msgId+"'></div></td>"+
+				    "<td class='msgitem msgtype' id='thtrwidth-2'>"+typeIcon+"</td>"+"<td class='msgitem msgstatus' id='thtrwidth-3'>"+statusIcon+"</td>"+
+				    "<td class='msgitem sender' id='thtrwidth-4' id='sender' data-senderid='"+msgitem.fromUserId+"' data-sendername='"+msgitem.fromUserName+"' data-senderno='"+msgitem.fromUserId+"'>"+
+				    	msgitem.fromUserName+"("+msgitem.fromUserId+")"+"</td>"+
+				    "<td class='msgitem subject' id='thtrwidth-5'>"+msgitem.subject+
+				    "</td><td class='msgitem date'>"+msgitem.dateSent+
+					+"</td></tr>";
+		
+		$("#msglistresult").append(html);
+		
+	};
+})
+.fail(function(err){
+		alert(err+"잘못된 경로입니다. 로그인이 되지 않은 것 같네요.")
+});
+</script>
+<!-- Search User -->
+<script src="<c:url value="/resources/script/msg/searchMember.js"/>" ></script>
 
+<!-- Message List AJAX Script -->
+<%-- <script src="<c:url value="/resources/script/msg/inboxlist.js"/>" ></script> --%>
+
+<!-- Write Form Modal Script -->
 	<script>
     $("li.msg-menu-btn.writemsg").on("click", function(){
-		$("#writeFormModal").modal('show');   	
+		$("#writeFormModal").modal('show');
+		// Modal 상에서 autocomplete하면 자동완성 리스트가 모달 뒤로 보여지고 사용자는 보이지 않음으로 
+		// 이를 처리하기 위해서 사용하는 코드 
+		$("#searchRecipient").autocomplete("option", "appendTo", "#writeFormModal");
     });
     </script>
 </body>

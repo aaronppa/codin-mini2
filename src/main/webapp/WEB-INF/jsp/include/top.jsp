@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,9 +20,11 @@
     </div>
     
     <div id="topText">
-        <a href="#">OOO님 접속을 환영합니다.</a>
+        <span><c:out value="${user.memberName}"/>(<c:out value="${user.memberId}" />)님 접속을 환영합니다.</span>
+    	<c:if test="${user.memberGrade == 'a' }" >
         <a href="#">admin</a>
-        <a href="#">logout</a>
+        </c:if>
+        <a href="<c:url value='/testmsg/logout.do'/>">LOGOUT</a>
     </div>
 </body>
 </html>

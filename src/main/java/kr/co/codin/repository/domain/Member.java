@@ -10,7 +10,7 @@ public class Member {
 	private String memberPassword;
 	private String memberEmail;
 	private String memberName;
-	private char memberGrade;
+	private String memberGrade;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date memberRegDate;
@@ -48,10 +48,10 @@ public class Member {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-	public char getMemberGrade() {
+	public String getMemberGrade() {
 		return memberGrade;
 	}
-	public void setMemberGrade(char memberGrade) {
+	public void setMemberGrade(String memberGrade) {
 		this.memberGrade = memberGrade;
 	}
 	

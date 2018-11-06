@@ -20,34 +20,41 @@ public class TestMsgController {
 	public String login1(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		session.setAttribute("user", service.login1());
-		return "redirect:/msg/maininbox.do";
+		return "redirect:/msgtest.jsp";
 	}
 	
 	@RequestMapping("login2.do")
 	public String login2(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		session.setAttribute("user", service.login2());
-		return "redirect:/msg/maininbox.do";
+		return "redirect:/msgtest.jsp";
 	}
 	
 	@RequestMapping("login3.do")
 	public String login3(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		session.setAttribute("user", service.login3());
-		return "redirect:/msg/maininbox.do";
+		return "redirect:/msgtest.jsp";
 	}
 	
 	@RequestMapping("login4.do")
 	public String login4(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		session.setAttribute("user", service.login4());
-		return "redirect:/msg/maininbox.do";
+		return "redirect:/msgtest.jsp";
 	}
 
 	@RequestMapping("logout.do")
 	public String logout(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		session.invalidate();
+		return "redirect:/msgtest.jsp";
+	}
+	
+	@RequestMapping("maininbox.do")
+	public String mainIndex(HttpServletRequest request) throws Exception {
 		return "redirect:/msg/maininbox.do";
 	}
+	
+	
 }

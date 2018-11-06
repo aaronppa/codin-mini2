@@ -15,6 +15,10 @@
 	<a href="<c:url value='/testmsg/login3.do'/>">테스터2 로그인</a><br>
 	<a href="<c:url value='/testmsg/login4.do'/>">테스터3 로그인</a><br>
 	<a href="<c:url value='/testmsg/logout.do'/>">로그아웃</a>
-	<h2>현재 로그인 되어있는 계정 : ${user.memberName }</h2>
+	<h2>현재 로그인 되어있는 계정 사용자이름 : ${user.memberName }</h2>
+	<h2>현재 로그인 되어있는 계정 사용자ID: ${user.memberId }</h2>
+	<h2>현재 로그인 되어있는 계정 memberNo: ${user.memberNo }</h2>
+	
+	<a href="<c:url value='/testmsg/maininbox.do'/>">Main Inbox</a><br>	
 </body>
 </html>

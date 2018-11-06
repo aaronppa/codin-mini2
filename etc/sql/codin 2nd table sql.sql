@@ -1,3 +1,8 @@
+-- 2018-11-05 수정사항
+-- create table recipients (RECIPIENTS) 대체 
+-- alter table message add trash_writer int default 0;
+-- alter table recipients add trash_recipient int default 0;
+
 CREATE TABLE ticket (
 	ticket_no INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	ticket_title VARCHAR(100) NOT NULL,
@@ -74,7 +79,8 @@ CREATE TABLE message (
 	subject VARCHAR(50), 
 	message_body VARCHAR(1000),
 	date_sent datetime default now(),
-	thread INT
+	thread INT, 
+	trash_writer int default 0
 );
 
 CREATE TABLE msg_type (
@@ -82,10 +88,11 @@ CREATE TABLE msg_type (
 	type VARCHAR(100) NOT NULL 
 );
 
-CREATE TABLE RECIPIENTS (
+CREATE TABLE recipients (
 	msg_id INT NOT NULL, 
 	to_user_no INT NOT NULL, 
-	date_read datetime 
+	date_read datetime,
+	trash_recipient int default 0
 );
 
 CREATE TABLE thread (

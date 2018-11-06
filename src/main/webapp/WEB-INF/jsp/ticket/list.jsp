@@ -1,9 +1,12 @@
+<%@page import="kr.co.codin.ticket.service.TicketServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%@ include file="/WEB-INF/jsp/include/basicInclude.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>내가 받은 티켓 - Codin</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -12,15 +15,18 @@
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
+
 </head>
 <body>
+	<c:import url="/WEB-INF/jsp/include/top.jsp" />
+	<div style="height: 50px"></div>
     <div id="container">
         <h2>내가 받은 티켓</h2>
         <hr>
         <table>
             <thead>
                 <tr>
-                    <th>발급 순서</th>
+                    <th>발급 번호</th>
                     <th>제목</th>
                     <th>발급자</th>
                     <th>만료일</th>
@@ -29,38 +35,82 @@
                     <th>비고</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Front Servlet 제작</td>
-                    <td>최원영</td>
-                    <td>2018-10-20</td>
-                    <td>중</td>
-                    <td>75%</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>MVC 성능 최적화</td>
-                    <td>이경</td>
-                    <td>2018-11-30</td>
-                    <td>최상</td>
-                    <td>3%</td>
-                    <td></td>
-                </tr>
-                <tr class="overdate">
-                    <td>3</td>
-                    <td>Oven 구현화</td>
-                    <td>유병욱</td>
-                    <td>2018-10-10</td>
-                    <td>하</td>
-                    <td>95%</td>
-                    <td>날짜경과</td>
-                </tr>
+            <tbody id = ticketList>
+               	<c:forEach var="ticket" items="${list}">
+			    <tr>
+					<td class="ticketNo">${ticket.ticketNo}</td>
+					<td><span class="detail">${ticket.ticketTitle}</a></td>
+					<td>${ticket.member.memberName }</td>
+				    <td class="ticketDate">
+					    <fmt:parseDate var="ticketEnd" value="${ticket.ticketEnd}" pattern="yyyy-MM-dd HH:mm:ss"/>
+   					    <fmt:formatDate value="${ticketEnd}" pattern="yyyy/MM/dd"/>
+				    </td>
+<%-- 				    <td>${ticket.ticketEnd}</td> --%>
+				    <td>
+				    	<c:choose>
+				    		<c:when test="${ticket.ticketDifficulty == '1'}">
+								하
+				    		</c:when>
+				    		<c:when test="${ticket.ticketDifficulty == '2'}">
+								중
+				    		</c:when>
+				    		<c:when test="${ticket.ticketDifficulty == '3'}">
+								상
+				    		</c:when>
+				    	</c:choose>
+				    
+				    </td>
+				    <td><span class="ticketProgress">${ticket.ticketProgress}</span>%</td>
+				    <td class="remarks"></td>
+				</tr>
+				</c:forEach>
             </tbody>
         </table>
         <div id="buttonArea">
-            <button type="button">티켓 발급</button>
+            <button type="button" id="issue">티켓 발급</button>
         </div>
+        <script>
+	    $("#issue").click(function () {
+	    	window.open("/codin_mini/ticket/issue.do", "issue", "menubar");
+	    })
+	    
+	   	var $ticketDate = $(".ticketDate");
+	   	
+	   	const TODAY = new Date();
+	    
+	   	for (let i = 0; i < $ticketDate.length; i++) {
+	   		let ticketDate = new Date($ticketDate[i].textContent.trim())
+			
+			if ((TODAY - ticketDate) > 0) {
+				if (TODAY.getDate() == ticketDate.getDate()) {
+					$ticketDate.eq(i).parent().addClass("today");
+					$ticketDate.eq(i).parent().children(".remarks").text("오늘 마감")
+				} else {
+  					$ticketDate.eq(i).parent().addClass("overdate")
+					$ticketDate.eq(i).parent().children(".remarks").text("날짜 경과")
+				}
+	   		}
+			
+	   	}
+	    
+	   	var $ticketProgress = $(".ticketProgress");
+// 	   	console.dir($ticketProgress);
+	   	
+	   	for (let i = 0; i < $ticketProgress.length; i++) {
+	   		console.log(i, parseInt($ticketProgress[i]).textContent)
+	   		
+	   		if (parseInt($ticketProgress[i].textContent) == 100) {
+	   			$ticketProgress.eq(i).parent().parent().addClass("complete")
+				$ticketProgress.eq(i).parent().parent().children(".remarks").text(" ")
+
+	   		}
+	   		
+	   	}
+	   	
+	   	$(".detail").click(function() {
+			var ticketNo = $(this).parent().parent().children(".ticketNo").html()
+	   		window.open("/codin_mini/ticket/detail.do?ticketNo="+ticketNo, "detail", "menubar");		
+	   	})
+        </script>
 </body>
 </html>

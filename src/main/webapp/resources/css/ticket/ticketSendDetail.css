@@ -71,7 +71,11 @@ select, .date{
 }
 
 .title {
-    width: 325px;
+    width: 680px;
+}
+
+#ticketReceiver {
+	width: 665px;
 }
 
 .progress {
@@ -90,4 +94,8 @@ select, .date{
 
 #progressBar{
 	text-align: center;
+}
+
+.marginBottom {
+	margin-bottom: 30px;
 }

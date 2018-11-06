@@ -1,5 +1,7 @@
 package kr.co.codin.repository.domain;
 
+import java.util.Date;
+
 public class Ticket {
 	private int ticketNo;
 	private String ticketTitle;
@@ -8,8 +10,17 @@ public class Ticket {
 	private String ticketStart;
 	private String ticketEnd;
 	private String ticketText;
+	private Date ticketDate;
 	private int ticketProgress;
 	
+	private Member member;
+	
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
 	public int getTicketNo() {
 		return ticketNo;
 	}
@@ -58,11 +69,20 @@ public class Ticket {
 	public void setTicketProgress(int ticketProgress) {
 		this.ticketProgress = ticketProgress;
 	}
-	
+	public Date getTicketDate() {
+		return ticketDate;
+	}
+	public void setTicketDate(Date ticketDate) {
+		this.ticketDate = ticketDate;
+	}
 	@Override
 	public String toString() {
 		return "Ticket [ticketNo=" + ticketNo + ", ticketTitle=" + ticketTitle + ", ticketSender=" + ticketSender
-				+ ", ticketDifficulty=" + ticketDifficulty + ", ticketStart=" + ticketStart + ", ticketEnd="
-				+ ticketEnd + ", ticketText=" + ticketText + ", ticketProgress=" + ticketProgress + "]";
+				+ ", ticketDifficulty=" + ticketDifficulty + ", ticketStart=" + ticketStart + ", ticketEnd=" + ticketEnd
+				+ ", ticketText=" + ticketText + ", ticketDate=" + ticketDate + ", ticketProgress=" + ticketProgress
+				+ ", member=" + member + "]";
 	}
+
+
+	
 }

@@ -2,6 +2,25 @@
     margin: 30px 150px;
 }
 
+ul{
+     text-align:center;  
+}
+
+#ticketTop > li{
+	background: #CAE4FC;
+	padding-top:5px;
+    display:inline-block; 
+    width: 150px;
+    height: 30px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#ticketTop > li:hover {
+	background: #63B2F7;
+	font-weight: bolder;
+}
+
 table{
     width: 100%;
 }
@@ -31,4 +50,33 @@ td, th {
 
 .overdate{
     color: red;
+}
+
+.rightMargin {
+    margin-right: 35px;
+}
+
+a {
+	text-decoration: none;
+}
+.today{
+    background-color: #ffff66;
+}
+
+.complete, .complete:hover{
+	background-color: #006600;
+	color: white;
+}
+
+#buttonArea{
+    padding-top: 20px;
+    text-align: right;
+}
+
+.detail{
+	cursor: pointer;
+}
+
+.detail:hover {
+	text-decoration: underline;
 }

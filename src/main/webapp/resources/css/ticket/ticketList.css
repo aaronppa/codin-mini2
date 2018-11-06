@@ -33,7 +33,28 @@ td, th {
     color: red;
 }
 
+a {
+	text-decoration: none;
+}
+
+.today{
+    background-color: #ffff66;
+}
+
+.complete, .complete:hover{
+	background-color: #006600;
+	color: white;
+}
+
 #buttonArea{
     padding-top: 20px;
     text-align: right;
+}
+
+.detail{
+	cursor: pointer;
+}
+
+.detail:hover {
+	text-decoration: underline;
 }

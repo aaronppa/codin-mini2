@@ -42,4 +42,37 @@ public class TicketServiceImpl implements TicketService {
 	public void insertSkill(TicketSkill skill) {
 		mapper.insertSkill(skill);
 	}
+
+	@Override
+	public List<Ticket> ticketList(int userNo) {
+		return mapper.ticketList(userNo);
+	}
+
+	@Override
+	public Ticket ticketDetail(int ticketNo) {
+		Ticket ticket = mapper.ticketDetail(ticketNo);
+		ticket.setTicketEnd(ticket.getTicketEnd().substring(0, 10));
+		
+		return ticket;
+	}
+
+	@Override
+	public List<TicketSkill> ticketSkillDetail(int ticketNo) {
+		return mapper.ticketSkillDetail(ticketNo);
+	}
+
+	@Override
+	public void updateReceiver(Ticket ticket) {
+		mapper.updateReceiver(ticket);
+	}
+
+	@Override
+	public List<Ticket> sendTicketList(int senderNo) {
+		return mapper.sendTicketList(senderNo);
+	}
+
+	@Override
+	public List<String> searchReceiver(int ticketNo) {
+		return mapper.searchReceiver(ticketNo);
+	}
 }

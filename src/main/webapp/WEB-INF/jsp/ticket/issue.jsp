@@ -14,9 +14,8 @@
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
-
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="<c:url value='/resources/script/sweet/sweetalert2.all.min.js'/>"/></script>
+	<script src="<c:url value='/resources/script/sweet/sweetalert2.all.min.js'/>"/></script>
 </head>
 <body>
     <div id="container">
@@ -147,8 +146,15 @@
             	data: $("#form").serialize()
             }).done(function(){
             	$(".groupMember").remove();
+            	swal({
+					  type: 'success',
+					  title: 'OK!',
+					  text: '작업이 정상적으로 저장되었습니다.'
+				}).then((result)=>{
+					opener.parent.location.reload();
+					window.close();						
+				})
             })
-            
         })
         
 	    

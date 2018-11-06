@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
     <link rel="stylesheet" href="<c:url value='/resources/script/sweet/sweetalert2.min.css'/>">
-    <link rel="stylesheet" href="<c:url value='/resources/css/ticket/ticketDetail.css'/>">
+    <link rel="stylesheet" href="<c:url value='/resources/css/ticket/ticketSendDetail.css'/>">
     <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -19,25 +19,32 @@
     <div id="container">
         <h2>티켓 세부 내용</h2>
         <hr>
-        <form>
+        <form id="form">
+        	<input type="hidden" name="ticketNo" value='${ticket.ticketNo }'/>
             <span>티켓 발급일 : </span>
 		    <fmt:formatDate value='${ticket.ticketDate }' pattern="yyyy-MM-dd HH:mm" var="ticketDate"/>
             <input class="line1 rightMargin" type="text" disabled="disabled" id="ticketDate" value='${ticketDate }'/>
             <span>만료일 : </span>
-            <input class="line1 rightMargin" type="text" disabled="disabled" id="ticketEnd" value='${ticket.ticketEnd }'/>
+            <input class="line1 rightMargin" type="date" id="ticketEnd" name="ticketEnd" value='${ticket.ticketEnd }'/>
             <span>난이도 : </span>
-            <input class="line1" type="text" id="ticketDifficulty" disabled="disabled" /><br>
+            <select name="ticketDifficulty" name="ticketDifficulty" id="ticketDifficulty">
+                <option value="1">하</option>
+                <option value="2">중</option>
+                <option value="3">상</option>
+            </select><br>
+            
+<!--             <input class="line1" type="text" id="ticketDifficulty" disabled="disabled" /><br> -->
             <span>티켓 제목 : </span>
-            <input class="title rightMargin" type="text" disabled="disabled" id="ticketTitle" value='${ticket.ticketTitle }'/>
-            <span>티켓 발급자 : </span>
-            <input type="text" disabled="disabled" id="ticketReceiver"  value='${ticket.member.memberName }'/>
+            <input class="title rightMargin" type="text" id="ticketTitle" name="ticketTitle" value='${ticket.ticketTitle }'/><br>
+            <span>티켓 수신자 : </span>
+            <input type="text" disabled="disabled" id="ticketReceiver"  value='${receiver }'/>
             <br>
             <p class="progress rightMargin">작업 진행률</p>
             <p class="progress" id="progress">${ticket.ticketProgress }</p>%<br>
             <div id="progressBar">
-            	<input type="range" id="progressNum" min="0" max="100" value="${ticket.ticketProgress }"> <br>
+            	<input type="range" id="progressNum" min="0" max="100" value="${ticket.ticketProgress }" disabled="disabled"> <br>
 			</div>
-            <span>주요 사용 툴 : </span>
+            <span >주요 사용 툴 : </span>
             <input class="skill" type="checkbox" name="ticketSkill" value="1" id="skill1">
             <label for="skill1">Java</label>
             <input class="skill" type="checkbox" name="ticketSkill" value="2" id="skill2">
@@ -52,36 +59,28 @@
             <label for="skill6">JQuery / Ajax</label>
             <input class="skill" type="checkbox" name="ticketSkill" value="7" id="skill7">
             <label for="skill7">spring</label><br>
+        <div class="marginBottom"> </div>
             <span class="marginBottom">티켓 내용</span><br>
-            <textarea class="ticketText" id="ticketText" disabled="disabled" name="ticketText">${ticket.ticketText }</textarea>
+            <textarea class="ticketText" id="ticketText" disabled="disabled">${ticket.ticketText }</textarea>
             <span class="marginBottom">추가할 내용</span><br>
-            <textarea class="ticketText" id="ticketAddText" name="ticketAddText"></textarea>
+            <textarea class="ticketText" id="ticketAddText" name="ticketText"></textarea>
             <div id="submitBox">
-                <button type="button" id="submit">저장</button>
-                <button type="button" id="delete">티켓거부</button>
+                <button type="button" id="submit">수정</button>
+                <button type="button" id="delete">티켓삭제</button>
                 <button type="button" id="close">닫기</button>
             </div>
         </form>
     </div>
     <script>
-    	if (${ticket.ticketDifficulty} == "1") {
-    		$("#ticketDifficulty").val("하")	    		
-    	}
+ 
+    	$("#ticketDifficulty > option").eq(${ticket.ticketDifficulty}-1).attr("selected", "selected")
     
-    	if (${ticket.ticketDifficulty} == "2") {
-    		$("#ticketDifficulty").val("중")	    		
-    	}
-    
-    	if (${ticket.ticketDifficulty} == "3") {
-    		$("#ticketDifficulty").val("상")	    		
-    	}
-    	
     	try {
     		var ticketSkill = ${ticketSkill}
     		for (let i = 0; i < ticketSkill.length; i++) {
     			console.log(ticketSkill[i].skillCode-1)
     			console.dir($(".skill"))
-    			$(".skill").eq(ticketSkill[i].skillCode-1).attr("checked", "checked");
+    			$(".skill").eq(ticketSkill[i].skillCode).attr("checked", "checked");
 
     		}
 
@@ -89,8 +88,6 @@
     		;;
     	}
     	
-        $("input[type='checkbox']").attr("disabled","disabled");
-
         $("#close").click(function() {
         	swal({
         		  title: '창을 닫으시겠습니까?',
@@ -111,8 +108,8 @@
         
          $("#delete").click(function() {
         	swal({
-        		  title: '이 티켓을 거부하시겠습니까?',
-        		  text: "티켓 거부는 취소되지 않습니다.",
+        		  title: '이 티켓을 삭제하시겠습니까?',
+        		  text: "티켓 삭제는 취소되지 않습니다.",
         		  type: 'warning',
         		  showCancelButton: true,
         		  confirmButtonColor: '#3085d6',
@@ -126,6 +123,7 @@
 					}
         		})
         })
+        
         $("#submit").click(function() {
         	swal({
       		  title: '저장하시겠습니까?',
@@ -139,14 +137,9 @@
       		}).then((result) => {
       		  if (result.value) {
 					$.ajax({
-						url:"<c:url value='/ticket/updateReceiver.do'/>",
+						url:"<c:url value='/ticket/updateSender.do'/>",
 						type:"POST",
-						data: {
-							ticketNo:`${ticket.ticketNo}`,
-							userName: `${user.memberName}`,
-							addText: $("#ticketAddText").val(),
-							progress: $("#progressNum").val()
-						}
+						data: $("#form").serialize()
 					}).done(function() {
 						swal({
 							  type: 'success',
@@ -164,7 +157,7 @@
         $("#progressNum").mouseup(function() {
             $("#progress").html($("#progressNum").val())
         })
-        
+
     </script>
 </body>
 </html>

@@ -11,6 +11,8 @@
 		<result column="ticket_end" property="ticketEnd" />
 		<result column="ticket_text" property="ticketText" />
 		<result column="ticket_progress" property="ticketProgress" />
+		<result column="ticket_date" property="ticketDate" />
+		<association column="ticket_sender" property="member" select="searchMemberByNo"></association>
 	</resultMap>
 	
 	<resultMap id="memberMap" type="Member">
@@ -50,6 +52,12 @@
 		where member_id = #{id}
 	</select>
 	
+	<select id="searchMemberByNo" parameterType="int" resultMap="memberMap">
+		select *
+		from member
+		where member_no = #{no}
+	</select>
+	
 	<insert id="insertGroup" parameterType="TicketGroup">
 		insert into ticket_group
 		(ticket_no, group_member)
@@ -64,4 +72,57 @@
 		(#{ticketNo}, #{skillCode})
 	</insert>
 	
+	<!-- 특정 로그인 멤버로만 확인 하는 쿼리 필요 -->
+	<select id="ticketList" parameterType="int" resultMap="ticketMap">
+		select *
+		from ticket 
+		where ticket_no in (select ticket_no
+							from ticket_group
+							where group_member = #{userNo})
+		order by ticket_no desc
+	</select>
+	
+	<select id="sendTicketList" parameterType="int" resultMap="ticketMap">
+		select *
+		from ticket 
+		where ticket_sender = #{no}
+		order by ticket_no desc
+	</select>
+	
+	<select id="ticketDetail" parameterType="int" resultMap="ticketMap">
+		select *
+		from ticket
+		where ticket_no = #{ticketNo}
+	</select>
+	
+	<select id="ticketSkillDetail" parameterType="int" resultMap="ticketSkillMap">
+		select *
+		from ticket_skill
+		where ticket_no = #{ticketNo}
+	</select>
+	
+	<update id="updateReceiver" parameterType="Ticket">
+		update ticket
+		set ticket_text = #{ticketText},
+			ticket_progress = #{ticketProgress}
+		where ticket_no = #{ticketNo}
+	</update>
+	
+	<update id="updateSender" parameterType="Ticket">
+		update ticket
+		set ticket_text = #{ticketText},
+			ticket_title = #{ticketTitle},
+			ticket_difficulty = #{ticketDifficulty},
+			ticket_end = #{ticketEnd}
+		where ticket_no = #{ticketNo}
+	</update>
+	
+	<select id="searchReceiver" parameterType="int" resultType="string">
+		select member_name
+		from member
+		where member_no in (select group_member
+							from ticket_group
+							where ticket_no = #{ticketNo}
+							)
+	</select>
 </mapper>

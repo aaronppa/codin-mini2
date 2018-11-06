@@ -311,7 +311,7 @@ body.swal2-toast-shown > .swal2-container {
     position: initial; }
   .swal2-popup.swal2-toast .swal2-content {
     justify-content: flex-start;
-    font-size: 30px; }
+    font-size: 1em; }
   .swal2-popup.swal2-toast .swal2-icon {
     width: 2em;
     min-width: 2em;
@@ -800,7 +800,7 @@ body.swal2-no-backdrop .swal2-shown {
     margin: 0;
     padding: 0;
     color: #545454;
-    font-size: 30px;
+    font-size: 1.125em;
     font-weight: 300;
     line-height: normal;
     word-wrap: break-word; }
@@ -820,7 +820,7 @@ body.swal2-no-backdrop .swal2-shown {
     transition: border-color .3s, box-shadow .3s;
     border: 1px solid #d9d9d9;
     border-radius: 0.1875em;
-    font-size: 30px;
+    font-size: 1.125em;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.06);
     box-sizing: border-box; }
     .swal2-popup .swal2-input.swal2-inputerror,

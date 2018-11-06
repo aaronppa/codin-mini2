@@ -13,5 +13,55 @@
 		<result column="ticket_progress" property="ticketProgress" />
 	</resultMap>
 	
+	<resultMap id="memberMap" type="Member">
+		<result column="member_no" property="memberNo" />
+		<result column="member_id" property="memberId" />
+		<result column="member_name" property="memberName" />
+	</resultMap>
+	
+	<resultMap type="TicketSkill" id="ticketSkillMap">
+		<result column="skill_no" property="skillNo"/>
+		<result column="ticket_no" property="ticketNo"/>
+		<result column="skill_code" property="skillCode"/>
+	</resultMap>
+	
+	<resultMap type="TicketGroup" id="ticketGroupMap">
+		<result column="group_no" property="groupNo"/>
+		<result column="ticket_no" property="ticketNo"/>
+		<result column="group_member" property="groupMember"/>
+	</resultMap>
+	
+	<insert id="insertTicket" parameterType="Ticket" useGeneratedKeys="true" keyProperty="ticketNo">
+		insert into ticket
+		(ticket_title, ticket_sender, ticket_difficulty, ticket_start, ticket_end, ticket_text)
+		values
+		(#{ticketTitle}, #{ticketSender}, #{ticketDifficulty}, #{ticketStart}, #{ticketEnd}, #{ticketText})
+	</insert>
 
+	<select id="autoCom" resultType="string">
+		select member_id
+		from member
+		order by member_no desc
+	</select>
+	
+	<select id="searchMember" parameterType="string" resultMap="memberMap">
+		select *
+		from member
+		where member_id = #{id}
+	</select>
+	
+	<insert id="insertGroup" parameterType="TicketGroup">
+		insert into ticket_group
+		(ticket_no, group_member)
+		values
+		(#{ticketNo}, #{groupMember})
+	</insert>
+	
+	<insert id="insertSkill" parameterType="TicketSkill">
+		insert into ticket_skill
+		(ticket_no, skill_code)
+		values
+		(#{ticketNo}, #{skillCode})
+	</insert>
+	
 </mapper>

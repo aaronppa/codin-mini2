@@ -42,102 +42,45 @@
 	}
 	
 </style>
+<script src="<c:url value='/resources/js/jquery-dateformat.js'/>"></script>	
+
 </head>
 <body>
 <c:import url="/WEB-INF/jsp/include/top.jsp" />
 	<!-- 게시물 목록 표현하기 -->
 	<h2>PHOTO</h2>
+	<h2></h2>
 	<hr>
 	<div id="writeBtn">
 		<button type="button" class="btn btn-outline-secondary"><a href="<c:url value='/gallary/writeForm.do'/>" >write</a></button>
 	</div>
 	<br>
 	<table>
-		<tr>
-			<td>
-				<div class="card" style="width: 18rem;">
-				<a href="<c:url value='/gallary/detail.do'/>" >
-				  <img class="card-img-top" src="/codin_mini/gallimg/aaaa.jpg" alt="Card image cap">
-				 </a> 
-				  <div class="card-body">
-				    <p class="card-text">부엉이에요</p>
-				  </div>
-				</div>
-			</td>
-			<td>
-				<div class="card" style="width: 18rem;">
-				<a href="<c:url value='/gallary/detail.do'/>" >
-				  <img class="card-img-top" src="/codin_mini/gallimg/aaaa.jpg" alt="Card image cap">
-				 </a> 
-				  <div class="card-body">
-				    <p class="card-text">부엉이에요</p>
-				  </div>
-				</div>
-			</td>
-			<td>
-				<div class="card" style="width: 18rem;">
-				<a href="<c:url value='/gallary/detail.do'/>" >
-				  <img class="card-img-top" src="/codin_mini/gallimg/aaaa.jpg" alt="Card image cap">
-				 </a> 
-				  <div class="card-body">
-				    <p class="card-text">부엉이에요</p>
-				  </div>
-				</div>
-			</td>
-			<td>
-				<div class="card" style="width: 18rem;">
-				<a href="<c:url value='/gallary/detail.do'/>" >
-				  <img class="card-img-top" src="/codin_mini/gallimg/aaaa.jpg" alt="Card image cap">
-				 </a> 
-				  <div class="card-body">
-				    <p class="card-text">부엉이에요</p>
-				  </div>
-				</div>
-			</td>
-		</tr>
-		<!-- 한 열 끝 -->
-		<tr>
-			<td>
-				<div class="card" style="width: 18rem;">
-				<a href="<c:url value='/gallary/detail.do'/>" >
-				  <img class="card-img-top" src="/codin_mini/gallimg/aaaa.jpg" alt="Card image cap">
-				 </a> 
-				  <div class="card-body">
-				    <p class="card-text">부엉이에요</p>
-				  </div>
-				</div>
-			</td>
-			<td>
-				<div class="card" style="width: 18rem;">
-				<a href="<c:url value='/gallary/detail.do'/>" >
-				  <img class="card-img-top" src="/codin_mini/gallimg/aaaa.jpg" alt="Card image cap">
-				 </a> 
-				  <div class="card-body">
-				    <p class="card-text">부엉이에요</p>
-				  </div>
-				</div>
-			</td>
-			<td>
-				<div class="card" style="width: 18rem;">
-				<a href="<c:url value='/gallary/detail.do'/>" >
-				  <img class="card-img-top" src="/codin_mini/gallimg/aaaa.jpg" alt="Card image cap">
-				 </a> 
-				  <div class="card-body">
-				    <p class="card-text">부엉이에요</p>
-				  </div>
-				</div>
-			</td>
-			<td>
-				<div class="card" style="width: 18rem;">
-				<a href="<c:url value='/gallary/detail.do'/>" >
-				  <img class="card-img-top" src="/codin_mini/gallimg/aaaa.jpg" alt="Card image cap">
-				 </a> 
-				  <div class="card-body">
-				    <p class="card-text">부엉이에요</p>
-				  </div>
-				</div>
-			</td>
-		</tr>
+	<!-- 반복문 -->
+	<tbody>
+		<c:forEach var="g" items="${gall}" varStatus="loop"> 
+			<c:if test="${loop.count % 3 == 1}">
+				<tr id="tr">
+			</c:if>
+				<td id="td">
+					<div class="card" style="width: 18rem;">
+					<a href="<c:url value='/gallary/detail.do?gallNo=${g.gallNo}'/>" >
+					  <img class="card-img-top" src="/codin_mini/gallimg/aaaa.jpg" alt="Card image cap">
+					 </a> 
+					  <div class="card-body">
+					    <p class="card-text"><h3>${g.gallTitle}</h3></p>
+					    <p class="card-text">${g.gallWriter}</p>
+					  </div>
+					</div>
+				</td>		
+			<c:if test="${loop.count % 3 == 0}">
+				</tr>
+			</c:if>
+		</c:forEach>
+		<c:if test="${gall.size() % 3 != 0}">
+		 </tr>
+		</c:if>
+	</tbody>
 	</table>
 	<br>
 	<br>

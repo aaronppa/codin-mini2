@@ -1,14 +1,12 @@
 package kr.co.codin.repository.domain;
 
-import java.util.Date;
-
 public class Ticket {
 	private int ticketNo;
 	private String ticketTitle;
-	private int ticket_sender;
-	private char ticketDifficulty;
-	private Date ticketStrart;
-	private Date ticketEnd;
+	private int ticketSender;
+	private int ticketDifficulty;
+	private String ticketStart;
+	private String ticketEnd;
 	private String ticketText;
 	private int ticketProgress;
 	
@@ -24,28 +22,28 @@ public class Ticket {
 	public void setTicketTitle(String ticketTitle) {
 		this.ticketTitle = ticketTitle;
 	}
-	public int getTicket_sender() {
-		return ticket_sender;
+	public int getTicketSender() {
+		return ticketSender;
 	}
-	public void setTicket_sender(int ticket_sender) {
-		this.ticket_sender = ticket_sender;
+	public void setTicketSender(int ticketSender) {
+		this.ticketSender = ticketSender;
 	}
-	public char getTicketDifficulty() {
+	public int getTicketDifficulty() {
 		return ticketDifficulty;
 	}
-	public void setTicketDifficulty(char ticketDifficulty) {
+	public void setTicketDifficulty(int ticketDifficulty) {
 		this.ticketDifficulty = ticketDifficulty;
 	}
-	public Date getTicketStrart() {
-		return ticketStrart;
+	public String getTicketStart() {
+		return ticketStart;
 	}
-	public void setTicketStrart(Date ticketStrart) {
-		this.ticketStrart = ticketStrart;
+	public void setTicketStart(String ticketStart) {
+		this.ticketStart = ticketStart;
 	}
-	public Date getTicketEnd() {
+	public String getTicketEnd() {
 		return ticketEnd;
 	}
-	public void setTicketEnd(Date ticketEnd) {
+	public void setTicketEnd(String ticketEnd) {
 		this.ticketEnd = ticketEnd;
 	}
 	public String getTicketText() {
@@ -63,8 +61,8 @@ public class Ticket {
 	
 	@Override
 	public String toString() {
-		return "Ticket [ticketNo=" + ticketNo + ", ticketTitle=" + ticketTitle + ", ticket_sender=" + ticket_sender
-				+ ", ticketDifficulty=" + ticketDifficulty + ", ticketStrart=" + ticketStrart + ", ticketEnd="
+		return "Ticket [ticketNo=" + ticketNo + ", ticketTitle=" + ticketTitle + ", ticketSender=" + ticketSender
+				+ ", ticketDifficulty=" + ticketDifficulty + ", ticketStart=" + ticketStart + ", ticketEnd="
 				+ ticketEnd + ", ticketText=" + ticketText + ", ticketProgress=" + ticketProgress + "]";
 	}
 }

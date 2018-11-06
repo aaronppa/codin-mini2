@@ -7,8 +7,8 @@ public class Gallary {
 	private String gallWriter;
 	private String gallTitle;
 	private String gallContent;
-	private Date gellRegDate;
-	private int gallViewCnt;
+	private Date gallRegDate;
+	private Integer gallViewCnt;
 	
 	public int getGallNo() {
 		return gallNo;
@@ -34,17 +34,23 @@ public class Gallary {
 	public void setGallContent(String gallContent) {
 		this.gallContent = gallContent;
 	}
-	public Date getGellRegDate() {
-		return gellRegDate;
+	public Date getGallRegDate() {
+		return gallRegDate;
 	}
-	public void setGellRegDate(Date gellRegDate) {
-		this.gellRegDate = gellRegDate;
+	public void setGallRegDate(Date gallRegDate) {
+		this.gallRegDate = gallRegDate;
 	}
-	public int getGallViewCnt() {
+	public Integer getGallViewCnt() {
 		return gallViewCnt;
 	}
-	public void setGallViewCnt(int gallViewCnt) {
+	public void setGallViewCnt(Integer gallViewCnt) {
 		this.gallViewCnt = gallViewCnt;
 	}
+
+	
+
+
+	
+	
 	
 }	

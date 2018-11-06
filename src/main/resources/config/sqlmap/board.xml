@@ -1,0 +1,38 @@
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.codin.repository.mapper.BoardMapper">
+	<resultMap id="BoardMap" type="Board">
+		<result column="board_no" property="boardNo"/>
+		<result column="board_title" property="boardTitle"/>
+		<result column="board_content" property="boardContent"/>
+		<result column="board_id" property="boardId"/>
+		<result column="board_date" property="boardDate"/>
+		<result column="category_no" property="boardNo"/>
+	
+		<result column="board_viewCnt" property="boardViewCnt"/>
+	</resultMap>
+	
+	<insert id="insertBoard" parameterType="Board">
+		insert into board(board_title, board_content, board_id,board_date)
+				   values(#{boardTitle} , #{boardContent}, #{boardId}, CURDATE())
+	</insert>
+	
+	<select id="selectBoard" resultMap="BoardMap">
+		select *
+		from board
+		order by board_no desc
+	</select>
+	
+	<select id="selectBoardByNo" parameterType="int" resultMap="BoardMap">
+	select *
+	from board
+	where board_no =#{boardNo}
+	
+	</select>
+	<update id="updateViewCnt" parameterType="int" >
+	update board 
+	set board_viewCnt=board_viewCnt+1
+	where board_no=#{boardNo}
+	</update>
+</mapper>

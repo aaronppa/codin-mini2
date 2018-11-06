@@ -13,6 +13,12 @@
 		<result column="member_age" property="memberAge" />
 		<result column="member_gender" property="memberGender" />
 	</resultMap>
+
+	<resultMap id="skillMap" type="MemberSkill">
+		<result column="member_no" property="memberNo" />
+		<result column="member_skill_no" property="memberSkillNo" />
+		<result column="skill_code" property="skillCode" />
+	</resultMap>
 	
 	<select id="selectMember" resultMap="memberMap">
 		select *
@@ -34,4 +40,36 @@
 		 where member_id = #{memberId}
 		   and member_password = #{memberPassword}
 	</select>
+	
+	<select id="selectMemberByNo" parameterType="int" resultMap="memberMap">
+		select *
+		  from member
+		 where member_no = #{memberNo}
+	</select>
+	
+	<select id="selectMemberSkillByNo" parameterType="int" resultMap="skillMap">
+		select *
+		  from member_skill
+		 where member_no = #{memberNo}
+	</select>
+	
+	<update id="updateMember" parameterType="Member">
+		update member
+		   set member_age = #{memberAge},
+		       member_gender = #{memberGender},
+		       member_email = #{memberEmail}
+		 where member_no = #{memberNo}
+	</update>
+	
+	<delete id="deleteMemberSkill">
+		delete from member_skill
+	</delete>
+	
+	<insert id="insertMemberSkill" parameterType="MemberSkill">
+		insert into member_skill(
+			member_no, member_skill_no
+		) values (
+			#{memberNo}, #{memberSkillNo}
+		)
+	</insert>
 </mapper>

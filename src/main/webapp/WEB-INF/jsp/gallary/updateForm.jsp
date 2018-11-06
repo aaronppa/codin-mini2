@@ -37,30 +37,35 @@
   </style>
 </head>
 <body>
-	<c:import url="/WEB-INF/jsp/include/top.jsp" />
-	<div id="header">
-	 <h2>DETAIL</h2>
-	 <hr> 
-	 <div id="title">
-	 	<input type="text" id="title" value="제목을 입력하세요"/>
-	 </div>
-	 <hr>
-	</div>
-	<div id="main">
-		 <img src="/codin_mini/gallimg/aaaa.jpg">
-		 <br>
-		 <br>
-		 <textarea cols="130" rows="7">내용을 입력하세요</textarea>
+	<form action="<c:url value='/gallary/update.do'/>" method="post">
+		<c:import url="/WEB-INF/jsp/include/top.jsp" />
+		<div id="header">
+		 <h2>UPDATE</h2>
+		 <hr> 
+		 <input type="hidden" name="gallNo" value="${gall.gallNo}"/>
+		 <h2>${gall.gallWriter }</h2>
+		 <input type="hidden" id="gallWriter" value="${gall.gallWriter}">
+		 <div id="title">
+		 	<input type="text" name="gallTitle" value="${gall.gallTitle}" placeholder="제목을 입력하세요"/>
+		 </div>
 		 <hr>
-	</div>
-	<div id="udl">
-		 <button type="button" class="btn btn-outline-secondary"><a href='write.do'>insert</a></button>
-		 <button type="button" class="btn btn-outline-secondary"><a href='list.do'>list</a></button>
-	</div>
-	<hr>
-	<br>
-	<br>
-	<br>
+		</div>
+		<div id="main">
+			 <img src="/codin_mini/gallimg/aaaa.jpg">
+			 <br>
+			 <br>
+			 <textarea name="gallContent" cols="130" rows="7" placeholder="내용을 입력하세요">${gall.gallContent}</textarea>
+			 <hr>
+		</div>
+		<div id="udl">
+			 <button class="btn btn-primary" type="submit">submit</button>
+			 <button type="button" class="btn btn-outline-secondary"><a href='list.do'>list</a></button>
+		</div>
+		<hr>
+		<br>
+		<br>
+		<br>
+	</form>
 	 	
 	 <script>
 	 </script>

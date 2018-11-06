@@ -10,6 +10,22 @@
 		<result column="gall_reg_date" property="gallRegDate"/>
 		<result column="gall_view_cnt" property="gallViewCnt"/>
 	</resultMap>
+	<resultMap id="gallCommentMap" type="gallComment">
+		<result column="gall_no" property="gallNo"/>
+		<result column="gall_com_no" property="gallComNo"/>
+		<result column="gall_com_writer" property="gallComWriter"/>
+		<result column="gall_com_content" property="gallComContent"/>
+		<result column="gall_com_reg_date" property="gallComRegDate"/>
+	</resultMap>
+	<resultMap id="gallFileMap" type="gallFile">
+		<result column="gall_no" property="gallNo"/>
+		<result column="file_no" property="fileNo"/>
+		<result column="file_ori_name" property="fileOriName"/>
+		<result column="file_server_name" property="fileServerName"/>
+		<result column="file_path" property="filePath"/>
+		<result column="file_size" property="fileSize"/>		
+	</resultMap>
+
 	
 	<select id="selectGall" resultMap="gallaryMap">
 		select *
@@ -22,5 +38,62 @@
 		  from gallary
 		 where gall_no=#{gallNo}
 	</select>
+	
+<!-- 	<update id="updateViewCnt" parameterType="int"> -->
+<!-- 		update gallary  -->
+<!-- 		   set view_cnt = view_cnt + 1 -->
+<!-- 		  from gall_no = #{gallNo} -->
+<!-- 	</update> -->
+	
+	<insert id="insertGall" parameterType="gallary" >
+		insert into gallary(
+				gall_writer, gall_title, gall_content
+			)values(
+				#{gallWriter}, #{gallTitle}, #{gallContent}
+			)
+	</insert>
+
+	<update id="updateGall" parameterType="gallary">
+		update gallary
+		   set gall_title = #{gallTitle},
+		   	   gall_content = #{gallContent}
+		 where gall_no = #{gallNo}
+	</update>
+	
+	<delete id="deleteGall" parameterType="int">
+		delete 
+		  from gallary
+		 where gall_no = #{gallNo}
+	</delete>
+	
+	<!-- comment -->
+
+	<insert id="insertGallComment" parameterType="gallComment" >
+		insert into gall_comment(
+				gall_no, gall_com_writer, gall_com_content
+			)values(
+				#{gallNo}, #{gallComWriter}, #{gallComContent}
+			)
+	</insert>
+	
+	<!-- resultType : select의 결과를 담아 줄 곳 -->
+	<select id="selectCommentList" parameterType="int" resultMap="gallCommentMap">
+		select *
+		  from gall_comment
+		 where gall_no = #{gallNo}
+	</select>
+
+	<!-- file-->
+	<insert id="uploadFile" parameterType="gallFile">
+		insert into gall_file(
+			gall_no, file_ori_name, file_server_name, file_path, file_size 
+		)values(
+			#{gallNo}, #{fileOriName}, #{fileServerName}, #{filePath}, #{fileSize}
+		) 
+	</insert>
+	
+	
+	
+	
 
 </mapper>

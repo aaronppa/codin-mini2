@@ -22,6 +22,12 @@
 	<div style="height: 50px"></div>
     <div id="container">
         <h2>내가 받은 티켓</h2>
+        <ul id="ticketTop">
+        	<li class="rightMargin">내가 받은 티켓</li>
+        	<li class="rightMargin">내가 보낸 티켓</li>
+        	<li>티켓 발급</li>
+        </ul>
+        
         <hr>
         <table>
             <thead>
@@ -70,6 +76,18 @@
             <button type="button" id="issue">티켓 발급</button>
         </div>
         <script>
+        $("#ticketTop > li:eq(0)").click(function(){
+        	location.href='<c:url value="/ticket/list.do"/>'
+        })
+        
+        $("#ticketTop > li:eq(1)").click(function(){
+        	location.href='<c:url value="/ticket/sendList.do"/>'
+        })
+        
+        $("#ticketTop > li:eq(2)").click(function(){
+	    	window.open("/codin_mini/ticket/issue.do", "issue", "menubar");
+        })
+        
 	    $("#issue").click(function () {
 	    	window.open("/codin_mini/ticket/issue.do", "issue", "menubar");
 	    })

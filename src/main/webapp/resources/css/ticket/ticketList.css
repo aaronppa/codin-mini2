@@ -2,6 +2,29 @@
     margin: 30px 150px;
 }
 
+ul{
+     text-align:center;  
+}
+
+#ticketTop > li{
+	background: #CAE4FC;
+	padding-top:5px;
+    display:inline-block; 
+    width: 150px;
+    height: 30px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#ticketTop > li:hover {
+	background: #63B2F7;
+	font-weight: bolder;
+}
+
+.rightMargin {
+    margin-right: 35px;
+}
+
 table{
     width: 100%;
 }
@@ -31,10 +54,6 @@ td, th {
 
 .overdate{
     color: red;
-}
-
-a {
-	text-decoration: none;
 }
 
 .today{

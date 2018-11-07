@@ -75,4 +75,29 @@ public class TicketServiceImpl implements TicketService {
 	public List<String> searchReceiver(int ticketNo) {
 		return mapper.searchReceiver(ticketNo);
 	}
+
+	@Override
+	public void updateSender(Ticket ticket) {
+		mapper.updateSender(ticket);
+	}
+
+	@Override
+	public void deleteSkill(int skillNo) {
+		mapper.deleteSkill(skillNo);
+	}
+
+	@Override
+	public Member searchMemberByNo(int memberNo) {
+		return mapper.searchMemberByNo(memberNo);
+	}
+
+	@Override
+	public void deleteTicket(int ticketNo) {
+		mapper.deleteTicket(ticketNo);
+	}
+
+	@Override
+	public void deleteReceiver(TicketGroup ticketGroup) {
+		mapper.deleteReceiver(ticketGroup);
+	}
 }

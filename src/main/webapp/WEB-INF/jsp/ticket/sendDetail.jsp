@@ -20,6 +20,7 @@
         <h2>티켓 세부 내용</h2>
         <hr>
         <form id="form">
+           	<input type="hidden" name="ticketSender" value='${user.memberNo }'>
         	<input type="hidden" name="ticketNo" value='${ticket.ticketNo }'/>
             <span>티켓 발급일 : </span>
 		    <fmt:formatDate value='${ticket.ticketDate }' pattern="yyyy-MM-dd HH:mm" var="ticketDate"/>
@@ -80,7 +81,7 @@
     		for (let i = 0; i < ticketSkill.length; i++) {
     			console.log(ticketSkill[i].skillCode-1)
     			console.dir($(".skill"))
-    			$(".skill").eq(ticketSkill[i].skillCode).attr("checked", "checked");
+    			$(".skill").eq(ticketSkill[i].skillCode-1).attr("checked", "checked");
 
     		}
 
@@ -96,13 +97,14 @@
         		  showCancelButton: true,
         		  confirmButtonColor: '#3085d6',
         		  cancelButtonColor: '#d33',
-        		  confirmButtonText: '네',
+        		  confirmButtonText: '네',/*
+        		  */
         		  cancelButtonText: "아니오"
         		}).then((result) => {
-					if (result.value) {
-
-						window.close()  	
-					}
+						if (result.value) {
+	
+							window.close()  	
+						}
         		})
         })
         
@@ -117,11 +119,23 @@
         		  confirmButtonText: '네',
         		  cancelButtonText: "아니오"
         		}).then((result) => {
-					if (result.value) {
-
-						window.close()  	
-					}
-        		})
+	  	      		  if (result.value) {
+							$.ajax({
+								url:"<c:url value='/ticket/deleteSender.do'/>",
+								type:"POST",
+								data: {ticketNo : `${ticket.ticketNo }`}
+							}).done(function() {
+								swal({
+									  type: 'success',
+									  title: 'OK!',
+									  text: '작업이 정상적으로 저장되었습니다.'
+								}).then((result)=>{
+									opener.parent.location.reload();
+									window.close();						
+								})
+							})
+		      		  }
+	       		})
         })
         
         $("#submit").click(function() {
@@ -135,22 +149,22 @@
       		  confirmButtonText: '네',
       		  cancelButtonText: "아니오"
       		}).then((result) => {
-      		  if (result.value) {
-					$.ajax({
-						url:"<c:url value='/ticket/updateSender.do'/>",
-						type:"POST",
-						data: $("#form").serialize()
-					}).done(function() {
-						swal({
-							  type: 'success',
-							  title: 'OK!',
-							  text: '작업이 정상적으로 저장되었습니다.'
-						}).then((result)=>{
-							opener.parent.location.reload();
-							window.close();						
+	      		  if (result.value) {
+						$.ajax({
+							url:"<c:url value='/ticket/updateSender.do'/>",
+							type:"POST",
+							data: $("#form").serialize()
+						}).done(function() {
+							swal({
+								  type: 'success',
+								  title: 'OK!',
+								  text: '작업이 정상적으로 저장되었습니다.'
+							}).then((result)=>{
+								opener.parent.location.reload();
+								window.close();						
+							})
 						})
-					})
-      		  }
+	      		  }
       		})
         })	
         

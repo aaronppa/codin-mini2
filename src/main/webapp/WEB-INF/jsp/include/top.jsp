@@ -21,7 +21,7 @@
     </div>
     
     <div id="topText">
-        <span class="topText" id="profile">${user.memberId}님 접속을 환영합니다.</span>
+        <span class="topText" id="profile">${user.memberName}님 접속을 환영합니다.</span>
         <c:if test="${user.memberGrade == 'a'}">
         	<span class="topText" id="admin">admin</span>
 		</c:if>

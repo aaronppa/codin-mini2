@@ -40,9 +40,9 @@ public class TicketController {
 	@RequestMapping("submit.do")
 	@ResponseBody
 	public void issueSubmit(Ticket ticket, String[] groupMember, int[] ticketSkill) {
-		System.out.println(ticket);
-		System.out.println(Arrays.toString(groupMember));
-		System.out.println(Arrays.toString(ticketSkill));
+		//System.out.println(ticket);
+		//System.out.println(Arrays.toString(groupMember));
+		//System.out.println(Arrays.toString(ticketSkill));
 		int ticketNo = service.insertTicket(ticket);
 		
 		for (int i = 0; i < groupMember.length; i++) {
@@ -69,7 +69,7 @@ public class TicketController {
 	@RequestMapping("searchMember.do")
 	@ResponseBody
 	public Member searchMember(String memberId) {
-		System.out.println("searchMember invoked");
+		//System.out.println("searchMember invoked");
 
 		return service.searchMember(memberId);
 	}
@@ -120,23 +120,57 @@ public class TicketController {
 	@RequestMapping("updateSender.do")
 	@ResponseBody
 	public void updateSender(Ticket ticket, int[] ticketSkill) {
-		System.out.println(ticket);
-		System.out.println(Arrays.toString(ticketSkill));
-//		int ticketNo = service.insertTicket(ticket);
-//		
-//		for (int i = 0; i < groupMember.length; i++) {
-//			TicketGroup group = new TicketGroup();
-//			group.setTicketNo(ticketNo);
-//			group.setGroupMember(service.searchMember(groupMember[i]).getMemberNo());
-//			service.insertGroup(group);
-//		}
-//		
-//		for (int i = 0; i < ticketSkill.length; i++) {
-//			TicketSkill skill = new TicketSkill();
-//			skill.setTicketNo(ticketNo);
-//			skill.setSkillCode(ticketSkill[i]);
-//			service.insertSkill(skill);
-//		}
+		//System.out.println(ticket);
+		
+		String addText = ticket.getTicketText();
+		String updateText = service.ticketDetail(ticket.getTicketNo()).getTicketText();
+		if (addText != "") {
+			updateText += ("&#10;" 
+						+ "------------------------------------------------------------"
+						+ "&#10;" 
+						+ "[" + service.searchMemberByNo(ticket.getTicketSender()).getMemberName() + "]&#10;"
+						+ addText);
+		}
+		ticket.setTicketText(updateText);
+		
+		service.updateSender(ticket);
+		
+		List<TicketSkill> orgSkillList = service.ticketSkillDetail(ticket.getTicketNo());
+		//System.out.println("updateSkill : " + Arrays.toString(ticketSkill));
+		//System.out.println("orgSkill : " + orgSkillList.toString());
+
+		for (TicketSkill orgSkill : orgSkillList) {
+			boolean exist = false;
+			int SkillCode = orgSkill.getSkillCode();
+			
+			for (int updateSkill : ticketSkill) {
+				if (SkillCode == updateSkill) {
+					exist = true; 
+				}
+				
+			}
+			
+			if (!exist) {
+				service.deleteSkill(orgSkill.getSkillNo());
+				//System.out.println("없는 orgSkill : " + orgSkill.toString());
+			}
+		}
+		
+		for (int updateSkill : ticketSkill) {
+			boolean exist = false;  
+			
+			for (TicketSkill orgSkill : orgSkillList) {
+				if (orgSkill.getSkillCode() == updateSkill) exist = true; 
+			}
+			
+			if(!exist) {
+				TicketSkill newSkill = new TicketSkill();
+				newSkill.setSkillCode(updateSkill);
+				newSkill.setTicketNo(ticket.getTicketNo());
+				service.insertSkill(newSkill);
+			}
+		}
+
 	}
 
 	@RequestMapping("sendList.do")
@@ -160,5 +194,19 @@ public class TicketController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("receiver", recevierMap);
+	}
+	
+	@RequestMapping("deleteSender.do")
+	@ResponseBody
+	public void delteSender(int ticketNo) {
+//		System.out.println(ticketNo);
+		service.deleteTicket(ticketNo);
+	}
+	
+	@RequestMapping("deleteReceiver.do")
+	@ResponseBody
+	public void deleteReceiver(TicketGroup ticketGroup) {
+//		System.out.println(ticketGroup);
+		service.deleteReceiver(ticketGroup);
 	}
 }

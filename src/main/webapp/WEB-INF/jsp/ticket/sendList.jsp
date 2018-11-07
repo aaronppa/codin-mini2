@@ -75,6 +75,18 @@
             <button type="button" id="issue">티켓 발급</button>
         </div>
         <script>
+        $("#ticketTop > li:eq(0)").click(function(){
+        	location.href='<c:url value="/ticket/list.do"/>'
+        })
+        
+        $("#ticketTop > li:eq(1)").click(function(){
+        	location.href='<c:url value="/ticket/sendList.do"/>'
+        })
+        
+        $("#ticketTop > li:eq(2)").click(function(){
+	    	window.open("/codin_mini/ticket/issue.do", "issue", "menubar");
+        })
+        
 	    $("#issue").click(function () {
 	    	window.open("/codin_mini/ticket/issue.do", "issue", "menubar");
 	    })

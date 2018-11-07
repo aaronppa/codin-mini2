@@ -19,4 +19,10 @@ public interface TicketService {
 	void updateReceiver(Ticket ticket);
 	List<Ticket> sendTicketList(int senderNo);
 	List<String> searchReceiver(int ticketNo);
+	void updateSender(Ticket ticket);
+	void deleteSkill(int skillNo);
+	Member searchMemberByNo(int memberNo);
+	void deleteTicket(int ticketNo);
+	void deleteReceiver(TicketGroup ticketGroup);
+
 }

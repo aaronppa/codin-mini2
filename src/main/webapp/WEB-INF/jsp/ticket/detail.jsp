@@ -120,10 +120,24 @@
         		  confirmButtonText: '네',
         		  cancelButtonText: "아니오"
         		}).then((result) => {
-					if (result.value) {
-
-						window.close()  	
-					}
+	  	      		  if (result.value) {
+							$.ajax({
+								url:"<c:url value='/ticket/deleteReceiver.do'/>",
+								type:"POST",
+								data: {ticketNo : `${ticket.ticketNo }`,
+									groupMember : `${user.memberNo}`	
+									}
+							}).done(function() {
+								swal({
+									  type: 'success',
+									  title: 'OK!',
+									  text: '작업이 정상적으로 저장되었습니다.'
+								}).then((result)=>{
+									opener.parent.location.reload();
+									window.close();						
+								})
+							})
+		      		  }
         		})
         })
         $("#submit").click(function() {

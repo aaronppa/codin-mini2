@@ -24,7 +24,7 @@
         <hr>
         <form id="form" method="POST">
 <%--         	<input type="hidden" name="ticketSender" value='${user.memberNo}'> --%>
-        	<input type="hidden" name="ticketSender" value='1'>
+        	<input type="hidden" name="ticketSender" value='${user.memberNo }'>
             <span>티켓 제목 : </span>
             <input type="text" id="ticketTitle" name="ticketTitle"/><br>
             <span>티켓 대상자 : </span>

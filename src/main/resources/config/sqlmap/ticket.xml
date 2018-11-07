@@ -125,4 +125,22 @@
 							where ticket_no = #{ticketNo}
 							)
 	</select>
+	
+	<delete id="deleteSkill" parameterType="int">
+		delete
+		from ticket_skill
+		where skill_no = #{skillNo}
+	</delete>
+	
+	<delete id="deleteTicket" parameterType="int">
+		delete
+		from ticket
+		where ticket_no = #{ticketNo}
+	</delete>
+	
+	<delete id="deleteReceiver" parameterType="ticketGroup">
+		delete
+		from ticket_group
+		where ticket_no = #{ticketNo} and group_member = #{groupMember}
+	</delete>
 </mapper>

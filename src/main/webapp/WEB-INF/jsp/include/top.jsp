@@ -52,7 +52,7 @@
 	})
 	
 	$("#profile").click(function() {
-//     	location.href='<c:url value="프로필 URL"/>'
+    	location.href='<c:url value="/member/myPage.do"/>'
 	})
 	
 	$("#admin").click(function() {
@@ -60,7 +60,7 @@
 	})
 	
 	$("#logout").click(function() {
-//     	location.href='<c:url value="로그아웃 URL"/>'
+    	location.href='<c:url value="/member/logout.do"/>'
 	})
 	
 </script>

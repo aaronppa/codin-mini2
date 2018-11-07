@@ -39,11 +39,11 @@
 		 where gall_no=#{gallNo}
 	</select>
 	
-<!-- 	<update id="updateViewCnt" parameterType="int"> -->
-<!-- 		update gallary  -->
-<!-- 		   set view_cnt = view_cnt + 1 -->
-<!-- 		  from gall_no = #{gallNo} -->
-<!-- 	</update> -->
+	<update id="updateViewCnt" parameterType="int">
+		update gallary 
+		   set gall_view_cnt = gall_view_cnt+1
+		  where gall_no = #{gallNo}
+	</update>
 	
 	<insert id="insertGall" parameterType="gallary" >
 		insert into gallary(
@@ -82,6 +82,13 @@
 		  from gall_comment
 		 where gall_no = #{gallNo}
 	</select>
+	
+	<delete id="deleteGallComment" parameterType="int">
+		delete 
+		  from gall_comment
+		 where gall_com_no = #{gallComNo}
+	</delete>
+
 
 	<!-- file-->
 	<insert id="uploadFile" parameterType="gallFile">

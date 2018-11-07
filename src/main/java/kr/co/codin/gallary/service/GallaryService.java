@@ -2,6 +2,8 @@ package kr.co.codin.gallary.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.co.codin.repository.domain.GallComment;
 import kr.co.codin.repository.domain.GallFile;
 import kr.co.codin.repository.domain.Gallary;
@@ -10,7 +12,6 @@ public interface GallaryService {
 	
 	List<Gallary> gallList();
 	
-//	Integer updateViewCnt(int gallNo);
 
 	void writeGall(Gallary gallary);
 	
@@ -22,9 +23,14 @@ public interface GallaryService {
 	
 	Gallary detailGall(int gallNo);
 	
+	//조회수
+//	int updateViewCnt(int gallNo);
+
 	void insertGallComment(GallComment gallComment);
 
 	List<GallComment> selectCommentList(int gallNo);
+	
+	void deleteGallComment(int gallComNo);
 	
 	void uploadFile(GallFile gallFile);
 	

@@ -48,12 +48,12 @@
 
 	<h2>자유 게시판</h2>
 	<hr>
-	<form action="<c:url value='/gallary/write.do' />" method="post">
+	<form action="<c:url value='/gallary/write.do' />" method="post" enctype="multipart/form-data">
 		<div id="header">
 		 <h2>WRITE</h2>
 		 <hr>
 		 <!-- ID value값을 표시 -->
-		 <h2>${user.memberName }</h2>
+		 <h2>ID : ${user.memberName}</h2>
 			<%-- 		  
 			readonly : 값을 변경 못하게 고정시켜놓음
 			<input name="gallWriter" value="${user.memberName }" readonly> 
@@ -78,20 +78,17 @@
 		<!-- 이미지등록 -->
 		<br>
 		<br>
+		<div class="custom-file" id="fileContent">
+		  <input type="file" class="custom-file-input" name="attach" id="customFile" >
+		  <label class="custom-file-label" for="#customFile" name="msg">file</label>
+		
+		</div>
 		<div id="il">
 			 <a href='list.do'><input class="btn btn-primary" type="submit" value="Submit"></a>
 			 <button type="button" class="btn btn-outline-secondary"><a href='list.do'>list</a></button>
 		</div>
 	</form>
-	<form action="<c:url value='/gallary/insertFile.do'/>" 
-		  method="post"
-		  enctype="multipart/form-data">
-		<div class="custom-file" id="fileContent">
-		  <input type="file" class="custom-file-input" name="fileOriName" id="customFile" multiple="multiple">
-		  <label class="custom-file-label" for="#customFile" name="msg">file</label>
-		  <button type="button" id="fileUpload">업로드</button>
-		</div>
-	</form>
+		
 	<hr>
 	<br>
 	<br>
@@ -120,20 +117,21 @@
 	$("#fileUpload").click(function(){
 		var files = $("input[name='fileOriName']")[0].files;
 		var fd = new FormData();
-		
+	
 
 		function sendFile(file, el){
 		$.ajax({
-			url : "/codin_mini/gallary/insertFile.do",
-			data : fd,
+			url : "/codin_mini/gallary/uploadFile.do",
+			data : {fd:fileOriName},
 			type : "post",
 			cache : false,
 			contentType :  false,
 			processData : false,
 			encType: 'multipart/form-data',
-			success : function(fileOriName){
-				alert("업로드성공");
-				$("#customFile").val(fileOriName);
+			success : function(data){
+				alert(data);
+				$("#customFile").val(data);
+			
 			}
 		});
 		};

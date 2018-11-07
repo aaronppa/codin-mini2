@@ -1,11 +1,14 @@
 package kr.co.codin.gallary.service;
 
+import java.util.Iterator;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.codin.repository.domain.GallComment;
 import kr.co.codin.repository.domain.GallFile;
@@ -23,13 +26,15 @@ public class GallaryServiceImpl implements GallaryService{
 		return mapper.selectGall();
 	}
 
-	
-	
+
 //	@Override
-//	public Integer updateViewCnt(Integer gallViewCnt) {
-//		mapper.updateViewCnt(gallViewCnt);
-//	
+//	public Integer updateViewCnt(int gallNo) {
+//		return mapper.updateViewCnt(gallNo);
 //	}
+
+
+
+
 
 
 
@@ -58,7 +63,7 @@ public class GallaryServiceImpl implements GallaryService{
 
 	@Override
 	public Gallary detailGall(int gallNo) {
-		
+		mapper.updateViewCnt(gallNo);
 		return mapper.selectGallByNo(gallNo);
 	}
 
@@ -67,7 +72,7 @@ public class GallaryServiceImpl implements GallaryService{
 		 mapper.insertGallComment(gallComment);
 	}
 
-
+	
 
 
 	@Override
@@ -75,32 +80,20 @@ public class GallaryServiceImpl implements GallaryService{
 		return mapper.selectCommentList(gallNo);
 	}
 
+	@Override
+	public void deleteGallComment(int gallComNo) {
+		mapper.deleteGallComment(gallComNo);
+	}
+
 
 
 	@Override
 	public void uploadFile(GallFile gallFile) {
+		System.out.println("FileNo"+gallFile.getFileNo());
 		
 		mapper.uploadFile(gallFile);
-	}
-	
-	
+	}	
 
-
-	
-	
-
-	
-	
-
-
-	
-	
-//	@Override
-//	public void insertFile(GallFile gallFile) {
-//		mapper.insertFile(gallFile);
-//	}
-
-	
 	
 	
 

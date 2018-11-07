@@ -13,10 +13,11 @@ public interface GallaryMapper {
 	void updateGall(Gallary gallary);
 	void deleteGall(int gallNo);
 	//조회수
-//	Integer updateViewCnt(int gallNo);
+	int updateViewCnt(int gallNo);
 	//댓글
 	void insertGallComment(GallComment gallComment);
 	List<GallComment> selectCommentList(int gallNo);
+	void deleteGallComment(int gallComNo);
 	
 	//파일
 	void uploadFile(GallFile gallFile);

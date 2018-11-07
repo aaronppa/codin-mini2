@@ -1,23 +1,16 @@
 package kr.co.codin.gallary.controller;
 
-import java.util.Iterator;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
+import org.apache.commons.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import kr.co.codin.gallary.service.GallaryService;
@@ -73,9 +66,13 @@ public class GallaryController {
 		model.addAttribute("gall");
 	}
 	@RequestMapping("write.do")
-	public String write(Gallary gallary) throws Exception{
+	public String write(Gallary gallary,MultipartFile attach) throws Exception{
+		System.out.println(gallary);
+		
 		System.out.println("write");
 		System.out.println("아이디 :"+tService.login1().getMemberId());
+		System.out.println("attach : "+attach);
+		
 		service.writeGall(gallary);
 		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"list.do";
 	}
@@ -86,6 +83,18 @@ public class GallaryController {
 		service.deleteGall(gallNo);
 		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"list.do";
 	}
+	
+//	@RequestMapping("viewCnt.do")
+//	@ResponseBody
+//	public String viewCnt(int gallNo) throws Exception{
+//		System.out.println("viewCntController");
+//		System.out.println("아이디 :"+tService.login1().getMemberId());
+//		service.updateViewCnt(gallNo);
+//		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"detail.do";
+//	}
+	
+		
+	
 
 	@RequestMapping("insertCom.do")
 	public void insertCom(GallComment gallComment, int gallNo) throws Exception{
@@ -106,12 +115,40 @@ public class GallaryController {
 		System.out.println("아이디 :"+tService.login1().getMemberId());
 		return service.selectCommentList(gallNo);
 	}
-		
-	@RequestMapping("uploadFile.do")
-	public void uploadFile(GallFile gallFile) throws Exception{
-		System.out.println("insertFile");
+	
+	@RequestMapping("deleteCom.do")
+	@ResponseBody
+	public String deleteCom(int gallComNo) throws Exception{
 		System.out.println("아이디 :"+tService.login1().getMemberId());
-		service.uploadFile(gallFile);
+		service.deleteGallComment(gallComNo);
+		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"list.do"; 
+	}	
+	
+//	MultipartFile 의 주요 메소드는
+//
+//	 String getName()	파라미터 이름을 구한다. 
+//	 String getOriginalFilename()	 업로드 한 파일의 실제!! 이름을 구한다.
+//	 boolean isEmpty()	 업로드 한 파일이 존재하지 않는 경우 true를 리턴한다.
+//	 long getSize()	 업로드한 파일의 크기를 구한다.
+//	 byte[] getBytes() throws IOException	 업로드 한 파일 데이터를 구한다. --> 이걸로 파일 쓰면된다.
+//	 InputStream getInputStream()	 InputStrem을 구한다.
+//	 void transferTo(File dest)	 업로드 한 파일 데 이터를 지정한 파일에 저장한다. --> 요고도 파일쓰는거다.
+
+
+	@RequestMapping("uploadFile.do")
+	public String uploadFile(GallFile gallFile, MultipartFile mFile) throws Exception{
+		System.out.println("호출");
+		System.out.println(mFile);
+		
+		//System.out.println("insertFile");
+		//System.out.println("아이디 :"+tService.login1().getMemberId());
+		
+		String fileOriName = mFile.getOriginalFilename();
+		mFile.transferTo(new File("C:/app/upload", fileOriName));
+		
+		
+		
+		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"write.do";		
 	}
 	
 	

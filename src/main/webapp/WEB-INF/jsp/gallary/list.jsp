@@ -69,7 +69,7 @@
 					 </a> 
 					  <div class="card-body">
 					    <p class="card-text"><h3>${g.gallTitle}</h3></p>
-					    <p class="card-text">${g.gallWriter}</p>
+					    <p class="card-text">by ${g.gallWriter}</p>
 					  </div>
 					</div>
 				</td>		

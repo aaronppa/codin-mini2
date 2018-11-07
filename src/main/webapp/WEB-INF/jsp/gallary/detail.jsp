@@ -1,9 +1,12 @@
+<%@page import="kr.co.codin.repository.domain.GallComment"%>
 <%@page import="org.springframework.beans.factory.annotation.Autowired"%>
 <%@page import="kr.co.codin.test.service.TestService"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%
+	GallComment gallCom = new GallComment();
+%>
 <!DOCTYPE html> 
 <html>
 <head>
@@ -54,7 +57,7 @@
 		 <h3>${gall.gallTitle}</h3><br>
 		 글쓴이 : ${gall.gallWriter}<br>
 		 등록일 : <fmt:formatDate value="${gall.gallRegDate}" pattern="yyyy-MM-dd"/><br>
-		 조회수 : ${gall.gallViewCnt}<br>
+		 조회수 : ${gall.gallViewCnt }<br>
 		<hr>
 	</div>
 	<!-- 슬라이드 시작 -->
@@ -94,16 +97,17 @@
  	<!-- 댓글등록 -->
  	<form action="" name="insertComForm" id="insertComForm" method="post">
 	 <div class="insertComGroup" style="text-align:center;">
-	 	<input type="hidden" name="gallNo" value="${gall.gallNo}"/>
-	 	<input type="hidden" name="gallComWriter" value="${user.memberName }">
+	 	<input type="hidden" id="gallNo" name="gallNo" value="${gall.gallNo}"/>
+	 	<input type="hidden" id="gallComWriter" name="gallComWriter" value="${user.memberName }">
 		<h4>${user.memberName }</h4>
 		<textarea name="gallComContent" id="gallComContent" rows="5" cols="150"></textarea>
 		<button class="btn btn-primary" type="submit" id="insertCom">submit</button>
 	 </div>
  	</form>
-	
+ 	
 	<!-- 댓글목록 -->
 		<input type="hidden" name="gallNo" id="gallNo"value="${gall.gallNo }">	
+		<input type="hidden" name="gallComNo" id="gallComNo" value="<%=gallCom.getGallComNo() %>"/>
 		<br>
 		<div name="comList" id="comList" ></div>
 		<br>
@@ -125,7 +129,7 @@
 	
 	//댓글 등록
 	$("#insertCom").click(function(){
-		
+		console.log("function")
 		$.ajax({
 			type:"post",
 			url: "<c:url value='/gallary/insertCom.do'/>",
@@ -150,23 +154,76 @@
 	 		data: {gallNo:$("#gallNo").val()},
 	 		async:false
 	 	}).done(function (result) {
-	 		console.log("success");
+	 		console.log("commentListSuccess")
 	 		var object = Object.keys(result);
 	 		var length = object.length;
 	 		console.log(result);
 	 		for(var i = 0; i<length ;i++){
 		 		$("#comList").append(
-		 				"<table id='comTable'><tr>"
-		 				+"<td id='comWriter' style='font-weight:bolder;'>"+result[i].gallComWriter+"</td>"
-		 				+"<td id ='comContent'>"+result[i].gallComContent+"</td>"	
+		 				"<table id='comTable' data-commentno='"+result[i].gallComNo+"'><tr>"
+		 				+"<td id='comWriter' style='font-weight:bolder;' data-comwriter='"+result[i].gallComWriter+"'>"+result[i].gallComWriter+"</td>"
+		 				+"<td id ='comContent' >"+result[i].gallComContent+"</td>"	
 		 				+"<td id='comRegDate'>"
+		 				//삭제버튼
 		 				+$.format.date(result[i].gallComRegDate, 'yyyy-MM-dd HH:mm:ss')+"</td>"
-		 				+"</tr></table><hr>"
+		 				+"<td><button type='button' id='delBtn' class='close deleteComment' data-btnno='"+result[i].gallComNo+"' aria-label='Close' >"
+		 				+"<span aria-hidden='true'>&times;</span>"
+		 				+"</button><hr></td>"
+		 				+"</tr><hr id='btw'></table>"
 		 		)};
 	 	}).fail(function(result){
-	 		alert(result);
+// 	 		alert(result);
 	 	});
 	
+// 		$(".close.deleteComment").on("click", function(e){
+// 			console.dir($(this).parent().parent().parent().parent())
+// 			console.dir($(this).parent().parent().parent().parent().data('commentno'))
+// 			e.preventDefault();
+// 			console.log($("#comTable").data("commentno")+" = 댓글번호")
+// 			console.log($("#delBtn").data("btnno")+"= 버튼번호호")
+// 			console.log($("#gallComNo").val()+"= 버튼번호호호")
+// 			$.ajax({
+// 				url:"<c:url value='/gallary/deleteCom.do'/>",
+// 				data : {gallComNo : $(this).parent().parent().parent().parent().data('commentno')}
+// 				}).done(function (result){
+// 						$(this).parent().parent().parent().parent().remove();
+// 				});
+// 			return false;
+// 		});
+		$(".close.deleteComment").on("click", function(e){
+			console.dir($(this).parent().parent().parent().parent())
+			console.dir($(this).parent().parent().parent().parent().data('commentno'))
+			e.preventDefault();
+			console.log($("#comTable").data("commentno")+" = 댓글번호")
+			console.log($("#delBtn").data("btnno")+"= 버튼번호호")
+			console.log($("#gallComNo").val()+"= 버튼번호호호")
+			$.ajax({
+				url:"<c:url value='/gallary/deleteCom.do'/>",
+				data : {gallComNo : $(this).parent().parent().parent().parent().data('commentno')}
+				}).done(function (result){
+						$(this).parent().parent().parent().parent().remove();
+				});
+		});
+		
+		
+// 		//조회수
+// 		$("#viewCnt").ready(function(){
+// 			console.log('viewCntFunction');
+// 			$.ajax({
+// 				url:"<c:url value='/gallary/de'/>",
+// 				data: {gallNo : $("#gallNo").val()},
+// 				async:false,
+// 				type:"post"
+// 			}).done(function(data){
+// 				alert('viewCntSuccess')
+// 				$("#viewCnt").append(
+// 						"<div>"+data.gallViewCnt+"명</div>"
+// 						);
+// 				console('viewCnt성공')
+// 			}).fail(function(result){
+// // 				alert("viewCntFail")
+// 			});
+// 		});
  </script>
 </body>
 </html>

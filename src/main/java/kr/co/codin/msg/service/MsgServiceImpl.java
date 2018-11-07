@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.co.codin.repository.domain.Member;
 import kr.co.codin.repository.domain.MemberAndId;
 import kr.co.codin.repository.domain.Message;
+import kr.co.codin.repository.domain.MsgPaging;
 import kr.co.codin.repository.domain.Recipient;
 import kr.co.codin.repository.mapper.MsgMapper;
 
@@ -20,7 +21,6 @@ public class MsgServiceImpl implements MsgService{
 	@Override
 	public void writeFirstMsg(Message msg) {
 		mapper.insertFirstMsg(msg);
-		
 	}
 
 	@Override
@@ -39,8 +39,59 @@ public class MsgServiceImpl implements MsgService{
 	}
 
 	@Override
-	public List<Message> listAllMsg(int memberNo) {
-		return mapper.selectAllMsg(memberNo);
+	public void updateread(Recipient recipient) {
+		mapper.readTimeStamp(recipient);
 	}
+
+	@Override
+	public Message detail(int msgId) {
+		Message message = mapper.selectAMsg(msgId);
+//		System.out.println("mapper.selectAMsg(msgId) RESULT: "+message.toString());
+		return message;
+	}
+	
+	@Override
+	public void trashReceivedMsg(Recipient recipient) {
+		mapper.updateRecipientTrash(recipient);
+	}
+	
+	@Override
+	public void trashDraftSentMsg(MsgPaging mp) {
+		mapper.updateWriterTrash(mp);
+	}
+	
+	@Override
+	public void restoreReceivedMsg(Recipient recipient) {
+		mapper.updateRecipientRestore(recipient);
+	}
+	
+	@Override
+	public void restoreDraftSentMsg(MsgPaging mp) {
+		mapper.updateWriterRestore(mp);
+	}
+	
+	@Override
+	public List<Message> listMsg(MsgPaging mp) {
+		return mapper.selectMsg(mp);
+	}
+	
+	@Override
+	public List<Message> listTrashMsg(MsgPaging mp) {
+		return mapper.selectTrash(mp);
+	}
+	
+	@Override
+	public List<Message> listSentMsg(int memberNo) {
+		return mapper.selectSentMsg(memberNo);
+	}
+
+	@Override
+	public List<Message> listDraftMsg(MsgPaging mp) {
+		return mapper.selectDraftMsg(mp);
+	}
+
+	
+
+	
 
 }

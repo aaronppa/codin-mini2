@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Codin Mini - Message Main Inbox</title>
+<title>Codin Mini - Mail Inbox</title>
 <%@ include file="/WEB-INF/jsp/include/basicInclude.jsp" %>
 <link rel="stylesheet" href="<c:url value="/resources/css/msginbox.css"/>">
 <style>
@@ -17,7 +17,7 @@
     <div class="container-fluid">
         <div class="container-sidebar col-2">
             <div class="sidebar icon">
-                <i class="fas fa-mail-bulk fa-5x"></i>
+                <i class="fas fa-envelope-open-text fa-5x"></i>
             </div>
             <span class="glyphicon glyphicon-pencil"></span>
             <ul class="msg-menu-btn">
@@ -33,7 +33,7 @@
             </ul>
         </div>
         <div class="container-body col-10">
-           <div class="trashicon receivedmsg">
+        <div class="trashicon receivedmsg">
            <i class="far fa-trash-alt"></i>
            </div>
            <div class="searchcontainer">
@@ -64,19 +64,23 @@
                                 <th id="thtrwidth-6">날짜/시간</th>
                             </tr>
                         </thead>
+                        <form action="">
                         <tbody id="msglistresult">
+                               
                         </tbody>
+                        </form>
                     </table>
                 </div>
             </div>
         </div>
        </div>
        
+        
 <!-- Side Menu Buttons Event -->
 <script>
- 	$(".maininbox").click(function(){window.location.pathname = '/codin_mini/msg/maininbox.do'});
+	$(".maininbox").click(function(){window.location.pathname = '/codin_mini/msg/maininbox.do'});
 	$(".mailinbox").click(function(){window.location.pathname = '/codin_mini/msg/mailinbox.do'});
- 	$(".memoinbox").click(function(){window.location.pathname = '/codin_mini/msg/memoinbox.do'});
+	$(".memoinbox").click(function(){window.location.pathname = '/codin_mini/msg/memoinbox.do'});
 	$(".announceinbox").click(function(){window.location.pathname = '/codin_mini/msg/announcementinbox.do'});
 	$(".draftbox").click(function(){window.location.pathname = '/codin_mini/msg/draftinbox.do'});
 	$(".sentbox").click(function(){window.location.pathname = '/codin_mini/msg/sentbox.do'});
@@ -87,8 +91,9 @@
 <script  src="<c:url value="/resources/script/msg/displayinbox.js"/>" ></script>
 <script>
 const thisUserNo = ${user.memberNo};
-window.onload = displayinbox(0);
+window.onload = displayinbox(2);
 </script>
+
 
 
 <!-- Modal WriteForm -->

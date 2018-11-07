@@ -1,6 +1,7 @@
 package kr.co.codin.repository.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -18,4 +19,6 @@ public class Message {
 	private int trashWriter;
 	private Date dateRead;
 	private int trashRecipient;
+	private String type;
+	private List<Recipient> recipients;
 }

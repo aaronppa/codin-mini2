@@ -3,17 +3,20 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.codin.repository.mapper.MsgMapper">
 	<resultMap type="Message" id="MessageMap">
-		<result column="msg_id" property="msgId"/>
+		<id column="msg_id" property="msgId"/>
 		<result column="type_id" property="typeId"/>
 		<result column="from_user_no" property="fromUserNo"/>
-		<result column="member_name" property="fromUserName"/>
-		<result column="member_id" property="fromUserId"/>
+		<result column="from_user_name" property="fromUserName"/>
+		<result column="from_user_id" property="fromUserId"/>
 		<result column="subject" property="subject"/>
 		<result column="message_body" property="body"/>
 		<result column="date_sent" property="dateSent"/>		
 		<result column="trash_writer" property="trashWriter"/>		
 		<result column="date_read" property="dateRead"/>		
-		<result column="trash_recipient" property="trashRecipient"/>		
+		<result column="trash_recipient" property="trashRecipient"/>
+		<collection property="recipients"
+					column="msg_id"
+					select="selectRecipients"/>	
 	</resultMap>
 	
 	<resultMap type="MemberAndId" id="MemberAndIdMap">
@@ -36,10 +39,107 @@
 	
 	<resultMap type="Recipient" id="RecipientMap">
 		<result column="msg_id" property="msgId" />
-		<result column="to_user_no" property="msgId" />
+		<result column="to_user_no" property="toUserNo" />
+		<result column="to_user_id" property="toUserId" />
+		<result column="to_user_name" property="toUserName" />
 		<result column="date_read" property="dateRead" />
 		<result column="trash_recipient" property="trashRecipient" />
 	</resultMap>
+	
+	<resultMap type="MsgPaging" id="MsgPagingMap">
+		<result column="to_user_no" property="toUserNo" />
+		<result column="type_id" property="typeId"/>
+		<result column="from_user_no" property="fromUserNo"/>
+		<result column="trash_writer" property="trashWriter"/>	
+		<result column="trash_recipient" property="trashRecipient" />
+	</resultMap>
+		
+	<select id="selectMsg" resultMap="MessageMap" parameterType="MsgPaging">
+		select *
+		  from message as m
+		 inner join msg_type as mt on mt.type_id = m.type_id
+		 inner join (select *
+		 			   from recipients
+		 			  where trash_recipient !=1
+		 			    and to_user_no = #{toUserNo}
+		 					) as r on r.msg_id = m.msg_id 
+		 inner join (select member_id as from_user_id, member_name as from_user_name, member_no as from_member_no
+		               from member
+		                    ) as mem on mem.from_member_no = m.from_user_no
+		 	<choose>
+			 	<when test="typeId==0">
+			 		AND m.type_id != 4
+				</when>
+				<otherwise>
+					AND m.type_id = #{typeId}
+				</otherwise>
+			</choose>    
+		 order by m.msg_id desc
+	</select>
+	
+	<select id="selectSentMsg" parameterType="int" resultMap="MessageMap">
+		select *
+		  from message
+		 where from_user_no = #{memberNo} 
+		   and trash_writer != 1
+		order by msg_id desc
+	</select>
+
+	<select id="selectDraftMsg" parameterType="MsgPaging" resultMap="MessageMap">
+		select *
+		  from message
+		 where from_user_no = #{fromUserNo}
+		   and type_id = #{typeId}
+		   and trash_writer != 1
+		order by msg_id desc
+	</select>
+	
+	<select id="selectTrash" parameterType="MsgPaging" resultMap="MessageMap">
+		(select *
+		  from message as m
+		inner join recipients as r on r.msg_id = m.msg_id
+		inner join (select member_id as from_user_id, member_name as from_user_name, member_no as from_member_no
+		               from member
+		                    ) as mem on mem.from_member_no = m.from_user_no
+		where from_user_no = #{fromUserNo}
+		  and trash_writer = 1
+		limit 1)
+		union all
+		select *
+		  from message as m
+		inner join recipients as r on r.msg_id = m.msg_id
+		inner join (select member_id as from_user_id, member_name as from_user_name, member_no as from_member_no
+		               from member
+		                    ) as mem on mem.from_member_no = m.from_user_no
+		where to_user_no = #{fromUserNo}
+		  and trash_recipient = 1
+	</select>
+	
+	<select id="selectMembers" resultMap="MemberAndIdMap">
+		select member_no, member_id, member_name
+		 from member
+	</select>
+	
+	<!-- not using -->
+	<select id="selectMembers2" resultMap="MemberMap">
+		select member_no, member_id, member_name
+		 from member
+	</select>
+		
+	<select id="selectAMsg" parameterType="int" resultMap="MessageMap">
+		select *
+		  from message
+		 where msg_id = #{msgId}
+	</select>
+		
+	<select id="selectRecipients" parameterType="int" resultMap="RecipientMap">
+		select *
+		  from recipients
+		inner join (select member_no, member_id as to_user_id, member_name as to_user_name
+		              from member
+		   ) as mem on mem.member_no = to_user_no
+		 where msg_id = #{msgId} 
+	</select>
 	
 	<insert id="insertFirstMsg" parameterType="Message" useGeneratedKeys="true" keyProperty="msgId">
 		insert into message(
@@ -57,28 +157,40 @@
 		)
 	</insert>
 	
-	<select id="selectMembers" resultMap="MemberAndIdMap">
-		select member_no, member_id, member_name
-		 from member
-	</select>
 	
-	<select id="selectMembers2" resultMap="MemberMap">
-		select member_no, member_id, member_name
-		 from member
-	</select>
+	<update id="readTimeStamp" parameterType="Recipient">
+		update recipients
+		  set date_read = now()
+		 where msg_id = #{msgId} 
+		   and to_user_no = #{toUserNo}  
+	</update>
 	
-	<select id="selectAllMsg" resultMap="MessageMap" parameterType="int">
-		select *
-		  from message as m
-		 inner join msg_type as mt on mt.type_id = m.type_id
-		 inner join (select *
-		 			   from recipients
-		 			  where to_user_no = #{memberNo}
-		 					) as r on r.msg_id = m.msg_id 
-		 inner join (select member_id, member_name, member_no
-		               from member
-		                    ) as mem on mem.member_no = m.from_user_no
-		 where from_user_no!=#{memberNo}
-		   and type!='draft'
-	</select>
+	<update id="updateRecipientTrash" parameterType="Recipient">
+		update recipients
+		   set trash_recipient = 1
+		 where msg_id = #{msgId}
+		   and to_user_no = #{toUserNo}
+	</update>
+	
+	<update id="updateWriterTrash" parameterType="Recipient">
+		update message
+		   set trash_writer = 1
+		 where msg_id = #{msgId}
+		   and from_user_no = #{fromUserNo}
+	</update>
+	
+	<update id="updateRecipientRestore" parameterType="MsgPaging">
+		update recipients
+		   set trash_recipient = 0
+		 where msg_id = #{msgId}
+		   and to_user_no = #{toUserNo}
+	</update>
+	
+	<update id="updateWriterRestore" parameterType="MsgPaging">
+		update message
+		   set trash_writer = 0
+		 where msg_id = #{msgId}
+		   and from_user_no = #{fromUserNo}
+	</update>
+	
 </mapper>

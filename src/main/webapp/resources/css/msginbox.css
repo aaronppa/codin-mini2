@@ -12,6 +12,7 @@
     height: 660px;
     padding: 10px;
     margin: 0px;
+    border: 1px solid #c4c4c4;
 }
 
 .sidebar.icon *{
@@ -22,7 +23,7 @@
 }
 
 .container-body{
-    background-color: #f8ffec212236255;
+    background-color: #e3edf7;
 }
 
 .msg-menu-btn{
@@ -77,6 +78,12 @@ li.msg-menu-btn:hover{
     background-color: rgb(172, 172, 172);
 }
 
+.trashicon, .restoreicon{
+	float: left;
+	margin-top: 30px;
+	margin-left: 8px;
+	margin-right: 15px;
+}
 .searchkeyword{
     padding: 10px;
     font-size: 17px;
@@ -106,7 +113,7 @@ div.msglist{
 }
 
 div.msglist table * {
-  border: 1px solid #c6c8d1;
+	border: 1px solid #c6c8d1;
 }
 div.msglist table thead th {
     text-align: center;
@@ -116,24 +123,15 @@ div.msglist table thead th {
 }
 
 table {
-    display: flex;
-    flex-flow: column;
     height: 100%;
     width: 1100px;
 }
 
-table thead {
-    /* head takes the height it requires, 
-    and it's not scaled when table is resized */
-    flex: 0 0 auto;
-    width: calc(100% - 0.1em);
-}
 
 table tbody {
     /* body takes all the remaining available space */
-    flex: 1 1 auto;
     display: block;
-    overflow-y: auto;
+/*     overflow-y: auto; */
     border-top-width: 0px;
 }
 
@@ -148,37 +146,75 @@ td.msgitem {
 	border: none;
 }
 
+tr.msgitem, tr.msgitem > td{
+	/* border: none !important; */
+	border: 1px solid #d7d8e9;
+}
+
+#selectall{
+	margin-bottom: 3px;
+}
+
+#thtrwidth-1, div.checkbox, i{
+	border: none !important;
+	padding-bottom: 3px;
+}
+
 #thtrwidth-1{
 	width: 30px;
-    padding-left: 5px;
+	padding-left: 8px;
     padding-top: 4px;
+    border: none !important;
 	}
+	
 #thtrwidth-2{
 	width: 62px;
-    padding-left: 18px;
+    padding-left: 22px;
     padding-top: 5px;
     height: 15px;
-    
 	}
 #thtrwidth-3{
 	width: 62px;
-	padding-left: 18px;
+	padding-left: 22px;
     padding-top: 5px;
     height: 15px;
-  
     }
-#thtrwidth-4{width: 190px;}
-#thtrwidth-5{width: 643px;}
-#thtrwidth-6{width: 150px;}
+#thtrwidth-4{
+	text-indent: 10px;
+	min-width: 190px;
+	white-space: nowrap; 
+	max-width: 190px !important;
+	text-overflow: ellipsis; 
+	overflow: hidden;
+	}
+#thtrwidth-5{
+	text-indent: 10px;
+	min-width: 643px;
+	white-space: nowrap; 
+	max-width: 643px !important;
+	text-overflow: ellipsis; 
+	overflow: hidden;
+	}
+#thtrwidth-6{
+	text-indent: 10px;
+	width: 150px;
+	}
+#thtrwidth-7{
+	text-indent: 10px;
+	min-width: 453px;
+	white-space: nowrap; 
+	max-width: 453px !important;
+	text-overflow: ellipsis; 
+	overflow: hidden;
+	}
 
 th{
-	background-color: #65ff60; 
+	background-color: #f4f8ea; 
 }
 
 table thead,
 table tbody tr {
     display: table;
-    table-layout: fixed;
 }
 
 /* Modal Size */
@@ -221,9 +257,6 @@ input{
 	border: none;
 }
 
-textarea#message-body{
-	height: 430px;
-}
 
 .modal-footer{
 	margin-bottom: 16px;
@@ -233,13 +266,10 @@ textarea#message-body{
 	padding-top: 0px;
 }
 
-div.checkbox, i{
-	border: none !important;
-	padding-bottom: 4px;
-}
 
 tbody, th, thead{
-	 border: none !important;
+	 /* border: none !important; */
+	 border: 1px solid #d7d8e9;
 }
 
 /* Recipient Search Loading */
@@ -276,3 +306,8 @@ ul#recipientAddedLabel > li{
 	cursor: pointer;
 	outline:none;
  }
+ 
+.clickable-row{
+ 	cursor: pointer;
+ }
+

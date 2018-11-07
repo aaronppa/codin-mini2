@@ -8,5 +8,8 @@ import lombok.Data;
 public class Recipient {
 	private int msgId;
 	private int toUserNo;
-	Date dateRead;
+	private Date dateRead;
+	private int trashRecipient;
+	private String toUserId;
+	private String toUserName;
 }

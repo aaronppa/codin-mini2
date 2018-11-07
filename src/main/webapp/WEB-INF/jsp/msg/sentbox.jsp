@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Codin Mini - Message Main Inbox</title>
+<title>Codin Mini - Sent Message Box</title>
 <%@ include file="/WEB-INF/jsp/include/basicInclude.jsp" %>
 <link rel="stylesheet" href="<c:url value="/resources/css/msginbox.css"/>">
 <style>
@@ -17,7 +17,7 @@
     <div class="container-fluid">
         <div class="container-sidebar col-2">
             <div class="sidebar icon">
-                <i class="fas fa-mail-bulk fa-5x"></i>
+                <i class="far fa-paper-plane fa-5x"></i>
             </div>
             <span class="glyphicon glyphicon-pencil"></span>
             <ul class="msg-menu-btn">
@@ -33,7 +33,7 @@
             </ul>
         </div>
         <div class="container-body col-10">
-           <div class="trashicon receivedmsg">
+         <div class="trashicon">
            <i class="far fa-trash-alt"></i>
            </div>
            <div class="searchcontainer">
@@ -59,24 +59,28 @@
                                 <th id="thtrwidth-1"><div class="checkbox"><input type="checkbox" id="selectall"></div></th>
                                 <th id="thtrwidth-2">유형</th>
                                 <th id="thtrwidth-3">상태</th>
-                                <th id="thtrwidth-4">보낸사람</th>
+                                <th id="thtrwidth-4">받는 사람</th>
                                 <th id="thtrwidth-5">제목/메세지</th>
-                                <th id="thtrwidth-6">날짜/시간</th>
+                                <th id="thtrwidth-6">보낸 날짜/시간</th>
                             </tr>
                         </thead>
+                        <form action="">
                         <tbody id="msglistresult">
+                               
                         </tbody>
+                        </form>
                     </table>
                 </div>
             </div>
         </div>
        </div>
        
+        
 <!-- Side Menu Buttons Event -->
 <script>
- 	$(".maininbox").click(function(){window.location.pathname = '/codin_mini/msg/maininbox.do'});
+	$(".maininbox").click(function(){window.location.pathname = '/codin_mini/msg/maininbox.do'});
 	$(".mailinbox").click(function(){window.location.pathname = '/codin_mini/msg/mailinbox.do'});
- 	$(".memoinbox").click(function(){window.location.pathname = '/codin_mini/msg/memoinbox.do'});
+	$(".memoinbox").click(function(){window.location.pathname = '/codin_mini/msg/memoinbox.do'});
 	$(".announceinbox").click(function(){window.location.pathname = '/codin_mini/msg/announcementinbox.do'});
 	$(".draftbox").click(function(){window.location.pathname = '/codin_mini/msg/draftinbox.do'});
 	$(".sentbox").click(function(){window.location.pathname = '/codin_mini/msg/sentbox.do'});
@@ -86,10 +90,12 @@
 <!-- Display Msg Script-->
 <script  src="<c:url value="/resources/script/msg/displayinbox.js"/>" ></script>
 <script>
+$(".trashicon").hover(function(){
+	alert("보낸메일은 삭제되어도 본인 보낸메일함에서만 해당 메세지가 이동한 것이고 수신자의 메세지함에는 영향이 없습니다.")
+})
 const thisUserNo = ${user.memberNo};
-window.onload = displayinbox(0);
+window.onload = displaydrafsentbox(1); 
 </script>
-
 
 <!-- Modal WriteForm -->
 	<div class="modal fade" id="writeFormModal" tabindex="-1" role="dialog"

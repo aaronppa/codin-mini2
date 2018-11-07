@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Codin Mini - Message Main Inbox</title>
+<title>Codin Mini - Trash Box</title>
 <%@ include file="/WEB-INF/jsp/include/basicInclude.jsp" %>
 <link rel="stylesheet" href="<c:url value="/resources/css/msginbox.css"/>">
 <style>
@@ -16,8 +16,9 @@
 <c:import url="/WEB-INF/jsp/include/top.jsp" />
     <div class="container-fluid">
         <div class="container-sidebar col-2">
+        	<!-- Hover시 영구삭제 메시지 tooltip show -->
             <div class="sidebar icon">
-                <i class="fas fa-mail-bulk fa-5x"></i>
+                <i class="fa fa-trash-alt fa-5x"></i>
             </div>
             <span class="glyphicon glyphicon-pencil"></span>
             <ul class="msg-menu-btn">
@@ -33,10 +34,10 @@
             </ul>
         </div>
         <div class="container-body col-10">
-           <div class="trashicon receivedmsg">
-           <i class="far fa-trash-alt"></i>
-           </div>
            <div class="searchcontainer">
+            <div class="restoreicon">
+           <i class="fas fa-upload"></i>
+           </div>
                <div class="searcharea">
                    <form class="searchform" method="get" role="search" id="aso_search_form_anchor">
                         <div class="searchbox" gh="sb">
@@ -59,24 +60,29 @@
                                 <th id="thtrwidth-1"><div class="checkbox"><input type="checkbox" id="selectall"></div></th>
                                 <th id="thtrwidth-2">유형</th>
                                 <th id="thtrwidth-3">상태</th>
-                                <th id="thtrwidth-4">보낸사람</th>
-                                <th id="thtrwidth-5">제목/메세지</th>
-                                <th id="thtrwidth-6">날짜/시간</th>
+                                <th id="thtrwidth-4">보낸 사람</th>
+                                <th id="thtrwidth-4">받는 사람</th>
+                                <th id="thtrwidth-7">제목/메세지</th>
+                                <th id="thtrwidth-6">보낸 날짜/시간</th>
                             </tr>
                         </thead>
+                        <form action="">
                         <tbody id="msglistresult">
+                               
                         </tbody>
+                        </form>
                     </table>
                 </div>
             </div>
         </div>
        </div>
        
+        
 <!-- Side Menu Buttons Event -->
 <script>
- 	$(".maininbox").click(function(){window.location.pathname = '/codin_mini/msg/maininbox.do'});
+	$(".maininbox").click(function(){window.location.pathname = '/codin_mini/msg/maininbox.do'});
 	$(".mailinbox").click(function(){window.location.pathname = '/codin_mini/msg/mailinbox.do'});
- 	$(".memoinbox").click(function(){window.location.pathname = '/codin_mini/msg/memoinbox.do'});
+	$(".memoinbox").click(function(){window.location.pathname = '/codin_mini/msg/memoinbox.do'});
 	$(".announceinbox").click(function(){window.location.pathname = '/codin_mini/msg/announcementinbox.do'});
 	$(".draftbox").click(function(){window.location.pathname = '/codin_mini/msg/draftinbox.do'});
 	$(".sentbox").click(function(){window.location.pathname = '/codin_mini/msg/sentbox.do'});
@@ -87,9 +93,8 @@
 <script  src="<c:url value="/resources/script/msg/displayinbox.js"/>" ></script>
 <script>
 const thisUserNo = ${user.memberNo};
-window.onload = displayinbox(0);
+window.onload = displaytrashbox(); 
 </script>
-
 
 <!-- Modal WriteForm -->
 	<div class="modal fade" id="writeFormModal" tabindex="-1" role="dialog"

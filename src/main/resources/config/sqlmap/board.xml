@@ -2,26 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.codin.repository.mapper.BoardMapper">
+
 	<resultMap id="BoardMap" type="Board">
 		<result column="board_no" property="boardNo"/>
 		<result column="board_title" property="boardTitle"/>
 		<result column="board_content" property="boardContent"/>
 		<result column="board_id" property="boardId"/>
 		<result column="board_date" property="boardDate"/>
-		<result column="category_no" property="boardNo"/>
+		<result column="category_no" property="boardNo"/>	
+		<result column="board_viewCnt" property="boardViewCnt"/>
+	</resultMap>
+
 	
+	<resultMap id="CommentMap" type="BoardComment">
+		<result column="comment_no" property="commentNo"/>
+		<result column="comment_id" property="commentId"/>
+		<result column="comment_content" property="commentContent"/>
+		<result column="comment_date" property="commentDate"/>
+		<result column="board_date" property="boardDate"/>
+		<result column="board_no" property="boardNo"/>	
 		<result column="board_viewCnt" property="boardViewCnt"/>
 	</resultMap>
 	
+	
+	
+	
 	<insert id="insertBoard" parameterType="Board">
-		insert into board(board_title, board_content, board_id,board_date)
-				   values(#{boardTitle} , #{boardContent}, #{boardId}, CURDATE())
+		insert into board(board_title, board_content, board_id)
+				   values(#{boardTitle} , #{boardContent}, #{boardId})
 	</insert>
 	
-	<select id="selectBoard" resultMap="BoardMap">
+	<select id="selectBoard" parameterType="BoardPage" resultMap="BoardMap" >
 		select *
-		from board
-		order by board_no desc
+        from board
+        order by board_no desc 
+   		limit #{PageNo},20	
 	</select>
 	
 	<select id="selectBoardByNo" parameterType="int" resultMap="BoardMap">
@@ -30,9 +45,56 @@
 	where board_no =#{boardNo}
 	
 	</select>
+	
+	<select id="MaxBoardNo" resultType="int">
+	select Max(board_no)
+        from board
+	</select>
+	<select id="checkingContentCnt" resultType="int">
+	select count(*)
+	from board
+	</select>
+	
+	<!-- 조회수 증가 -->
 	<update id="updateViewCnt" parameterType="int" >
 	update board 
 	set board_viewCnt=board_viewCnt+1
 	where board_no=#{boardNo}
 	</update>
+	
+	<delete id="DeleteBoard" parameterType="Board">
+	delete from board where board_no = #{boardNo} and board_id=#{boardId}
+	</delete>
+	
+	<update id="updateBoard" parameterType="Board">
+	update board
+	set board_title=#{boardTitle} , board_content=#{boardContent} 
+	where board_no = #{boardNo} and board_id =#{boardId}
+	</update>
+	
+	
+	<!-- 페이징 -->
+	<!-- 총 게시물 수 -->
+	<select id="AllListCnt"  resultType="int">
+	select count(*)
+	from board
+	
+	</select>
+
+	
+	
+	
+		<!-- 댓글 -->
+	<select id="selectComment" parameterType="BoardComment" resultMap="CommentMap">
+		select *
+			from board_comment
+			where board_no= #{boardNo}
+			order by comment_no asc
+	</select>
+
+
+		<insert id="insertComment" parameterType="BoardComment">
+		insert into board_comment(board_no,comment_id, comment_content) values(#{boardNo},#{commentId},#{commentContent})
+	
+	</insert>
 </mapper>

@@ -58,13 +58,13 @@
 <c:import url="/WEB-INF/jsp/include/top.jsp" />
 	
     <div id="writeDiv">
-        <form id="frm" action="/codin_mini/board/write.do" method="post" name="board">
+        <form id="frm" action="/codin_mini/board/update.do" method="post" name="board">
                
                     
                
                     	
                     	<input type="hidden" name="boardId" value="${user.memberId}">
-                    
+                    	<input type="hidden" name="boardNo" value="${board.boardNo}">
                             
                                     <select id="category" name="categoryNo">
                                     		<option value="0"></option> 
@@ -103,7 +103,7 @@
                 lang: 'ko-KR'         // 한국어 지정(기본값은 en-US)
                 });
                 var sHTml = $('#summernote').code();
-                
+                alert(sHTml);
             });
             
            /*  $("writeBTN").click(function(){

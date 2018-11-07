@@ -132,4 +132,26 @@
 		delete from member
 		 where member_no = #{memberNo}
 	</delete>
+	
+	<select id="searchMember" parameterType="MemberSearch" resultMap="memberMap">
+		select *
+		  from member
+		 <choose>
+		 	<when test="memberGrade.equals('1')">
+		 		where member_id like CONCAT('%', #{memberId}, '%')
+		 		  and member_grade = '1'
+		 	</when>
+		 	<when test="memberGrade.equals('2')">
+		 		where member_id like CONCAT('%', #{memberId}, '%')
+		 		  and member_grade = '2'
+		 	</when>
+		 	<when test="memberGrade.equals('3')">
+		 		where member_id like CONCAT('%', #{memberId}, '%')
+		 		  and member_grade = '3'
+		 	</when>
+		 	<otherwise>
+		 		where member_id like CONCAT('%', #{memberId}, '%')
+		 	</otherwise>
+		 </choose>
+	</select>
 </mapper>

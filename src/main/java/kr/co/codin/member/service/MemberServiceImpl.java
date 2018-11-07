@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.codin.repository.domain.Member;
 import kr.co.codin.repository.domain.MemberCareer;
+import kr.co.codin.repository.domain.MemberSearch;
 import kr.co.codin.repository.domain.MemberSkill;
 import kr.co.codin.repository.mapper.MemberMapper;
 
@@ -90,6 +91,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void deleteAccount(int memberNo) {
 		mapper.deleteAccount(memberNo);
+	}
+
+	@Override
+	public List<Member> searchMember(MemberSearch memberSearch) {
+//		System.out.println(memberSearch);
+		return mapper.searchMember(memberSearch);
 	}
 
 }

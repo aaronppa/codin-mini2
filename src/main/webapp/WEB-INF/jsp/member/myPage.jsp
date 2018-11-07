@@ -241,6 +241,8 @@
     		var no = $(this).data('no');
     		$.ajax({
     			url: "/codin_mini/member/deleteCareer.do",
+    			method: "post",
+    			dataType:"json",
     			data: {careerNo: no, memberNo: memberNo}
     		}).done(function() {
     			alert("삭제되었습니다.");

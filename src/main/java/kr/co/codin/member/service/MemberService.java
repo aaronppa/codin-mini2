@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.codin.repository.domain.Member;
 import kr.co.codin.repository.domain.MemberCareer;
+import kr.co.codin.repository.domain.MemberSearch;
 import kr.co.codin.repository.domain.MemberSkill;
 
 /**
@@ -97,4 +98,11 @@ public interface MemberService {
 	 * @param memberNo
 	 */
 	void deleteAccount(int memberNo);
+	
+	/**
+	 * 관리자의 회원 검색에 대한 비즈니스 로직 처리
+	 * @param memberSearch
+	 * @return
+	 */
+	List<Member> searchMember(MemberSearch memberSearch);
 }

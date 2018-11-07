@@ -2,10 +2,9 @@ package kr.co.codin.repository.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import kr.co.codin.repository.domain.Member;
 import kr.co.codin.repository.domain.MemberCareer;
+import kr.co.codin.repository.domain.MemberSearch;
 import kr.co.codin.repository.domain.MemberSkill;
 
 public interface MemberMapper {
@@ -25,4 +24,5 @@ public interface MemberMapper {
 	void deleteCareerAll(int memberNo);
 	void deleteCareer(MemberCareer memberCareer);
 	void deleteAccount(int memberNo);
+	List<Member> searchMember(MemberSearch memberSearch);
 }

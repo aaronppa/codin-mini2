@@ -91,4 +91,10 @@ public interface MemberService {
 	 * @param memberCareer
 	 */
 	void deleteCareer(MemberCareer memberCareer);
+	
+	/**
+	 * 회원 탈퇴에 대한 비즈니스 로직 처리
+	 * @param memberNo
+	 */
+	void deleteAccount(int memberNo);
 }

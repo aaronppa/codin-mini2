@@ -127,4 +127,9 @@
 		 where career_no = #{careerNo}
 		   and member_no = #{memberNo}
 	</delete>
+	
+	<delete id="deleteAccount" parameterType="int">
+		delete from member
+		 where member_no = #{memberNo}
+	</delete>
 </mapper>

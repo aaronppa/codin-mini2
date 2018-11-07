@@ -82,7 +82,7 @@
 	<div id="top-menu">
 	<c:import url="../include/top.jsp" />
 	</div>
-	<h2>기본 정보</h2>
+	<h2>기본 정보<button class="btn btn-primary col-md-offset-9"><a href="<c:url value='/member/deleteAccount.do?memberNo=' />${member.memberNo}">탈퇴</a></button></h2>
     <hr>
     <div>
         <table class="info basics">
@@ -240,8 +240,8 @@
 			var memberNo = $(this).data('writer');
     		var no = $(this).data('no');
     		$.ajax({
-    			url: "/codin/member/deleteCareer.do",
-    			data: {no: no, memberNo:memberNo}
+    			url: "/codin_mini/member/deleteCareer.do",
+    			data: {careerNo: no, memberNo: memberNo}
     		}).done(function() {
     			alert("삭제되었습니다.");
     		});

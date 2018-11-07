@@ -24,4 +24,5 @@ public interface MemberMapper {
 	void updateMemberCareer(MemberCareer memberCareer);
 	void deleteCareerAll(int memberNo);
 	void deleteCareer(MemberCareer memberCareer);
+	void deleteAccount(int memberNo);
 }

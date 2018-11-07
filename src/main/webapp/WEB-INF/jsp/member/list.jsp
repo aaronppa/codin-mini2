@@ -78,6 +78,7 @@
                 <th>성별</th>
                 <th>가입일</th>
                 <th>회원구분</th>
+                <th>강퇴</th>
             </tr>
             <c:forEach var="member" items="${list}">
             	<tr>
@@ -87,6 +88,7 @@
             		<td>${member.memberGender}</td>
             		<td><fmt:formatDate value="${member.memberRegDate}" pattern="yyyy-MM-dd"/></td>
             		<td>${member.memberGrade}</td>
+            		<td><a href="<c:url value='/member/deleteAccount.do?memberNo=' />${member.memberNo}">강퇴</a></td>
             	</tr>
             </c:forEach>
         </table>

@@ -87,4 +87,9 @@ public class MemberServiceImpl implements MemberService {
 		mapper.deleteCareer(memberCareer);
 	}
 
+	@Override
+	public void deleteAccount(int memberNo) {
+		mapper.deleteAccount(memberNo);
+	}
+
 }

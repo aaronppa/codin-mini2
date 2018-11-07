@@ -133,4 +133,11 @@ public class MemberController {
 	public void deleteCareer(MemberCareer memberCareer) {
 		service.deleteCareer(memberCareer);
 	}
+	
+	@RequestMapping("/deleteAccount.do")
+	public String deleteAccount(HttpSession session, int memberNo) {
+		session.invalidate();
+		service.deleteAccount(memberNo);
+		return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "loginForm.do";
+	}
 }

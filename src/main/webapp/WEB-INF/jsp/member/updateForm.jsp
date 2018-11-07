@@ -194,8 +194,6 @@
 	    <table class="info career">
 	        <c:forEach var="career" items="${memberCareer}">
 		        <tr>
-		            <td rowspan="4" class="imgTd">
-		            </td>
 		            <th>회사명</th>
 		            <td><input type="text" name="careerCompany" value="${career.careerCompany}" /></td>
 		            <th>직위</th>
@@ -214,26 +212,26 @@
 		            <td></td>
 		        </tr>
 		    </c:forEach>
-	        <tr>
-	            <th>개발언어</th>
-	            <td>
-	                <select class="form-control">
-	                    <option>Java</option>
-	                    <option>Python</option>
-	                    <option>Javascript</option>
-	                    <option>PHP</option>
-	                    <option>C++</option>
-	                </select>
-	            </td>
-	            <th>수준</th>
-	            <td>
-	                <select class="form-control">
-	                    <option>상</option>
-	                    <option>중</option>
-	                    <option>하</option>
-	                </select>
-	            </td>
-	        </tr>
+<!-- 	        <tr> -->
+<!-- 	            <th>개발언어</th> -->
+<!-- 	            <td> -->
+<!-- 	                <select class="form-control"> -->
+<!-- 	                    <option>Java</option> -->
+<!-- 	                    <option>Python</option> -->
+<!-- 	                    <option>Javascript</option> -->
+<!-- 	                    <option>PHP</option> -->
+<!-- 	                    <option>C++</option> -->
+<!-- 	                </select> -->
+<!-- 	            </td> -->
+<!-- 	            <th>수준</th> -->
+<!-- 	            <td> -->
+<!-- 	                <select class="form-control"> -->
+<!-- 	                    <option>상</option> -->
+<!-- 	                    <option>중</option> -->
+<!-- 	                    <option>하</option> -->
+<!-- 	                </select> -->
+<!-- 	            </td> -->
+<!-- 	        </tr> -->
 	    </table>
 	    <div class="col-md-offset-10 col-md-1 save">
 	    	<button class="btn btn-primary">저장</button>

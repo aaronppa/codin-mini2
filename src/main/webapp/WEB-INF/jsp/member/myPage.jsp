@@ -190,7 +190,7 @@
     <table class="info career">
 	    <c:forEach var="career" items="${memberCareer}">
 	        <tr>
-	        	<td rowspan="3"><button class="btn btn-primary" id="deleteCareer" data-no="${career.careerNo}" data-writer="${member.memberNo}">삭제</button></td>
+<%-- 	        	<td rowspan="3"><button class="btn btn-primary" id="deleteCareer" data-no="${career.careerNo}" data-writer="${member.memberNo}">삭제</button></td> --%>
 	            <th>회사명</th>
 	            <td>${career.careerCompany}</td>
 	            <th>직위</th>
@@ -209,27 +209,27 @@
 	            <td></td>
 	        </tr>
 	    </c:forEach>
-        <tr>
-        	<td></td>
-            <th>개발언어</th>
-            <td>
-                <select class="form-control">
-                    <option>Java</option>
-                    <option>Python</option>
-                    <option>Javascript</option>
-                    <option>PHP</option>
-                    <option>C++</option>
-                </select>
-            </td>
-            <th>수준</th>
-            <td>
-                <select class="form-control">
-                    <option>상</option>
-                    <option>중</option>
-                    <option>하</option>
-                </select>
-            </td>
-        </tr>
+<!--         <tr> -->
+<!--         	<td></td> -->
+<!--             <th>개발언어</th> -->
+<!--             <td> -->
+<!--                 <select class="form-control"> -->
+<!--                     <option>Java</option> -->
+<!--                     <option>Python</option> -->
+<!--                     <option>Javascript</option> -->
+<!--                     <option>PHP</option> -->
+<!--                     <option>C++</option> -->
+<!--                 </select> -->
+<!--             </td> -->
+<!--             <th>수준</th> -->
+<!--             <td> -->
+<!--                 <select class="form-control"> -->
+<!--                     <option>상</option> -->
+<!--                     <option>중</option> -->
+<!--                     <option>하</option> -->
+<!--                 </select> -->
+<!--             </td> -->
+<!--         </tr> -->
     </table>
     <div class="col-md-offset-10 col-md-2 update-delete">
     	<button class="btn btn-primary"><a href="<c:url value='/member/updateForm.do' />">수정</a></button>

@@ -42,12 +42,6 @@
 	</div>
 	<form class="form-horizontal" id="search-form" action="search.do">
         <div class="form-group">
-            <label for="searchText" class="col-md-2 control-label">검색어</label>
-            <div class="col-md-8">
-                <input type="text" class="form-control" id="searchText" placeholder="내용을 입력해주세요." name="memberId">
-            </div>
-        </div>
-        <div class="form-group">
             <label for="memberGrade" class="col-md-2 control-label">회원 구분</label>
             <div class="col-md-2">
                 <select class="form-control" id="memberGrade" name="memberGrade">
@@ -57,20 +51,26 @@
                     <option value="3">우수회원</option>
                 </select>
             </div>
-            <label for="regDateStart" class="col-md-1 control-label">가입일</label>
-            <div class="col-md-2">
-                <input type="text" class="form-control" id="regDateStart" placeholder="날짜를 입력해주세요.">
+<!--             <label for="regDateStart" class="col-md-1 control-label">가입일</label> -->
+<!--             <div class="col-md-2"> -->
+<!--                 <input type="text" class="form-control" id="regDateStart" placeholder="날짜를 입력해주세요."> -->
+<!--             </div> -->
+<!--             <div class="col-md-1 align-center"> -->
+<!--                 ~ -->
+<!--             </div> -->
+<!--             <div class="col-md-2"> -->
+<!--                 <input type="text" class="form-control reg-date-to" id="regDateEnd" placeholder="날짜를 입력해주세요."> -->
+<!--             </div> -->
+<!--             <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> -->
+<!--         </div> -->
+<!--         <div class="form-group"> -->
+            <label for="searchText" class="col-md-1 control-label">검색어</label>
+            <div class="col-md-5">
+                <input type="text" class="form-control" id="searchText" placeholder="내용을 입력해주세요." name="memberId">
             </div>
-            <div class="col-md-1 align-center">
-                ~
-            </div>
-            <div class="col-md-2">
-                <input type="text" class="form-control reg-date-to" id="regDateEnd" placeholder="날짜를 입력해주세요.">
-            </div>
-            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-9 col-md-2 align-center">
+<!--         </div> -->
+<!--         <div class="form-group"> -->
+            <div class="col-md-1">
                 <button class="btn btn-primary">검색</button>
             </div>
         </div>

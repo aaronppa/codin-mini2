@@ -173,8 +173,6 @@
     <table class="info career">
 	    <c:forEach var="career" items="${memberCareer}">
 	        <tr>
-                <td rowspan="4" class="imgTd">
-                </td>
 	            <th>회사명</th>
 	            <td>${career.careerCompany}</td>
 	            <th>직위</th>
@@ -192,27 +190,27 @@
 	            <th></th>
 	            <td></td>
 	        </tr>
-	        <tr>
-	            <th>개발언어</th>
-	            <td>
-	                <select class="form-control">
-	                    <option>Java</option>
-	                    <option>Python</option>
-	                    <option>Javascript</option>
-	                    <option>PHP</option>
-	                    <option>C++</option>
-	                </select>
-	            </td>
-	            <th>수준</th>
-	            <td>
-	                <select class="form-control">
-	                    <option>상</option>
-	                    <option>중</option>
-	                    <option>하</option>
-	                </select>
-	            </td>
-	        </tr>
 	    </c:forEach>
+<!-- 	        <tr> -->
+<!-- 	            <th>개발언어</th> -->
+<!-- 	            <td> -->
+<!-- 	                <select class="form-control"> -->
+<!-- 	                    <option>Java</option> -->
+<!-- 	                    <option>Python</option> -->
+<!-- 	                    <option>Javascript</option> -->
+<!-- 	                    <option>PHP</option> -->
+<!-- 	                    <option>C++</option> -->
+<!-- 	                </select> -->
+<!-- 	            </td> -->
+<!-- 	            <th>수준</th> -->
+<!-- 	            <td> -->
+<!-- 	                <select class="form-control"> -->
+<!-- 	                    <option>상</option> -->
+<!-- 	                    <option>중</option> -->
+<!-- 	                    <option>하</option> -->
+<!-- 	                </select> -->
+<!-- 	            </td> -->
+<!-- 	        </tr> -->
     </table>
     <div class="col-md-offset-9 col-md-2 update-delete">
     	<button class="btn btn-primary"><a href="<c:url value='/member/updateMemberForm.do?memberNo='/>${member.memberNo}">수정</a></button>

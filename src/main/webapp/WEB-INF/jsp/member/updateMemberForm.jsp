@@ -191,8 +191,6 @@
 	    <hr>
 	    <table class="info career">
 	        <tr>
-	                    <td rowspan="4" class="imgTd">
-	                    </td>
 	            <th>회사명</th>
 	            <td>비트캠프</td>
 	            <th>직위</th>
@@ -210,26 +208,26 @@
 	            <th></th>
 	            <td></td>
 	        </tr>
-	        <tr>
-	            <th>개발언어</th>
-	            <td>
-	                <select class="form-control">
-	                    <option>Java</option>
-	                    <option>Python</option>
-	                    <option>Javascript</option>
-	                    <option>PHP</option>
-	                    <option>C++</option>
-	                </select>
-	            </td>
-	            <th>수준</th>
-	            <td>
-	                <select class="form-control">
-	                    <option>상</option>
-	                    <option>중</option>
-	                    <option>하</option>
-	                </select>
-	            </td>
-	        </tr>
+<!-- 	        <tr> -->
+<!-- 	            <th>개발언어</th> -->
+<!-- 	            <td> -->
+<!-- 	                <select class="form-control"> -->
+<!-- 	                    <option>Java</option> -->
+<!-- 	                    <option>Python</option> -->
+<!-- 	                    <option>Javascript</option> -->
+<!-- 	                    <option>PHP</option> -->
+<!-- 	                    <option>C++</option> -->
+<!-- 	                </select> -->
+<!-- 	            </td> -->
+<!-- 	            <th>수준</th> -->
+<!-- 	            <td> -->
+<!-- 	                <select class="form-control"> -->
+<!-- 	                    <option>상</option> -->
+<!-- 	                    <option>중</option> -->
+<!-- 	                    <option>하</option> -->
+<!-- 	                </select> -->
+<!-- 	            </td> -->
+<!-- 	        </tr> -->
 	    </table>
 	    <div class="col-md-offset-10 col-md-1 save">
 	    	<button class="btn btn-primary">저장</button>

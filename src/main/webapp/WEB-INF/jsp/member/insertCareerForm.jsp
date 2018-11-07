@@ -217,26 +217,26 @@
 	            <td></td>
 	        </tr>
         </form>
-        <tr>
-            <th>개발언어</th>
-            <td>
-                <select class="form-control">
-                    <option>Java</option>
-                    <option>Python</option>
-                    <option>Javascript</option>
-                    <option>PHP</option>
-                    <option>C++</option>
-                </select>
-            </td>
-            <th>수준</th>
-            <td>
-                <select class="form-control">
-                    <option>상</option>
-                    <option>중</option>
-                    <option>하</option>
-                </select>
-            </td>
-        </tr>
+<!--         <tr> -->
+<!--             <th>개발언어</th> -->
+<!--             <td> -->
+<!--                 <select class="form-control"> -->
+<!--                     <option>Java</option> -->
+<!--                     <option>Python</option> -->
+<!--                     <option>Javascript</option> -->
+<!--                     <option>PHP</option> -->
+<!--                     <option>C++</option> -->
+<!--                 </select> -->
+<!--             </td> -->
+<!--             <th>수준</th> -->
+<!--             <td> -->
+<!--                 <select class="form-control"> -->
+<!--                     <option>상</option> -->
+<!--                     <option>중</option> -->
+<!--                     <option>하</option> -->
+<!--                 </select> -->
+<!--             </td> -->
+<!--         </tr> -->
     </table>
     <div class="col-md-offset-10 col-md-2 update-delete">
     	<button class="btn btn-primary"><a href="<c:url value='/member/updateForm.do' />">수정</a></button>

@@ -74,7 +74,7 @@
         </table>
    		<c:import url="/WEB-INF/jsp/ticket/ticketPageing.jsp"></c:import>
         <div id="buttonArea">
-            <button type="button" id="issue">티켓 발급</button>
+<!--             <button type="button" id="issue">티켓 발급</button> -->
         </div>
         <script>
         $("#ticketTop > li:eq(0)").click(function(){
@@ -89,9 +89,9 @@
 	    	window.open("/codin_mini/ticket/issue.do", "issue", "width=1030, height=700, location=no");
         })
         
-	    $("#issue").click(function () {
-	    	window.open("/codin_mini/ticket/issue.do", "issue", "width=1030, height=700, location=no");
-	    })
+// 	    $("#issue").click(function () {
+// 	    	window.open("/codin_mini/ticket/issue.do", "issue", "width=1030, height=700, location=no");
+// 	    })
 	    
 	   	var $ticketDate = $(".ticketDate");
 	   	

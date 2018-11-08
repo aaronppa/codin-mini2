@@ -45,7 +45,7 @@
 	})
 	
 	$(".topli:eq(2)").click(function(){
-    	location.href='<c:url value="/board/listForm.do?pageNo=1"/>'
+    	location.href='<c:url value="/board/list.do?pageNo=1"/>'
 	})
 	
 	$(".topli:eq(3)").click(function(){

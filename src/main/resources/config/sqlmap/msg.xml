@@ -76,6 +76,15 @@
 			</choose>    
 		 order by m.msg_id desc
 	</select>
+			
+	<select id="selectAMsg" parameterType="int" resultMap="MessageMap">
+		select *
+		  from message as m
+		inner join (select member_id as from_user_id, member_name as from_user_name, member_no as from_member_no
+		               from member
+		                    ) as mem on mem.from_member_no = m.from_user_no
+		 where msg_id = #{msgId}
+	</select>
 	
 	<select id="selectSentMsg" parameterType="int" resultMap="MessageMap">
 		select *
@@ -93,6 +102,7 @@
 		   and trash_writer != 1
 		order by msg_id desc
 	</select>
+	
 	
 	<select id="selectTrash" parameterType="MsgPaging" resultMap="MessageMap">
 		(select *
@@ -126,12 +136,6 @@
 		 from member
 	</select>
 		
-	<select id="selectAMsg" parameterType="int" resultMap="MessageMap">
-		select *
-		  from message
-		 where msg_id = #{msgId}
-	</select>
-		
 	<select id="selectRecipients" parameterType="int" resultMap="RecipientMap">
 		select *
 		  from recipients
@@ -148,7 +152,7 @@
 			#{typeId}, #{fromUserNo}, #{subject},#{body}
 		)
 	</insert>
-	
+
 	<insert id="insertRecipients" parameterType="Recipient">
 		insert into recipients(
 			msg_id, to_user_no
@@ -157,6 +161,24 @@
 		)
 	</insert>
 	
+	<insert id="insertThread" parameterType="Message" useGeneratedKeys="true" keyProperty="thread">
+		insert into thread(msg_id) value(#{msgId})
+	</insert>
+	
+	
+	<update id="updateThread" parameterType="Message">
+		update message
+		   set thread = #{thread}
+		 where msg_id = #{msgId}
+	</update>
+	
+	<insert id="insertReplyMsg" parameterType="Message" useGeneratedKeys="true" keyProperty="msgId">
+		insert into message(
+			type_id, from_user_no, subject, message_body, thread
+		) values ( 
+			#{typeId}, #{fromUserNo}, #{subject},#{body}, #{thread}
+		)
+	</insert>
 	
 	<update id="readTimeStamp" parameterType="Recipient">
 		update recipients

@@ -33,6 +33,8 @@ public interface MsgMapper {
 	
 	// Sent/Draft Message Restore 처리 (message table에서만 update)
 	void updateWriterRestore(MsgPaging mp);
+
+	int insertThread(Message msg);
 	
 	List<Message> selectMsg(MsgPaging mp);
 
@@ -41,5 +43,10 @@ public interface MsgMapper {
 	List<Message> selectSentMsg(int memberNo);
 
 	List<Message> selectDraftMsg(MsgPaging mp);
+
+	void updateThread(Message msg);
+
+	void insertReplyMsg(Message msg);
+
 
 }

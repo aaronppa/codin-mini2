@@ -33,25 +33,23 @@
             </ul>
         </div>
         <div class="container-body col-10">
-           <div class="trashicon receivedmsg">
-           <i class="far fa-trash-alt"></i>
-           </div>
            <div class="searchcontainer">
-               <div class="searcharea">
-                   <form class="searchform" method="get" role="search" id="aso_search_form_anchor">
-                        <div class="searchbox" gh="sb">
-                            <input class="searchkeyword" aria-label="Search mail" autocomplete="off" placeholder="Search mail" value="" name="q" type="text" dir="ltr" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50" aria-activedescendant="gs_anrs50_0">
-                        </div>
-                        <button class="clearsearch" aria-label="Clear search" type="button">
-                                <i class="fas fa-times"></i>
-                        </button>
-                        <button class="search" aria-label="Search Mail" role="button">
-                                <i class="fas fa-search"></i>
-                        </button>
-                        </form>
+               <form class="searchform" method="get" role="search" id="aso_search_form_anchor">
+                    <div class="searchbox" gh="sb">
+                     <input class="searchkeyword" aria-label="Search mail" autocomplete="off" placeholder="Search mail" value="" name="q" type="text" dir="ltr" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50" aria-activedescendant="gs_anrs50_0">
+                    <button class="clearsearch" aria-label="Clear search" type="button">
+                            <i class="fas fa-times"></i>
+                    </button>
+                    <button class="search" aria-label="Search Mail" role="button">
+                            <i class="fas fa-search"></i>
+                    </button>
                     </div>
+                 </form>
             </div>
             <div class="table-wrapper canvasboard">
+	            <div class="trashicon receivedmsg">
+	           	<i class="far fa-trash-alt"></i>
+	           	</div>
                 <div class="msglist">
                     <table class="table table-hover">
                         <thead>
@@ -86,9 +84,10 @@
 <!-- Display Msg Script-->
 <script  src="<c:url value="/resources/script/msg/displayinbox.js"/>" ></script>
 <script>
-const thisUserNo = ${user.memberNo};
+const thisUserNo = ${user.memberNo}
 window.onload = displayinbox(0);
 </script>
+<script src="<c:url value="/resources/script/msg/reply.js"/>" ></script>
 
 
 <!-- Modal WriteForm -->
@@ -131,7 +130,7 @@ window.onload = displayinbox(0);
 		</div>
 	</div>
 
-<!-- Write Form Modal Script -->
+<!-- Write Form Summernote Script -->
 <script>
 	$('#summernote').summernote({
 	    placeholder: '제목만 입력하고 내용이 없으면 쪽지 형태로 발송됩니다.',
@@ -147,6 +146,7 @@ window.onload = displayinbox(0);
 	        ['height', ['height']]
 	      ]
     });
+	
 	$("li.msg-menu-btn.writemsg").on("click", function(){
 		$("#writeFormModal").modal('show');
 		// Modal 상에서 autocomplete하면 자동완성 리스트가 모달 뒤로 보여지고 사용자는 보이지 않음으로 

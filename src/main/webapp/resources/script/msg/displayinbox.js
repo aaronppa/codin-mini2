@@ -9,6 +9,11 @@ function displayinbox(typeIdParam){
 	data: "typeId="+typeIdParam
 	})
 	.done(function(data){
+		var html = "<tr><td>검색된 메세지가 없습니다.</td></tr>";
+		if($.isEmptyObject(data)){
+			$("#msglistresult").html(html); 
+			return;
+		} else {
 		for(var msgitem of data){
 			console.dir(msgitem);
 			/* Msg Type Icon Select */
@@ -40,7 +45,7 @@ function displayinbox(typeIdParam){
 			if(msgitem.dateRead!=null){
 				read = 1;
 			}
-			var html =  "<tr class='msgitem clickable-row' data-msgid='"+msgitem.msgId+"'data-msgtype='"+msgitem.typeId+"' data-read='"+read+"'>"+
+			html =  "<tr class='msgitem clickable-row' data-msgid='"+msgitem.msgId+"'data-msgtype='"+msgitem.typeId+"' data-read='"+read+"'>"+
 					    "<td class='msgitem chkbox'id='thtrwidth-1'><div class='checkbox'><input type='checkbox' name='msgId' class='select-checkbox' value='"+msgitem.msgId+"'></div></td>"+
 					    "<td class='msgitem msgtype' id='thtrwidth-2'>"+typeIcon+"</td>"+"<td class='msgitem msgstatus' id='thtrwidth-3'>"+statusIcon+"</td>"+
 					    "<td class='msgitem fromUser' id='thtrwidth-4' id='fromUser' data-fromUserId='"+msgitem.fromUserId+"' data-fromUserName='"+msgitem.fromUserName+"' data-fromUserNo='"+msgitem.fromUserNo+"'>"+
@@ -51,6 +56,7 @@ function displayinbox(typeIdParam){
 			
 			$("#msglistresult").append(html);
 			
+		};
 		};
 	})
 	.fail(function(err){
@@ -67,6 +73,11 @@ function displaydrafsentbox(typeIdParam){
 	data: "typeId="+typeIdParam
 	})
 	.done(function(data){
+		var html = "<tr><td>검색된 메세지가 없습니다.</td></tr>";
+		if($.isEmptyObject(data)){
+			$("#msglistresult").html(html); 
+			return;
+		} else {
 		for(var msgitem of data){
 			console.dir(msgitem);
 			/* Msg Type Icon Select */
@@ -100,6 +111,7 @@ function displaydrafsentbox(typeIdParam){
 			console.log("# of recipient array: "+arrlength);
 			var count = 0;
 			for(var recipient of msgitem.recipients){
+				console.log("msgitem.recipients");
 				html += recipient.toUserName+"("+recipient.toUserId+")";
 				count++;
 				console.log("count: "+count);
@@ -113,59 +125,15 @@ function displaydrafsentbox(typeIdParam){
 						"</td></tr>";
 			
 			$("#msglistresult").append(html);
-			
+		};
 		};
 	})
 	.fail(function(err){
 			alert("로그인이 되지 않은 것 같네요. 로그인 페이지로 이동합니다.");
 			window.location.pathname = '/codin_mini/msgtest.jsp';
 	});
-	
 
-// Message Item Detail View 
-$("#msglistresult").on("click",".clickable-row",function(e){
-	/* console.log("type: "+$(this).data("msgtype")+", read: "+$(this).data("read")); */
-	console.log($(this).data("msgid"));
-	console.dir(e.target);
-	if (e.target.classList[1] == "chkbox" || e.target.type == "checkbox" || e.target.className == "checkbox") {
-		// stop the bubbling to prevent firing the row's click event
-		e.stopPropagation();
-	} else {
-		var $td = $(this);
-		if($td.data("msgtype")==1){
-			if($td.data("read")==0){
-				$.get({
-					url: "updateread.do",
-					data: "msgId="+$td.data("msgid")
-				})
-				.done(function(){
-					alert("본문내용없는 쪽지를 확인하셨습니다.");
-					$td.data("read","1");
-					$td.find(".msgstatus").html("<i class='far fa-envelope-open'></i>");
-				});
-			} else {
-				alert("본문내용없는 확인하신 쪽지입니다.");
-				return;
-			};
-		} else{
-			$.get({
-				url: "msgitemdetail.do",
-				data: "msgId="+$td.data("msgid"),
-				datatype: "json"
-			})
-			.done(function(result){
-				console.dir(result);
-				console.dir(result.recipients);
-				$(".canvasboard").html(
-						`<div>`		
-					);
-				});		
-			}; 
-		};
-	});
 };
-
-
 // Displaying Trash Message
 function displaytrashbox(){
 	$.ajax({
@@ -173,6 +141,11 @@ function displaytrashbox(){
 	dataType:"json",
 	})
 	.done(function(data){
+		var html = "<tr><td>검색된 메세지가 없습니다.</td></tr>";
+	if($.isEmptyObject(data)){
+		$("#msglistresult").html(html); 
+		return;
+	} else {
 		for(var msgitem of data){
 			console.dir(msgitem);
 			/* Msg Type Icon Select */
@@ -208,6 +181,7 @@ function displaytrashbox(){
 			console.log("# of recipient array: "+arrlength);
 			var count = 0;
 			for(var recipient of msgitem.recipients){
+				console.log("msgitem.recipients")
 				html += recipient.toUserName+"("+recipient.toUserId+")";
 				count++;
 				console.log("count: "+count);
@@ -221,17 +195,16 @@ function displaytrashbox(){
 						"</td></tr>";
 			
 			$("#msglistresult").append(html);
-			
+		};
 		};
 	})
 	.fail(function(err){
 			alert("로그인이 되지 않은 것 같네요. 로그인 페이지로 이동합니다.");
 			window.location.pathname = '/codin_mini/msgtest.jsp';
-	});
-};
+		});
+	};
 
-
-// Checkbox Select Message Item
+//Checkbox Select Message Item
 $(window).bind("load", function(){
 	$("#selectall").on("click", function(e){
 		if($(this).is(':checked',true))  
@@ -244,8 +217,82 @@ $(window).bind("load", function(){
 		}  
 	});
 
-
-	$(".trashicon")
+	
+//Message Item Detail View 
+$("#msglistresult").on("click",".clickable-row",function(e){
+	/* console.log("type: "+$(this).data("msgtype")+", read: "+$(this).data("read")); */
+	console.log($(this).data("msgid"));
+	console.dir(e.target);
+	if (e.target.classList[1] == "chkbox" || e.target.type == "checkbox" || e.target.className == "checkbox") {
+		// stop the bubbling to prevent firing the row's click event
+		e.stopPropagation();
+	} else {
+		var $td = $(this);
+		if($td.data("msgtype")==1){
+			if($td.data("read")==0){
+				$.get({
+					url: "updateread.do",
+					data: "msgId="+$td.data("msgid")
+				})
+				.done(function(){
+					alert("본문내용없는 쪽지를 확인하셨습니다.");
+					$td.data("read","1");
+					$td.find(".msgstatus").html("<i class='far fa-envelope-open'></i>");
+				});
+			} else {
+				alert("본문내용없는 확인하신 쪽지입니다.");
+				return;
+			};
+		} else{
+			$.get({
+				url: "msgitemdetail.do",
+				data: "msgId="+$td.data("msgid"),
+				datatype: "json"
+			})
+			.done(function(result){
+				console.dir(result);
+				var recipientsText="";
+				var count=0;
+				for(var recipient of result.recipients){
+					console.dir("recipient: "+recipient);
+					recipientsText += recipient.toUserName+"("+recipient.toUserId+")";
+					count++
+					if(count<result.recipients.length){
+						recipientsText +=", "; 
+					};
+				};
+				var typeName="";
+				var inHtml = result.subject+
+							"</h4><div class='msgheadings'><p class='sender' id='senderName'>"+
+							result.fromUserName+
+							"<span class='sender' id='senderId'>("+
+							result.fromUserId+
+							")</span></p><p class='recipient' id='recipientName'><span>to:&nbsp;</span>"+
+							recipientsText+
+							"</p></div><hr><div class='msgbody' id='msgbody'>"+
+			                result.body+
+			                "</div><hr></div>";
+				var dataHtml= "<div class='msgdetails' data-msgid='"+result.msgId+
+						      "' data-fromuserno='"+result.fromUserNo+"' data-fromusername='"+result.fromUserName+
+						      "' data-fromuserid='"+result.fromUserId+"' data-typeid='"+result.typeId+
+							  "'>";
+				var html="";
+				if(result.typeId==2){
+					html+= "<div class='menufnicons'><ul><li class='menufn btn replyall'><i class='fas fa-reply-all'></i>전체회신</li><li class='menufn btn reply'><i class='fas fa-reply'></i>회신</li><li class='menufn btn forward'><i class='fas fa-arrow-right'></i>전달</li><li class='menufn btn unread'><i class='fas fa-envelope'></i>안읽음표시</li><li class='menufn btn trash'><i class='far fa-trash-alt'></i>휴지통으로 이동</li></ul><hr>"+
+						   dataHtml+"<h4 class='subject' id='subject'>[메일] "+inHtml;
+					html+= "<div class='replyfn'><button class='btn replyall'>전체회신</button><button class='btn reply'>회신</button></div>";
+				} else if(result.typeId==3){
+					html+= "<div class='menufnicons'><ul><li class='menufn btn unread'><i class='fas fa-envelope'></i>안읽음표시</li><li class='menufn btn trash'><i class='far fa-trash-alt'></i>휴지통으로 이동</li></ul><hr></div>"+
+							dataHtml+"<h4 class='subject' id='subject'>[공지사항] ";
+					html+= inHtml;
+				};
+				
+				$(".canvasboard").empty().html(html);
+				
+				});		
+			}; 
+		};
+	});
 });
 
 
@@ -268,7 +315,7 @@ $('.trashicon').on('click', function(e) {
 	{  
 		alert("선택하신 메세지가 없습니다.");  
 	}  
-	else {  			
+	else {	
 		WRN_PROFILE_DELETE = "선택하신 메세지를 정말 휴지통으로 이동하시겠습니까?";  
 		var check = confirm(WRN_PROFILE_DELETE);  
 		if(check == true){  
@@ -309,16 +356,19 @@ $('.restoreicon').on('click', function(e) {
 	var rMsgVals = []; 
 	var sdMsgVals = [];
 	
-	$(".select-checkbox:checked").each(function() {  
+	$(".select-checkbox:checked").each(function() {
+		console.log("restore: "+thisUserNo)
+		console.log("restore(this): "+$(this).data("fromuserno"));
 		if($(this).data("fromuserno")==thisUserNo){
 			sdMsgVals.push($(this).val());
 		} else {
 			rMsgVals.push($(this).val());
 		}
 	});
-	
+	console.dir("sdMsgVals: "+sdMsgVals);
+	console.dir("rMsgVals: "+rMsgVals);
 	//alert(allVals.length); return false;  
-	if(rMsgVals.length <=0 || sdMsgVals.length <=0)  
+	if(rMsgVals.length <=0 && sdMsgVals.length <=0)  
 	{  
 		alert("선택하신 메세지가 없습니다.");  
 	}  
@@ -359,3 +409,4 @@ $('.restoreicon').on('click', function(e) {
 	}  
 	
 });
+

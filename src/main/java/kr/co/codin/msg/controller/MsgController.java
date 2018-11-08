@@ -133,6 +133,36 @@ public class MsgController {
 		
 		return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "maininbox.do";
 	}
+
+	// ReplyAll Get All Recipients
+	@RequestMapping("premailreply.do")
+	@ResponseBody
+	public Message mailReplyAll(int msgId, HttpSession session) throws Exception{
+	
+		Message msg = service.detail(msgId);
+		System.out.println(msg.toString());
+		return msg;
+	}
+	
+	@RequestMapping("mailreply.do")
+	public String writeReplyMsg(Message msg, @RequestParam(value="toUserNo") List<Integer> recipients) throws Exception{
+		System.out.println("mailreply.do.do -> INCOMING MESSAGE PARAM: "+msg.toString());
+		if(msg.getThread()==0) {
+			service.createThread(msg);			
+			service.updateNewThread(msg);
+		} 
+			msg.setMsgId(0);
+			service.writeReplyMsg(msg);
+			System.out.println("new fetched msgId from generatedKEY: "+msg.getMsgId());
+		for(int id:recipients) {			
+			Recipient recipient = new Recipient();
+			recipient.setToUserNo(id);
+			recipient.setMsgId(msg.getMsgId());
+			System.out.println("write.do addRecipients() -> RECIPIENT: "+recipient.toString());
+			service.addRecipients(recipient);
+		}
+		return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "maininbox.do";
+	}
 	
 	@RequestMapping("searchmember.do")
 	@ResponseBody
@@ -173,7 +203,7 @@ public class MsgController {
 	public Message detail(int msgId, HttpSession session, Model model) throws Exception{
 		Recipient recipient = new Recipient();
 		Member member = (Member) session.getAttribute("user");
-		System.out.println("msgitemdetail.do(parameter Test)-> "+member.toString());
+		System.out.println("==msgitemdetail.do(parameter Test)-> "+member.toString());
 		
 		if(member==null) {
 				return null;
@@ -182,9 +212,11 @@ public class MsgController {
 		recipient.setMsgId(msgId);
 		recipient.setToUserNo(member.getMemberNo());
 		service.updateread(recipient);
-		return service.detail(msgId);
+		Message msg = service.detail(msgId);
+		System.out.println(msg.toString());
+		return msg;
 	}
-	
+		
 	// 받은 메세지만 Trash 처리 (recipient table에서만 update)
 	@RequestMapping("trashreceivedmsg.do")
 	@ResponseBody
@@ -197,6 +229,7 @@ public class MsgController {
 			service.trashReceivedMsg(recipient);
 		}
 	}
+	
 	
 	// Sent/Draft Message Trash 처리 (message table에서만 update)
 	@RequestMapping("trashdraftsentmsg.do")

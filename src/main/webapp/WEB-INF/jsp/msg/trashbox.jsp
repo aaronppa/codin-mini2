@@ -35,24 +35,22 @@
         </div>
         <div class="container-body col-10">
            <div class="searchcontainer">
-            <div class="restoreicon">
-           <i class="fas fa-upload"></i>
-           </div>
-               <div class="searcharea">
-                   <form class="searchform" method="get" role="search" id="aso_search_form_anchor">
-                        <div class="searchbox" gh="sb">
-                            <input class="searchkeyword" aria-label="Search mail" autocomplete="off" placeholder="Search mail" value="" name="q" type="text" dir="ltr" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50" aria-activedescendant="gs_anrs50_0">
-                        </div>
-                        <button class="clearsearch" aria-label="Clear search" type="button">
-                                <i class="fas fa-times"></i>
-                        </button>
-                        <button class="search" aria-label="Search Mail" role="button">
-                                <i class="fas fa-search"></i>
-                        </button>
-                        </form>
+               <form class="searchform" method="get" role="search" id="aso_search_form_anchor">
+                    <div class="searchbox" gh="sb">
+                     <input class="searchkeyword" aria-label="Search mail" autocomplete="off" placeholder="Search mail" value="" name="q" type="text" dir="ltr" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50" aria-activedescendant="gs_anrs50_0">
+                    <button class="clearsearch" aria-label="Clear search" type="button">
+                            <i class="fas fa-times"></i>
+                    </button>
+                    <button class="search" aria-label="Search Mail" role="button">
+                            <i class="fas fa-search"></i>
+                    </button>
                     </div>
+                 </form>
             </div>
             <div class="table-wrapper canvasboard">
+	            <div class="restoreicon">
+	           	<i class="far fa-trash-alt"></i>
+	           	</div>
                 <div class="msglist">
                     <table class="table table-hover">
                         <thead>
@@ -66,11 +64,8 @@
                                 <th id="thtrwidth-6">보낸 날짜/시간</th>
                             </tr>
                         </thead>
-                        <form action="">
-                        <tbody id="msglistresult">
-                               
+						<tbody id="msglistresult">
                         </tbody>
-                        </form>
                     </table>
                 </div>
             </div>

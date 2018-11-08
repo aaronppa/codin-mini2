@@ -66,6 +66,11 @@ public class MsgServiceImpl implements MsgService{
 	}
 	
 	@Override
+	public void createThread(Message msg) {
+		mapper.insertThread(msg);
+	}
+	
+	@Override
 	public void restoreDraftSentMsg(MsgPaging mp) {
 		mapper.updateWriterRestore(mp);
 	}
@@ -89,6 +94,18 @@ public class MsgServiceImpl implements MsgService{
 	public List<Message> listDraftMsg(MsgPaging mp) {
 		return mapper.selectDraftMsg(mp);
 	}
+
+	@Override
+	public void updateNewThread(Message msg) {
+		mapper.updateThread(msg);
+		
+	}
+
+	@Override
+	public void writeReplyMsg(Message msg) {
+		mapper.insertReplyMsg(msg);
+	}
+
 
 	
 

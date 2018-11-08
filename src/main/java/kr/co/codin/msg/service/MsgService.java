@@ -38,4 +38,10 @@ public interface MsgService {
 	List<Message> listSentMsg(int memberNo);
 
 	List<Message> listDraftMsg(MsgPaging mp);
+
+	void createThread(Message msg);
+
+	void updateNewThread(Message msg);
+
+	void writeReplyMsg(Message msg);
 }

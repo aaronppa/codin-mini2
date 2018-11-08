@@ -33,25 +33,23 @@
             </ul>
         </div>
         <div class="container-body col-10">
-         <div class="trashicon">
-           <i class="far fa-trash-alt"></i>
-           </div>
            <div class="searchcontainer">
-               <div class="searcharea">
-                   <form class="searchform" method="get" role="search" id="aso_search_form_anchor">
-                        <div class="searchbox" gh="sb">
-                            <input class="searchkeyword" aria-label="Search mail" autocomplete="off" placeholder="Search mail" value="" name="q" type="text" dir="ltr" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50" aria-activedescendant="gs_anrs50_0">
-                        </div>
-                        <button class="clearsearch" aria-label="Clear search" type="button">
-                                <i class="fas fa-times"></i>
-                        </button>
-                        <button class="search" aria-label="Search Mail" role="button">
-                                <i class="fas fa-search"></i>
-                        </button>
-                        </form>
+               <form class="searchform" method="get" role="search" id="aso_search_form_anchor">
+                    <div class="searchbox" gh="sb">
+                     <input class="searchkeyword" aria-label="Search mail" autocomplete="off" placeholder="Search mail" value="" name="q" type="text" dir="ltr" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50" aria-activedescendant="gs_anrs50_0">
+                    <button class="clearsearch" aria-label="Clear search" type="button">
+                            <i class="fas fa-times"></i>
+                    </button>
+                    <button class="search" aria-label="Search Mail" role="button">
+                            <i class="fas fa-search"></i>
+                    </button>
                     </div>
+                 </form>
             </div>
             <div class="table-wrapper canvasboard">
+	            <div class="trashicon receivedmsg">
+	           	<i class="far fa-trash-alt"></i>
+	           	</div>
                 <div class="msglist">
                     <table class="table table-hover">
                         <thead>
@@ -64,11 +62,8 @@
                                 <th id="thtrwidth-6">보낸 날짜/시간</th>
                             </tr>
                         </thead>
-                        <form action="">
                         <tbody id="msglistresult">
-                               
                         </tbody>
-                        </form>
                     </table>
                 </div>
             </div>
@@ -90,8 +85,8 @@
 <!-- Display Msg Script-->
 <script  src="<c:url value="/resources/script/msg/displayinbox.js"/>" ></script>
 <script>
-$(".trashicon").hover(function(){
-	alert("보낸메일은 삭제되어도 본인 보낸메일함에서만 해당 메세지가 이동한 것이고 수신자의 메세지함에는 영향이 없습니다.")
+$(".trashicon.tooltip").tooltipster(function(){
+	/* alert("보낸메일은 삭제되어도 본인 보낸메일함에서만 해당 메세지가 이동한 것이고 수신자의 메세지함에는 영향이 없습니다.") */
 })
 const thisUserNo = ${user.memberNo};
 window.onload = displaydrafsentbox(1); 

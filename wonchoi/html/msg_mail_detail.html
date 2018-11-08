@@ -175,6 +175,8 @@ div.mail-detail-wrapper{
     overflow: auto;
 }
 
+/* Detail Message CSS */
+
 .searchcontainer{
     height: 50px;
 }
@@ -203,12 +205,20 @@ p.sender{
 
 p.recipient{
     font-size: 15px;
+    margin-bottom: 15px;
 }
 
 .msgbody{
-    border: 1px solid darkblue;
+   
     border-radius: 15px;
-    padding: 10px;
+    padding: 0px 20px;
+}
+
+.replyfn *{
+    border: 1px solid black;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
 }
 </style>
 
@@ -286,8 +296,12 @@ p.recipient{
                     <div class="msgbody" id="msgbody">
                         <p>sdfasdfasdf</p>
                     </div>
-
                 </div>
+                <hr>
+                    <div class="replyfn">
+                        <button class="btn">전체회신</button>
+                        <button class="btn">회신</button>
+                    </div>
             </div>
         </div>
     </div>

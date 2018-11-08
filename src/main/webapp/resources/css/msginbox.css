@@ -9,12 +9,13 @@
     position: relative;
     border-radius: 15px;
     float:left;
-    height: 660px;
+    height: auto;
     padding: 10px;
     margin: 0px;
-    border: 1px solid #c4c4c4;
+    /* border: 1px solid #c4c4c4; */
 }
 
+/* Side Menu CSS */
 .sidebar.icon *{
     margin-right: auto;
     margin-left: 33%;
@@ -22,9 +23,6 @@
     margin-bottom: 20px;
 }
 
-.container-body{
-    background-color: #e3edf7;
-}
 
 .msg-menu-btn{
     padding: 0px;
@@ -78,25 +76,25 @@ li.msg-menu-btn:hover{
     background-color: rgb(172, 172, 172);
 }
 
-.trashicon, .restoreicon{
-	float: left;
-	margin-top: 30px;
-	margin-left: 8px;
-	margin-right: 15px;
+/* Container Main Body CSS */
+.searchcontainer > *{
+	display: inline-block;
 }
+
 .searchkeyword{
-    padding: 10px;
+	display: block;
+    padding: 6px;
     font-size: 17px;
     border: 1px solid grey;
     float: left;
-    width: 40%;
+    width: 400px;
     background: #f1f1f1;
     border-radius: 5px;
 }
 
 form.searchform button{
     float: left;
-    width: 4%;
+    width: 40px;
     padding: 10px;
     background: #f1f1f1;
     color: darkgreen;
@@ -105,21 +103,34 @@ form.searchform button{
     border-left: none;
     cursor: pointer;
     border-radius: 5px;
+    height: inherit;
+    vertical-align: middle;
+}
+
+.trashicon, .restoreicon{
+	clear: left;
+	margin-left: 15px;
+	padding-top: 10px;
 }
 
 div.msglist{
-    margin-top: 55px;
     height: 550px;
 }
 
 div.msglist table * {
-	border: 1px solid #c6c8d1;
+	/* border: 1px solid #c6c8d1; */
+	padding: 0px;
 }
-div.msglist table thead th {
+
+div.msglist table thead tr th {
     text-align: center;
     height: 15px !important;
-    padding: 0px  !important;
-    font-weight:500;
+    font-weight:700;
+    border: none;
+}
+
+th#thtrwidth-4, th#thtrwidth-5{
+	text-align: left;
 }
 
 table {
@@ -132,7 +143,7 @@ table tbody {
     /* body takes all the remaining available space */
     display: block;
 /*     overflow-y: auto; */
-    border-top-width: 0px;
+    border: none;
 }
 
 thead > tr{
@@ -147,38 +158,30 @@ td.msgitem {
 }
 
 tr.msgitem, tr.msgitem > td{
-	/* border: none !important; */
-	border: 1px solid #d7d8e9;
+	border: none !important;
 }
 
 #selectall{
 	margin-bottom: 3px;
 }
 
-#thtrwidth-1, div.checkbox, i{
+#thtrwidth-1, div.checkbox, i,td#thtrwidth-2, td#thtrwidth-3{
+	vertical-align: middle;
+	text-align: center;
 	border: none !important;
-	padding-bottom: 3px;
+	/* padding-bottom: 3px; */
 }
 
 #thtrwidth-1{
 	width: 30px;
-	padding-left: 8px;
-    padding-top: 4px;
     border: none !important;
-	}
+}
 	
-#thtrwidth-2{
+#thtrwidth-2, #thtrwidth-3{
 	width: 62px;
-    padding-left: 22px;
-    padding-top: 5px;
     height: 15px;
-	}
-#thtrwidth-3{
-	width: 62px;
-	padding-left: 22px;
-    padding-top: 5px;
-    height: 15px;
-    }
+}
+
 #thtrwidth-4{
 	text-indent: 10px;
 	min-width: 190px;
@@ -186,7 +189,7 @@ tr.msgitem, tr.msgitem > td{
 	max-width: 190px !important;
 	text-overflow: ellipsis; 
 	overflow: hidden;
-	}
+}
 #thtrwidth-5{
 	text-indent: 10px;
 	min-width: 643px;
@@ -194,11 +197,11 @@ tr.msgitem, tr.msgitem > td{
 	max-width: 643px !important;
 	text-overflow: ellipsis; 
 	overflow: hidden;
-	}
+}
 #thtrwidth-6{
-	text-indent: 10px;
-	width: 150px;
-	}
+	width: 210px;
+	text-align: center;
+}
 #thtrwidth-7{
 	text-indent: 10px;
 	min-width: 453px;
@@ -206,7 +209,7 @@ tr.msgitem, tr.msgitem > td{
 	max-width: 453px !important;
 	text-overflow: ellipsis; 
 	overflow: hidden;
-	}
+}
 
 th{
 	background-color: #f4f8ea; 
@@ -217,7 +220,7 @@ table tbody tr {
     display: table;
 }
 
-/* Modal Size */
+/* Modal Form Size */
 .modal-dialog.writeForm{
 	width: 100% !important;
 } 
@@ -266,12 +269,6 @@ input{
 	padding-top: 0px;
 }
 
-
-tbody, th, thead{
-	 /* border: none !important; */
-	 border: 1px solid #d7d8e9;
-}
-
 /* Recipient Search Loading */
 .ui-autocomplete-loading{ 
 	background: white url('http://f.goodkiss.co.kr/sample/images/waiting.gif') right center no-repeat;
@@ -311,3 +308,111 @@ ul#recipientAddedLabel > li{
  	cursor: pointer;
  }
 
+
+/* Detail Message CSS */
+
+.menufnicons{
+    margin-top: 10px
+}
+
+.menufnicons > ul {
+	padding: 0px;
+	margin-bottom: 0px;
+}
+
+.menufnicons > ul > li{
+    width: auto;
+    margin-right: 10px;
+    list-style-type: none;
+    text-align: center;
+    border-radius: 20px;
+    color: grey;
+    font-weight: bold;
+    padding: .375rem .75rem;
+    border: 1px solid grey;  
+}
+
+.canvasboard, .replyform{
+	margin-top: 10px;
+    border: 1px solid rgb(187, 187, 187);
+    background-color: white;
+    border-radius: 20px;
+    padding: 0 10px 10px;
+}
+.canvasboard > .msglist{
+	height: auto;
+    padding: 10px;
+}
+
+.msgheadings{
+    text-indent: 15px;
+}
+
+p.sender{
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 0px;
+}
+
+p.recipient{
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.msgbody{
+    border-radius: 15px;
+    padding: 0px 20px;
+}
+.replyfn{
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+}
+
+.btn.cancel, .btn.sendreply{
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100px;
+}
+
+.replyfn *, .btn.cancel, .btn.sendreply{
+    background-color: white;
+    display: inline-block;
+    margin-right: 40px;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-weight: bold;
+}
+.replyfn *:hover, .menufnicons > ul > li:hover, .btn.cancel:hover, .btn.sendreply:hover{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+hr{
+	margin: 5px;
+}
+
+#rSubject{
+	margin-bottom: 5px;
+}
+
+.replyform {
+	padding: 10px;
+}
+
+.replyform > form > span:nth-child(2){
+	float: left;
+	margin-bottom: 5px;
+}
+
+.replyform > form > span:nth-child(3){
+	clear: left;
+}
+
+.replyform > form > ul#recipientAddedLabel{
+	height: 20px;
+	margin-left: 24px;
+}
+
+#summernote_2{
+	margin-bottom: 10px;
+}

@@ -46,6 +46,10 @@
 	#comContent{
 		width:600px;
 	}
+	#imgPre{
+		width:400px;
+		height: 300px
+	}
 
   </style>
 </head>
@@ -75,7 +79,7 @@
 
 <!-- 슬라이드 끝 -->
 	<div id="main">
-		 <img src="/codin_mini/gallimg/aaaa.jpg">
+		 <img id="imgPre" src="/codin_mini/gallimg/server${gall.gallNo}.jpg">
 		 <br>
 		 ${gall.gallContent}
 		 <hr>
@@ -109,7 +113,13 @@
 		<input type="hidden" name="gallNo" id="gallNo"value="${gall.gallNo }">	
 		<input type="hidden" name="gallComNo" id="gallComNo" value="<%=gallCom.getGallComNo() %>"/>
 		<br>
-		<div name="comList" id="comList" ></div>
+		<div name="comList" id="comList" >
+			<table id="comTable">
+				<tr id="comTr">
+					<td id="comTd">
+				</tr>
+			</table>
+		</div>
 		<br>
 		<br>
 		<br>
@@ -152,13 +162,15 @@
 	 		//dataType: "json",
 	 		type:"post",
 	 		data: {gallNo:$("#gallNo").val()},
-	 		async:false
-	 	}).done(function (result) {
+		 	}).done(function (result) {
 	 		console.log("commentListSuccess")
 	 		var object = Object.keys(result);
 	 		var length = object.length;
 	 		console.log(result);
-	 		for(var i = 0; i<length ;i++){
+	 		if($("#gallComWriter").val() == null){
+	 			alert('로그인하셈')
+	 		}else{
+	 			for(var i = 0; i<length ;i++){
 		 		$("#comList").append(
 		 				"<table id='comTable' data-commentno='"+result[i].gallComNo+"'><tr>"
 		 				+"<td id='comWriter' style='font-weight:bolder;' data-comwriter='"+result[i].gallComWriter+"'>"+result[i].gallComWriter+"</td>"
@@ -170,10 +182,14 @@
 		 				+"<span aria-hidden='true'>&times;</span>"
 		 				+"</button><hr></td>"
 		 				+"</tr><hr id='btw'></table>"
-		 		)};
-	 	}).fail(function(result){
-// 	 		alert(result);
+		 				)
+	 			}
+	 		}
+
 	 	});
+// 	 	.fail(function(result){
+//  	 		alert(result);
+// 	 	});
 	
 // 		$(".close.deleteComment").on("click", function(e){
 // 			console.dir($(this).parent().parent().parent().parent())
@@ -191,7 +207,7 @@
 // 			return false;
 // 		});
 		$(".close.deleteComment").on("click", function(e){
-			console.dir($(this).parent().parent().parent().parent())
+			console.dir("commentno : "+$("#comTable").data('commentno'))
 			console.dir($(this).parent().parent().parent().parent().data('commentno'))
 			e.preventDefault();
 			console.log($("#comTable").data("commentno")+" = 댓글번호")
@@ -204,6 +220,8 @@
 						$(this).parent().parent().parent().parent().remove();
 				});
 		});
+		
+		
 		
 		
 // 		//조회수

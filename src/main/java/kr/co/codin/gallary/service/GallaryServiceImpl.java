@@ -21,10 +21,7 @@ public class GallaryServiceImpl implements GallaryService{
 	@Autowired
 	private GallaryMapper mapper;
 
-	@Override
-	public List<Gallary> gallList() {
-		return mapper.selectGall();
-	}
+
 
 
 //	@Override
@@ -32,14 +29,15 @@ public class GallaryServiceImpl implements GallaryService{
 //		return mapper.updateViewCnt(gallNo);
 //	}
 
-
-
-
-
+	@Override
+	public List<Gallary> gallList() {
+		return mapper.selectGall();
+	}
 
 
 	@Override
 	public void writeGall(Gallary gallary) {
+		
 		mapper.insertGall(gallary);
 	}
 
@@ -89,8 +87,6 @@ public class GallaryServiceImpl implements GallaryService{
 
 	@Override
 	public void uploadFile(GallFile gallFile) {
-		System.out.println("FileNo"+gallFile.getFileNo());
-		
 		mapper.uploadFile(gallFile);
 	}	
 

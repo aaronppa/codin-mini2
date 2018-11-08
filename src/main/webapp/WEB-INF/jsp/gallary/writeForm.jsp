@@ -40,7 +40,6 @@
 		width:200px;
 	}
 	
-
 </style>
 </head>
 <body>
@@ -49,6 +48,7 @@
 	<h2>자유 게시판</h2>
 	<hr>
 	<form action="<c:url value='/gallary/write.do' />" method="post" enctype="multipart/form-data">
+<%-- 		<input type="hidden" id="gallNo" name="gallNo" value="${gall.gallNo }"> --%>
 		<div id="header">
 		 <h2>WRITE</h2>
 		 <hr>
@@ -59,7 +59,7 @@
 			<input name="gallWriter" value="${user.memberName }" readonly> 
 			--%>
 			<!-- id value값을 제출 -->
-		  <input name="gallWriter" value="${user.memberName }" type="hidden">
+		  <input name="gallWriter" value="${user.memberName}" type="hidden">
 		 <div id="title">
 			<input name="gallTitle" class="form-control" type="text" placeholder="title">
 		 </div>
@@ -84,7 +84,7 @@
 		
 		</div>
 		<div id="il">
-			 <a href='list.do'><input class="btn btn-primary" type="submit" value="Submit"></a>
+			 <input class="btn btn-primary" type="submit" value="Submit">
 			 <button type="button" class="btn btn-outline-secondary"><a href='list.do'>list</a></button>
 		</div>
 	</form>
@@ -114,28 +114,27 @@
 
 	}; 
 	//파일등록
-	$("#fileUpload").click(function(){
-		var files = $("input[name='fileOriName']")[0].files;
-		var fd = new FormData();
+// 	$("#fileUpload").click(function(){
+// 		var files = $("input[name='fileOriName']")[0].files;
+// 		var fd = new FormData();
 	
 
-		function sendFile(file, el){
-		$.ajax({
-			url : "/codin_mini/gallary/uploadFile.do",
-			data : {fd:fileOriName},
-			type : "post",
-			cache : false,
-			contentType :  false,
-			processData : false,
-			encType: 'multipart/form-data',
-			success : function(data){
-				alert(data);
-				$("#customFile").val(data);
-			
-			}
-		});
-		};
-	});
+// 		function sendFile(file, el){
+// 		$.ajax({
+// 			url : "/codin_mini/gallary/write.do",
+// 			data : {gallNo:$("#gallNo").val()},
+// 			type : "post",
+// 			cache : false,
+// 			contentType : false,
+// 			processData : false,
+// 			encType: 'multipart/form-data',
+// 			success : function(data){
+// 				alert(data);
+// 				$("#customFile").val(data);
+// 			}
+// 		});
+// 		};
+// 	});
 	
 
 

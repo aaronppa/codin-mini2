@@ -55,6 +55,7 @@
 		<button type="button" class="btn btn-outline-secondary"><a href="<c:url value='/gallary/writeForm.do'/>" >write</a></button>
 	</div>
 	<br>
+<%-- 	<input type="hidden" id="gallNo" name="gallNo" value="${gall.gallNo }"> --%>
 	<table>
 	<!-- 반복문 -->
 	<tbody>
@@ -64,8 +65,8 @@
 			</c:if>
 				<td id="td">
 					<div class="card" style="width: 18rem;">
-					<a href="<c:url value='/gallary/detail.do?gallNo=${g.gallNo}'/>" >
-					  <img class="card-img-top" src="/codin_mini/gallimg/aaaa.jpg" alt="Card image cap">
+					<a id = "imglist" href="<c:url value='/gallary/detail.do?gallNo=${g.gallNo}'/>" >
+					  <img class="card-img-top" src="/codin_mini/gallimg/server${g.gallNo }.jpg" alt="Card image cap">
 					 </a> 
 					  <div class="card-body">
 					    <p class="card-text"><h3>${g.gallTitle}</h3></p>
@@ -101,6 +102,25 @@
 	<!-- 페이징 끝 -->
 	<br>
 	<br>
+<script>
+// 	$ajax({
+// 		url : "<c:url value='/gallary/uploadFile.do'/>",
+// 		type : "post",
+// 		data : {gallNo : $("#gallNo").val()},
+
+// 	}).done(function(result){
+// 		console.log("사진나와라")
+// 		var object = Object.keys(result);
+// 		var length = object.length;
+// 		console.log(result)
+// 		for(var i = 0; i<length; i++){
+// 			$("#imglist").append(
+// 				"<img class='card-img-top' src='/codin_mini/gallimg/"+result[i].fileServerName+".jpg' alt='Card image cap'>"
+// 			)
+// 		}
+// 	});
+
+</script>
 </body>
 </html>
 

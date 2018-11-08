@@ -2,13 +2,20 @@ package kr.co.codin.gallary.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.ServletContext;
 
 import org.apache.commons.fileupload.FileUpload;
+import org.apache.ibatis.annotations.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
@@ -24,6 +31,10 @@ import kr.co.codin.test.service.TestService;
 @RequestMapping("gallary")
 public class GallaryController {
 
+	//tomcat서버경로(프로젝트명까지)를 지정
+	@Autowired
+	private ServletContext context;
+	
 	@Autowired
 	private TestService tService;
 	
@@ -31,7 +42,7 @@ public class GallaryController {
 	private GallaryService service;
 	
 	@RequestMapping("list.do")
-	public void list(Model model) throws Exception{
+	public void list(Model model, GallFile gallFile) throws Exception{
 		System.out.println("list");
 		System.out.println("아이디 :"+tService.login1().getMemberId());
 		model.addAttribute("gall", service.gallList());
@@ -65,17 +76,46 @@ public class GallaryController {
 		System.out.println("아이디 :"+tService.login1().getMemberId());
 		model.addAttribute("gall");
 	}
+	
 	@RequestMapping("write.do")
-	public String write(Gallary gallary,MultipartFile attach) throws Exception{
-		System.out.println(gallary);
+	public String write(Gallary gallary, GallFile gallFile, MultipartFile attach) throws Exception{
 		
-		System.out.println("write");
-		System.out.println("아이디 :"+tService.login1().getMemberId());
-		System.out.println("attach : "+attach);
 		
+		String fileOriName = attach.getOriginalFilename();
+		int fileSize = (int) attach.getSize();
+//		int gallNo = gallFile.getGallNo();
+//		System.out.println("서버이름"+fileServerName);
+//		System.out.println("GallNo : "+gallNo);
+		if(attach.isEmpty() == true) 
+			return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"writeForm.do";
+		//oriName
+		gallFile.setFileOriName(fileOriName);
+		//serverName
+//		gallFile.setFileServerName(fileServerName);
+		//파일크기
+		gallFile.setFileSize(fileSize);
+		//파일경로
+		gallFile.setFilePath(context.getRealPath("/gallimg"));
+		
+	
 		service.writeGall(gallary);
+		
+		//GallaeyFileVO gallNo
+		int gallNo = gallary.getGallNo();
+		//Gallary의 gallNo를 gallary
+		System.out.println("gallary.gallNo : "+gallNo);	
+		
+		String fileServerName = "server"+gallNo;
+		gallFile.setFileServerName(fileServerName);
+		gallFile.setGallNo(gallNo);
+		service.uploadFile(gallFile);
+		attach.transferTo(new File(context.getRealPath("/gallimg"),fileServerName+".jpg"));
+		gallFile.setFileServerName(fileServerName);
 		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"list.do";
 	}
+	
+	
+	
 	@RequestMapping("delete.do")
 	public String delete(int gallNo, Model model) throws Exception{
 		System.out.println("delete");
@@ -135,21 +175,12 @@ public class GallaryController {
 //	 void transferTo(File dest)	 업로드 한 파일 데 이터를 지정한 파일에 저장한다. --> 요고도 파일쓰는거다.
 
 
-	@RequestMapping("uploadFile.do")
-	public String uploadFile(GallFile gallFile, MultipartFile mFile) throws Exception{
-		System.out.println("호출");
-		System.out.println(mFile);
-		
-		//System.out.println("insertFile");
-		//System.out.println("아이디 :"+tService.login1().getMemberId());
-		
-		String fileOriName = mFile.getOriginalFilename();
-		mFile.transferTo(new File("C:/app/upload", fileOriName));
-		
-		
-		
-		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"write.do";		
-	}
+//	@RequestMapping("uploadFile.do")
+//	@ResponseBody
+//	public String uploadFile(GallFile gallFile) throws Exception{
+//		
+//		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"list.do";		
+//	}
 	
 	
 

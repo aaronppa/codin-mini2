@@ -27,7 +27,7 @@
 	</resultMap>
 
 	
-	<select id="selectGall" resultMap="gallaryMap">
+	<select id="selectGall" resultMap="gallaryMap" >
 		select *
 		  from gallary
 		order by gall_no desc
@@ -45,7 +45,7 @@
 		  where gall_no = #{gallNo}
 	</update>
 	
-	<insert id="insertGall" parameterType="gallary" >
+	<insert id="insertGall" parameterType="gallary" useGeneratedKeys="true" keyProperty="gallNo">
 		insert into gallary(
 				gall_writer, gall_title, gall_content
 			)values(
@@ -91,7 +91,7 @@
 
 
 	<!-- file-->
-	<insert id="uploadFile" parameterType="gallFile">
+	<insert id="uploadFile" parameterType="gallFile" >
 		insert into gall_file(
 			gall_no, file_ori_name, file_server_name, file_path, file_size 
 		)values(

@@ -34,6 +34,10 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
+	#imgPre{
+		width:400px;
+		height: 300px
+	}
   </style>
 </head>
 <body>
@@ -51,7 +55,7 @@
 		 <hr>
 		</div>
 		<div id="main">
-			 <img src="/codin_mini/gallimg/aaaa.jpg">
+			 <img id="imgPre" src="/codin_mini/gallimg/server${gall.gallNo }.jpg">
 			 <br>
 			 <br>
 			 <textarea name="gallContent" cols="130" rows="7" placeholder="내용을 입력하세요">${gall.gallContent}</textarea>

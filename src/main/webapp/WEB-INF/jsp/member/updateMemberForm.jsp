@@ -52,7 +52,6 @@
     }
     
     .save {
-    	text-align: right;
     	margin-top: 50px;
     }
     
@@ -104,7 +103,6 @@
 	                <th>회원구분</th>
 	                <td>
 	                	<select class="form-control" id="memberGrade" name="memberGrade">
-		                	<option value="0">선택해주세요.</option>
 		                    <option value="1">준회원</option>
 		                    <option value="2">정회원</option>
 		                    <option value="3">우수회원</option>
@@ -250,7 +248,7 @@
 <!-- 	            </td> -->
 <!-- 	        </tr> -->
 	    </table>
-	    <div class="col-md-offset-10 col-md-1 save">
+	    <div class="col-md-offset-10 save">
 	    	<button class="btn btn-primary">저장</button>
 	    </div>
 	</form>	

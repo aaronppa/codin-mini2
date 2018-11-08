@@ -231,7 +231,6 @@
     </table>
     <div class="col-md-offset-10 update-delete">
     	<button class="btn btn-primary"><a href="<c:url value='/member/updateMemberForm.do?memberNo='/>${member.memberNo}">수정</a></button>
-    	<button class="btn btn-primary"><a href="<c:url value='/member/list.do'/>">목록</a></button>
     </div>
     </div>
 </body>

@@ -112,11 +112,7 @@
     	}
     	
     	$("#signupBtn").click(function (e) {
-    		console.dir($('#username').val());
-    		console.dir($('#password').val());
-    		console.dir($('#email').val());
-    		console.dir($('#name').val());
-    		if ($('#username').val() == "" || $('#password').val() == "" || $('#Email').val() == "" || $('#name').val() == "") {
+    		if ($('#username').val() == "" || $('#password').val() == "" || $('#email').val() == "" || $('#name').val() == "") {
     			e.preventDefault();
     			alert("입력란을 확인해주세요.");
     			$("#signupBtn").prop("disabled", true);

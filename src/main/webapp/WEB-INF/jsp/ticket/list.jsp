@@ -21,7 +21,7 @@
 	<c:import url="/WEB-INF/jsp/include/top.jsp" />
 	<div style="height: 50px"></div>
     <div id="container">
-        <h2>내가 받은 티켓</h2>
+        <h2 class="fontChange">내가 받은 티켓</h2>
         <ul id="ticketTop">
         	<li class="rightMargin">내가 받은 티켓</li>
         	<li class="rightMargin">내가 보낸 티켓</li>
@@ -31,7 +31,7 @@
         <hr>
         <table>
             <thead>
-                <tr>
+                <tr class="fontChange">
                     <th>발급 번호</th>
                     <th>제목</th>
                     <th>발급자</th>
@@ -76,7 +76,8 @@
         <div id="buttonArea">
 <!--             <button type="button" id="issue">티켓 발급</button> -->
         </div>
-        <script>
+        
+      <script>
         $("#ticketTop > li:eq(0)").click(function(){
         	location.href='<c:url value="/ticket/list.do"/>'
         })

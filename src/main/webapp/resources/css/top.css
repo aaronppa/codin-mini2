@@ -1,5 +1,6 @@
-#topMenu {
+#topMenu, .fontChange {
     font-family: 'Do Hyeon', sans-serif;
+    font-weight: normal;
     }
 
 #topText{

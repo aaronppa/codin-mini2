@@ -8,17 +8,19 @@ ul{
 
 #ticketTop > li{
 	background: #CAE4FC;
-	padding-top:5px;
     display:inline-block; 
     width: 150px;
     height: 30px;
     vertical-align: middle;
     cursor: pointer;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 20px;    color: #467baa;
+    
 }
 
 #ticketTop > li:hover {
-	background: #63B2F7;
-	font-weight: bolder;
+    transition: background 0.5s;
+	background: #96CAFA;
 }
 
 .rightMargin {
@@ -33,7 +35,8 @@ th {
     height: 30px;
     color: white;
     background-color: #333333;
-    font-size: 20px;
+    font-size: 22px;
+    font-weight: normal;
 }
 
 th {

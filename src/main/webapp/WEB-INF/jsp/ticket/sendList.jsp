@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>내가 보낸 티켓 - Codin</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="<c:url value='/resources/css/ticket/ticketSendlist.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/css/ticket/ticketList.css'/>">
     <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -21,7 +21,7 @@
 	<c:import url="/WEB-INF/jsp/include/top.jsp" />
 	<div style="height: 50px"></div>
     <div id="container">
-        <h2>내가 보낸 티켓</h2>
+        <h2 class="fontChange">내가 보낸 티켓</h2>
         <ul id="ticketTop">
         	<li class="rightMargin">내가 받은 티켓</li>
         	<li class="rightMargin">내가 보낸 티켓</li>
@@ -30,7 +30,7 @@
         <hr>
         <table>
             <thead>
-                <tr>
+                <tr class="fontChange">
                     <th>발급 번호</th>
                     <th>제목</th>
                     <th>대상자</th>

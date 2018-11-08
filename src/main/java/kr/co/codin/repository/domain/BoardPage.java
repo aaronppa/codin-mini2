@@ -47,37 +47,37 @@ public class BoardPage {
 	
 	
 	
-	private Map<InngerPage, Integer> PageList = new HashMap<InngerPage,Integer>();
+	public Map<String, Integer> PageLists = new HashMap<String,Integer>();
 	
 	
 	
 	
-	public Map<InngerPage, Integer> getPageList() {
-		return PageList;
+	public Map<String, Integer> getPageList() {
+		return PageLists;
 	}
-	public void setPageList(Map<InngerPage, Integer> pageList) {
-		PageList = pageList;
+	public void setPageList(Map<String, Integer> pageList) {
+		PageLists = pageList;
 	}
 
 
 
 
-	public class InngerPage{
-		private String AfirstPage;
-		private String AlastPage;
-		public String getAfirstPage() {
-			return AfirstPage;
-		}
-		public void setAfirstPage(String afirstPage) {
-			AfirstPage = afirstPage;
-		}
-		public String getAlastPage() {
-			return AlastPage;
-		}
-		public void setAlastPage(String alastPage) {
-			AlastPage = alastPage;
-		}
-		
-	}
+//	public class InnerPage{
+//		public String AfirstPage;
+//		public String AlastPage;
+//		public String getAfirstPage() {
+//			return AfirstPage;
+//		}
+//		public void setAfirstPage(String afirstPage) {
+//			AfirstPage = afirstPage;
+//		}
+//		public String getAlastPage() {
+//			return AlastPage;
+//		}
+//		public void setAlastPage(String alastPage) {
+//			AlastPage = alastPage;
+//		}
+//		
+//	}
 	
 }

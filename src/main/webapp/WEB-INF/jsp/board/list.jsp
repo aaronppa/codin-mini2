@@ -76,7 +76,7 @@ table>thead>tr>th, table>tbody>tr>td {
 
 $(document).ready(function(){
 
-	console.log($(location).attr('search').substring(8));
+	//console.log($(location).attr('search').substring(8));
 	
 	$.ajax({
  		url:"<c:url value='/board/ajaxPagingListForm.do'/>",
@@ -85,27 +85,73 @@ $(document).ready(function(){
  	}).done(function(result){
  	
  		var nowPage = $(location).attr('search').substring(8);
- 		console.log("nowPage:"+nowPage);
+ 		//console.log("nowPage:"+nowPage);
  		pageNo = nowPage;
  		$.ajax({
  			url:"<c:url value='/board/ajaxPaingList.do'/>",
  			data:{pageNo:pageNo},
- 			type:"get" 			
+ 			type:"get"
  		}).done(function(result){
- 			/* console.log(result);
- 			var lastPage=result; */
- 			console.log("result:"+result);
- 			for(var i=1; i<=result;i++ ){
- 			//	console.log(i);
- 				$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/list.do?pageNo="+i+"'>"+i+"</a></li>");
- 			}
+ 			console.log("result"+result);//총페잊
+  			//result 총 페이지
+  			//result
+  			
+  			//총페이지를 10으로 나눈값을 parseInt하고 나머지 버림
+  			//var rTotalPage= Math.floor(parseInt(result-1/10));
+ 			var rTotalPage= Math.floor((result-1)/10);
+  			
+  			
+  			
+  			
+  			
+  			
+  			//현재페이지
+  			var NowPage =$(location).attr('search').substring(8);
  			
+ 			var NextPage= parseInt(NowPage)+1;
  			
- 			$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/list.do?pageNo="+result+"'>>></a></li>");
- 		}).fail(function(result){
- 			alert("실패")
- 		})
  		
+ 			var NowPageChecking=Math.floor((NowPage-1)/10);
+ 			
+ 		
+ 			
+ 			
+ 		
+ 			var newNowPage = Math.floor($(location).attr('search').substring(8)-1/10);
+ 	
+ 			
+ 			
+ 		
+ 			var Mathnanugi = result%10;
+ 	
+ 			if(NowPageChecking != rTotalPage){
+ 				var pageNo = NowPageChecking*10;
+ 		
+		 		for(var i=1; i<=10;i++ ){
+		 			++pageNo;
+		 			$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/list.do?pageNo="+pageNo+"'>"+pageNo+"</a></li>");
+		 		}		
+		 			
+		 			$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/list.do?pageNo="+NextPage+"'>><li><a href='/codin_mini/board/list.do?pageNo="+result+"'>>></a></li>");
+		  			
+		 			
+		 			
+				}else{
+				
+ 					var pageNo = NowPageChecking*10;
+ 					
+ 					var lastPage = result%10;
+ 					//var elsePage= pageNo
+ 					for(var i=1; i<=lastPage;i++ ){
+ 				 		++pageNo;
+ 			 			$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/list.do?pageNo="+pageNo+"'>"+pageNo+"</a></li>");
+ 			 		}			
+ 			 			$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/list.do?pageNo="+NextPage+"'>><li><a href='/codin_mini/board/list.do?pageNo="+result+"'>>></a></li>");
+ 				}
+		 }).fail(function(result){
+		 			alert("실패");
+		 })
+ 			
  	
 
  	}).fail(function(result){
@@ -222,8 +268,10 @@ $(document).ready(function(){
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script>
 		//$("#pagingDiv > .pagination > li:nth(1)").before("<li><a href='/codin_mini/board/listForm.do?pageNo=1'>sdfsdfsdf<</a></li>")
+		var prev = $(location).attr('search').substring(8)-1;
 		
-		$("#pagingDiv > .pagination").prepend("<li><a href='/codin_mini/board/list.do?pageNo=1'><<</a></li>");
+		$("#pagingDiv > .pagination").prepend("<li><a href='/codin_mini/board/list.do?pageNo=1'><<</a></li><li><a href='/codin_mini/board/list.do?pageNo="+prev+"'><");
+		
 		//$("#pagingDiv > .pagination >li:nth-(last)").append("<li><a href='#'>>></a></li>");
 		//$("#pagingDiv > .pagination").children("li").html("dd")
 	</script>

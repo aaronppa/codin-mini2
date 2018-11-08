@@ -1,6 +1,8 @@
 package kr.co.codin.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,8 @@ import kr.co.codin.board.service.BoardService;
 import kr.co.codin.repository.domain.Board;
 import kr.co.codin.repository.domain.BoardComment;
 import kr.co.codin.repository.domain.BoardPage;
+
+
 
 @Controller
 @RequestMapping("board")
@@ -94,19 +98,32 @@ public class BoardController {
 	public int PageList(Integer pageNo){
 		
 		System.out.println("pageList에서 찍은 pageNo:"+pageNo);
-		if(service.checkingContentCnt()%20 ==0) {
 		
+	
+		
+		if(service.checkingContentCnt()%20 ==0) {
+//			int k=(int)pageNo/10;
+//			Map<String, Integer> list= new HashMap<String, Integer>();
+//			//	String AfrestPage= new InnerPage().AfirstPage();
+//				list.put("firstPage", k+1);
+//				list.put("lastPage", k+9);
 		System.out.println("첫번째if 걸림");
-
+		
 		return (int)Math.floor(service.checkingContentCnt()/20);//라스트 페이지
-	}else {
-
+		//return  list;
+		}else {
+			int k=(int)pageNo/10;
+			Map<String, Integer> list= new HashMap<String, Integer>();
+			//	String AfrestPage= new InnerPage().AfirstPage();
+				list.put("firstPage", k+1);
+				list.put("lastPage", k+9);
 		System.out.println(new BoardPage().getEndPage());
 
 		System.out.println("else걸림");
 
 		System.out.println("endPage"+new BoardPage().getEndPage());
 		return (int)Math.floor(service.checkingContentCnt()/20+1);
+		//return list;
 	}
 	
 

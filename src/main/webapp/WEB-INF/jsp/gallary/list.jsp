@@ -27,7 +27,7 @@
 		margin-left: auto;
 		margin-right: auto;
 		opacity: 0.5;
-		transform: scale(1.1);
+/*  		transform: scale(1.1);  */
 	}
 	table{
 		width: 80%;

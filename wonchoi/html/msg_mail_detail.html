@@ -174,6 +174,42 @@ div.mail-detail-wrapper{
     height: 550px;
     overflow: auto;
 }
+
+.searchcontainer{
+    height: 50px;
+}
+
+.menufnicons{
+    margin-top: 10px
+}
+
+.canvasboard{
+    position: relative;
+    margin-top: 5px;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.msgheadings{
+    text-indent: 15px;
+}
+
+p.sender{
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 0px;
+}
+
+p.recipient{
+    font-size: 15px;
+}
+
+.msgbody{
+    border: 1px solid darkblue;
+    border-radius: 15px;
+    padding: 10px;
+}
 </style>
 
 </head>
@@ -213,33 +249,42 @@ div.mail-detail-wrapper{
             </ul>
         </div>
         <div class="container-body col-10">
-           <div class="searchcontainer">
-               <div class="searcharea">
-                   <form class="searchform" method="get" role="search" id="aso_search_form_anchor">
-                        <div class="searchbox" gh="sb">
-                            <input class="searchkeyword" aria-label="Search mail" autocomplete="off" placeholder="Search mail" value="" name="q" type="text" dir="ltr" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50" aria-activedescendant="gs_anrs50_0">
-                        </div>
-                        <button class="clearsearch" aria-label="Clear search" type="button">
+            <div class="searchcontainer">
+                <div class="searcharea">
+                    <div class="searchbox" gh="sb">
+                        <form class="searchform" method="get" role="search" id="aso_search_form_anchor">
+                            <input class="searchkeyword" aria-label="Search mail" autocomplete="off" placeholder="Search mail"
+                                value="" name="q" type="text" dir="ltr" spellcheck="false" aria-haspopup="true" aria-live="off"
+                                aria-owns="gs_sbt50" aria-activedescendant="gs_anrs50_0">
+                            <button class="clearsearch" aria-label="Clear search" type="button">
                                 <i class="fas fa-times"></i>
-                        </button>
-                        <button class="search" aria-label="Search Mail" role="button">
+                            </button>
+                            <button class="search" aria-label="Search Mail" role="button">
                                 <i class="fas fa-search"></i>
-                        </button>
+                            </button>
                         </form>
                     </div>
+                </div>
             </div>
             <div class="table-wrapper canvasboard">
                 <div class="menufnicons">
-
+                    <i class="fas fa-reply-all">전체회신</i>&nbsp;
+                    <i class="fas fa-reply">회신</i>&nbsp;
+                    <i class="fas fa-arrow-right">전달</i>&nbsp;
+                    <i class="fas fa-envelope">안읽음표시</i>&nbsp;
+                    <i class="far fa-trash-alt">휴지통으로 이동</i>&nbsp;
+                    <hr>
                 </div>
                 <!-- overflow: scroll/auto -->
                 <div class="msgdetails">
-                    <h3 class="subject" id="subject"></h3>
+                    <h5 class="subject" id="subject">제목</h5>
                     <div class="msgheadings">
-                        <h6 class="sender name" id="senderName"></h6>
+                        <p class="sender" id="senderName">최원영<span class="sender" id="senderId">(aaronpa)</span></p>
+                        <p class="recipient" id="recipientName"><span>to:&nbsp;</span>최원영<span class="recipient" id="recipientId">(aaronpa)</span></p>
+               
                     </div>
                     <div class="msgbody" id="msgbody">
-
+                        <p>sdfasdfasdf</p>
                     </div>
 
                 </div>

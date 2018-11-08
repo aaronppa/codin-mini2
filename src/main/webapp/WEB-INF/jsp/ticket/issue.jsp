@@ -20,7 +20,7 @@
 <body>
     <div id="container">
         <h2>티켓 발급</h2>
-        <span>${user.memberName }</span>
+<%--         <span>${user.memberName }</span> --%>
         <hr>
         <form id="form" method="POST">
 <%--         	<input type="hidden" name="ticketSender" value='${user.memberNo}'> --%>

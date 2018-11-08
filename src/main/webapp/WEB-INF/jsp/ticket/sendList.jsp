@@ -74,6 +74,8 @@
         <div id="buttonArea">
             <button type="button" id="issue">티켓 발급</button>
         </div>
+        <c:import url="/WEB-INF/jsp/ticket/ticketPageing.jsp"></c:import>
+        
         <script>
         $("#ticketTop > li:eq(0)").click(function(){
         	location.href='<c:url value="/ticket/list.do"/>'
@@ -84,11 +86,11 @@
         })
         
         $("#ticketTop > li:eq(2)").click(function(){
-	    	window.open("/codin_mini/ticket/issue.do", "issue", "menubar");
+	    	window.open("/codin_mini/ticket/issue.do", "issue", "width=1030, height=700, location=no");
         })
         
 	    $("#issue").click(function () {
-	    	window.open("/codin_mini/ticket/issue.do", "issue", "menubar");
+	    	window.open("/codin_mini/ticket/issue.do", "issue", "width=1030, height=700, location=no");
 	    })
 	    
 	   	var $ticketDate = $(".ticketDate");
@@ -126,8 +128,18 @@
 	   	
 	   	$(".detail").click(function() {
 			var ticketNo = $(this).parent().parent().children(".ticketNo").html()
-	   		window.open("/codin_mini/ticket/sendDetail.do?ticketNo="+ticketNo, "detail", "menubar");		
+	   		window.open("/codin_mini/ticket/sendDetail.do?ticketNo="+ticketNo, "sendDetail", "width=1030, height=780, location=no");		
 	   	})
+	   	
+		$("nav > ul.pagination > li > a").click (function(e) {
+			e.preventDefault();
+			
+			var pageNo = $(this).attr("href")
+			
+			if (pageNo == 0 || pageNo == ${pageResult.endPage + 1}) return false;
+			location.href = "sendList.do?pageNo=" + pageNo;
+		})
+
         </script>
 </body>
 </html>

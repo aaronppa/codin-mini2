@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.co.codin.repository.domain.Member;
 import kr.co.codin.repository.domain.Ticket;
 import kr.co.codin.repository.domain.TicketGroup;
+import kr.co.codin.repository.domain.TicketPage;
 import kr.co.codin.repository.domain.TicketSkill;
 import kr.co.codin.repository.mapper.TicketMapper;
 
@@ -44,8 +45,8 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public List<Ticket> ticketList(int userNo) {
-		return mapper.ticketList(userNo);
+	public List<Ticket> ticketList(TicketPage page) {
+		return mapper.ticketList(page);
 	}
 
 	@Override
@@ -67,8 +68,8 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public List<Ticket> sendTicketList(int senderNo) {
-		return mapper.sendTicketList(senderNo);
+	public List<Ticket> sendTicketList(TicketPage page) {
+		return mapper.sendTicketList(page);
 	}
 
 	@Override
@@ -99,5 +100,15 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public void deleteReceiver(TicketGroup ticketGroup) {
 		mapper.deleteReceiver(ticketGroup);
+	}
+
+	@Override
+	public int sendTicketCount(int memberNo) {
+		return mapper.sendTicketCount(memberNo);
+	}
+
+	@Override
+	public int ticketCount(int memberNo) {
+		return mapper.ticketCount(memberNo);
 	}
 }

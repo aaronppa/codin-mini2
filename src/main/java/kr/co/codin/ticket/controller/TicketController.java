@@ -1,6 +1,5 @@
 package kr.co.codin.ticket.controller;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -18,6 +18,8 @@ import com.google.gson.Gson;
 import kr.co.codin.repository.domain.Member;
 import kr.co.codin.repository.domain.Ticket;
 import kr.co.codin.repository.domain.TicketGroup;
+import kr.co.codin.repository.domain.TicketPage;
+import kr.co.codin.repository.domain.TicketPageResult;
 import kr.co.codin.repository.domain.TicketSkill;
 import kr.co.codin.ticket.service.TicketService;
 
@@ -29,9 +31,23 @@ public class TicketController {
 	private TicketService service;
 	
 	@RequestMapping("list.do")
-	public void list(Model model, HttpSession session) {
+	public void list(Model model, HttpSession session, @RequestParam(value="pageNo", defaultValue="1") int pageNo) {
+
+		int ticketNum = 10;
+		int pageNum = 10;
+		
+		TicketPage page = new TicketPage(ticketNum);
+		page.setPageNo(pageNo);
+		
 		Member member = (Member) session.getAttribute("user");
-		model.addAttribute("list", service.ticketList(member.getMemberNo()));
+		page.setMemberNo(member.getMemberNo());
+
+		List<Ticket> list = service.ticketList(page);
+		
+		model.addAttribute("list", list);
+		
+		System.out.println(service.ticketCount(member.getMemberNo()));
+		model.addAttribute("pageResult", new TicketPageResult(pageNo, service.ticketCount(member.getMemberNo()), ticketNum, pageNum));
 	}
 	
 	@RequestMapping("issue.do")
@@ -40,9 +56,6 @@ public class TicketController {
 	@RequestMapping("submit.do")
 	@ResponseBody
 	public void issueSubmit(Ticket ticket, String[] groupMember, int[] ticketSkill) {
-		//System.out.println(ticket);
-		//System.out.println(Arrays.toString(groupMember));
-		//System.out.println(Arrays.toString(ticketSkill));
 		int ticketNo = service.insertTicket(ticket);
 		
 		for (int i = 0; i < groupMember.length; i++) {
@@ -69,8 +82,6 @@ public class TicketController {
 	@RequestMapping("searchMember.do")
 	@ResponseBody
 	public Member searchMember(String memberId) {
-		//System.out.println("searchMember invoked");
-
 		return service.searchMember(memberId);
 	}
 	
@@ -96,12 +107,6 @@ public class TicketController {
 	@ResponseBody
 	public void updateReceiver(int ticketNo, String addText, String userName, int progress) {
 		
-//		System.out.println("ticketNo : " + ticketNo);
-//		System.out.println("orgText : " + orgText);
-//		System.out.println("addText : " + addText);
-//		System.out.println("userName : " + userName);
-//		System.out.println("progress : " + progress);
-
 		Ticket ticket = new Ticket();
 		ticket.setTicketNo(ticketNo);
 		String updateText = service.ticketDetail(ticketNo).getTicketText();
@@ -120,7 +125,6 @@ public class TicketController {
 	@RequestMapping("updateSender.do")
 	@ResponseBody
 	public void updateSender(Ticket ticket, int[] ticketSkill) {
-		//System.out.println(ticket);
 		
 		String addText = ticket.getTicketText();
 		String updateText = service.ticketDetail(ticket.getTicketNo()).getTicketText();
@@ -136,24 +140,16 @@ public class TicketController {
 		service.updateSender(ticket);
 		
 		List<TicketSkill> orgSkillList = service.ticketSkillDetail(ticket.getTicketNo());
-		//System.out.println("updateSkill : " + Arrays.toString(ticketSkill));
-		//System.out.println("orgSkill : " + orgSkillList.toString());
 
 		for (TicketSkill orgSkill : orgSkillList) {
 			boolean exist = false;
 			int SkillCode = orgSkill.getSkillCode();
 			
 			for (int updateSkill : ticketSkill) {
-				if (SkillCode == updateSkill) {
-					exist = true; 
-				}
-				
+				if (SkillCode == updateSkill) exist = true; 
 			}
-			
-			if (!exist) {
-				service.deleteSkill(orgSkill.getSkillNo());
-				//System.out.println("없는 orgSkill : " + orgSkill.toString());
-			}
+
+			if (!exist) service.deleteSkill(orgSkill.getSkillNo());
 		}
 		
 		for (int updateSkill : ticketSkill) {
@@ -174,9 +170,19 @@ public class TicketController {
 	}
 
 	@RequestMapping("sendList.do")
-	public void sendList(Model model, HttpSession session) {
+	public void sendList(Model model, HttpSession session, @RequestParam(value="pageNo", defaultValue="1") int pageNo) {
+		
+		// 초기 설정 
+		int ticketNum = 10;
+		int pageNum = 10;
+		
+		TicketPage page = new TicketPage(ticketNum);
+		page.setPageNo(pageNo);
+		
 		Member member = (Member) session.getAttribute("user");
-		List<Ticket> list = service.sendTicketList(member.getMemberNo());
+		page.setMemberNo(member.getMemberNo());
+
+		List<Ticket> list = service.sendTicketList(page);
 		Map<Integer, String> recevierMap= new HashMap<>();
 		
 		for (Ticket ticket : list) {
@@ -194,19 +200,20 @@ public class TicketController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("receiver", recevierMap);
+		
+		System.out.println(service.sendTicketCount(member.getMemberNo()));
+		model.addAttribute("pageResult", new TicketPageResult(pageNo, service.sendTicketCount(member.getMemberNo()), ticketNum, pageNum));
 	}
 	
 	@RequestMapping("deleteSender.do")
 	@ResponseBody
 	public void delteSender(int ticketNo) {
-//		System.out.println(ticketNo);
 		service.deleteTicket(ticketNo);
 	}
 	
 	@RequestMapping("deleteReceiver.do")
 	@ResponseBody
 	public void deleteReceiver(TicketGroup ticketGroup) {
-//		System.out.println(ticketGroup);
 		service.deleteReceiver(ticketGroup);
 	}
 }

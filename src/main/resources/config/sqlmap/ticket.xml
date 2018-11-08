@@ -73,20 +73,22 @@
 	</insert>
 	
 	<!-- 특정 로그인 멤버로만 확인 하는 쿼리 필요 -->
-	<select id="ticketList" parameterType="int" resultMap="ticketMap">
+	<select id="ticketList" parameterType="TicketPage" resultMap="ticketMap">
 		select *
 		from ticket 
 		where ticket_no in (select ticket_no
 							from ticket_group
-							where group_member = #{userNo})
+							where group_member = #{memberNo})
 		order by ticket_no desc
+		limit #{begin}, #{pageNum} 
 	</select>
 	
-	<select id="sendTicketList" parameterType="int" resultMap="ticketMap">
+	<select id="sendTicketList" parameterType="TicketPage" resultMap="ticketMap">
 		select *
 		from ticket 
-		where ticket_sender = #{no}
+		where ticket_sender = #{memberNo}
 		order by ticket_no desc
+		limit #{begin}, #{pageNum} 
 	</select>
 	
 	<select id="ticketDetail" parameterType="int" resultMap="ticketMap">
@@ -143,4 +145,16 @@
 		from ticket_group
 		where ticket_no = #{ticketNo} and group_member = #{groupMember}
 	</delete>
+	
+	<select id="sendTicketCount" parameterType="int" resultType="int">
+		select count(*)
+		from ticket
+		where ticket_sender = #{memberNo}
+	</select>
+	
+	<select id="ticketCount" parameterType="int" resultType="int">
+		select count(*)
+		from ticket_group
+		where group_member = #{memberNo}
+	</select>
 </mapper>

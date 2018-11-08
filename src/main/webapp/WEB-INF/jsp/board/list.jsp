@@ -84,18 +84,24 @@ $(document).ready(function(){
  		data:{pageNo:$(location).attr('search').substring(8)}
  	}).done(function(result){
  	
- 		
+ 		var nowPage = $(location).attr('search').substring(8);
+ 		console.log("nowPage:"+nowPage);
+ 		pageNo = nowPage;
  		$.ajax({
  			url:"<c:url value='/board/ajaxPaingList.do'/>",
+ 			data:{pageNo:pageNo},
  			type:"get" 			
  		}).done(function(result){
  			/* console.log(result);
  			var lastPage=result; */
+ 			console.log("result:"+result);
  			for(var i=1; i<=result;i++ ){
- 				console.log(i);
- 				$("#pagingDiv").append("<ul class='pagination'><li><a href='/codin_mini/board/listForm.do?pageNo="+i+"'>"+i+"</a><li></ul>");
+ 			//	console.log(i);
+ 				$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/listForm.do?pageNo="+i+"'>"+i+"</a></li>");
  			}
  			
+ 			
+ 			$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/listForm.do?pageNo="+result+"'>>></a></li>");
  		}).fail(function(result){
  			alert("실패")
  		})
@@ -112,7 +118,7 @@ $(document).ready(function(){
 <body>
 	<c:import url="/WEB-INF/jsp/include/top.jsp" />
 	<div style="position: relative;top 100px;">${user.memberId}
-		hjkhhj</div>
+		</div>
 	<div id="selectorMenu">
 
 
@@ -193,7 +199,7 @@ $(document).ready(function(){
 				</c:forEach>
 			</tbody>
 		</table>
-
+			
 
 		<hr>
 		
@@ -204,7 +210,9 @@ $(document).ready(function(){
 			style="height: 25px;" /></a>
 			<br>
 		<div  class="text-center" id="pagingDiv">
+			<ul class='pagination'>
 			
+			</ul>
 		</div>
 	</div>
 
@@ -212,7 +220,13 @@ $(document).ready(function(){
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
+	<script>
+		//$("#pagingDiv > .pagination > li:nth(1)").before("<li><a href='/codin_mini/board/listForm.do?pageNo=1'>sdfsdfsdf<</a></li>")
+		
+		$("#pagingDiv > .pagination").prepend("<li><a href='/codin_mini/board/listForm.do?pageNo=1'><<</a></li>");
+		//$("#pagingDiv > .pagination >li:nth-(last)").append("<li><a href='#'>>></a></li>");
+		//$("#pagingDiv > .pagination").children("li").html("dd")
+	</script>
 
 </body>
 </html>

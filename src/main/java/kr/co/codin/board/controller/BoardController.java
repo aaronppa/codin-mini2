@@ -24,7 +24,7 @@ public class BoardController {
 	@Autowired
 	BoardService service;
 	
-	@RequestMapping("listForm.do")
+	@RequestMapping("list.do")
 	
 	public void listForm(Model model,int pageNo,BoardPage boardpage) throws Exception{
 		System.out.println("listForm의 PageNo:"+pageNo);
@@ -54,7 +54,7 @@ public class BoardController {
 		System.out.println("wirte.do 들어옴");
 		service.write(board);
 		
-		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"listForm.do?pageNo=1";
+		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"list.do?pageNo=1";
 	}
 	
 	@RequestMapping("writeForm.do")
@@ -92,11 +92,13 @@ public class BoardController {
 	@RequestMapping("ajaxPaingList.do")
 	@ResponseBody
 	public int PageList(Integer pageNo){
+		
+		System.out.println("pageList에서 찍은 pageNo:"+pageNo);
 		if(service.checkingContentCnt()%20 ==0) {
 		
 		System.out.println("첫번째if 걸림");
 
-		return (int)Math.floor(service.checkingContentCnt()/2);//라스트 페이지
+		return (int)Math.floor(service.checkingContentCnt()/20);//라스트 페이지
 	}else {
 
 		System.out.println(new BoardPage().getEndPage());
@@ -125,7 +127,7 @@ public class BoardController {
 		
 		service.deleteContent(board);
 		
-		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"listForm.do?pageNo=1";
+		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"list.do?pageNo=1";
 	}
 	
 	@RequestMapping("updateForm.do")
@@ -139,7 +141,7 @@ public class BoardController {
 	public String update(Model model,Board board)throws Exception{
 		System.out.println("update.do 접근");
 		service.updateContent(board);
-		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"listForm.do?pageNo=1";
+		return UrlBasedViewResolver.REDIRECT_URL_PREFIX+"list.do?pageNo=1";
 	}
 	
 }

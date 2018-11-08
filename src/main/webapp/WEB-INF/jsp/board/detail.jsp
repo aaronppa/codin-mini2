@@ -10,16 +10,17 @@
 
 
 <%@ include file="/WEB-INF/jsp/include/basicInclude.jsp" %>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
   
  
   
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="<c:url value='/resources/js/jquery-dateformat.js'/>"></script>	
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script src="<c:url value="/resources/js/jquery-dateformat.js"/>"></script>
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <style>
 #divtable {
 	width: 60%;
@@ -95,7 +96,7 @@ $(document).ready(function(){
  		//console.log(length);
  		for(var i=0 ;i<length ; i++){
  			var sysdate =new Date(result[i].commentDate);
- 			var tr = $("#ComTable").append("<tr style='height:50px'><td>"+result[i].commentId+"</td>"+"<td>"+result[i].commentContent+"</td><td>"+new Date(result[0].commentDate)+"</td>");			
+ 			var tr = $("#ComTable").append("<tr style='height:50px'><td>"+result[i].commentId+"</td>"+"<td>"+result[i].commentContent+"</td><td>"+ $.format.date(result[0].commentDate,"yyyy-MM-dd HH:mm:ss")  +"</td>");			
  		
  		}
 
@@ -183,7 +184,7 @@ $(document).ready(function(){
 		
 	</div>
 	
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<!-- 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>  -->
  	<script>
  
  	
@@ -208,7 +209,7 @@ $(document).ready(function(){
  	
    	$("#goTolist").click(function(e){
  		e.preventDefault();
- 		location.href="/codin_mini/board/listForm.do?pageNo=1";
+ 		location.href="/codin_mini/board/list.do?pageNo=1";
  	}) 
  	
  	$("#deleteContent").click(function(e){

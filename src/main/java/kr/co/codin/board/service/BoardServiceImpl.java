@@ -19,9 +19,9 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<Board> listBoard(int PageNo) {
 		System.out.println("serviceImpl의 PageNo"+PageNo);
-		System.out.println(PageNo);
+		//System.out.println(PageNo);
 		// TODO Auto-generated method stub
-		System.out.println("맥스 모스NO:"+mapper.MaxBoardNo());
+	//	System.out.println("맥스 모스NO:"+mapper.MaxBoardNo());
 		return mapper.selectBoard((PageNo-1)*20);
 	}
 

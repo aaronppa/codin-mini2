@@ -69,12 +69,18 @@
     	text-align: right;
     }
     
-    #top-menu {
-    	height: 50px;
-    }
-    
     body {
     	font-size: 18px;
+    }
+    
+    #container {
+    	margin-left: 50px;
+    	margin-right: 50px;
+    	margin-bottom: 50px;
+    }
+    
+    #top-menu {
+    	height: 50px;
     }
 </style>
 </head>
@@ -82,6 +88,7 @@
 	<div id="top-menu">
 	<c:import url="../include/top.jsp" />
 	</div>
+	<div id="container">
 	<h2>기본 정보</h2>
     <hr>
     <div>
@@ -242,6 +249,7 @@
 <!--             </td> -->
 <!--         </tr> -->
     </table>
+    </div>
 
     <script>
     	$("#deleteCareer").click(function() {

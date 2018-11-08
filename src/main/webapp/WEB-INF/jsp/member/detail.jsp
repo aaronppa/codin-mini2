@@ -67,12 +67,19 @@
     body {
     	font-size: 18px;
     }
+    
+     #container {
+    	margin-left: 50px;
+    	margin-right: 50px;
+    	margin-bottom: 50px;
+    }
 </style>
 </head>
 <body>
 	<div id="top-menu">
 	<c:import url="../include/top.jsp" />
 	</div>
+	<div id="container">
 	<h2>기본 정보</h2>
     <hr>
     <div>
@@ -221,6 +228,7 @@
     <div class="col-md-offset-10 update-delete">
     	<button class="btn btn-primary"><a href="<c:url value='/member/updateMemberForm.do?memberNo='/>${member.memberNo}">수정</a></button>
     	<button class="btn btn-primary"><a href="<c:url value='/member/list.do'/>">목록</a></button>
+    </div>
     </div>
 </body>
 </html>

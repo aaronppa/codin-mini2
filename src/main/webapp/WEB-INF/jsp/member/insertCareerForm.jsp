@@ -72,12 +72,19 @@
     body {
     	font-size: 18px;
     }
+    
+     #container {
+    	margin-left: 50px;
+    	margin-right: 50px;
+    	margin-bottom: 50px;
+    }
 </style>
 </head>
 <body>
 	<div id="top-menu">
 	<c:import url="../include/top.jsp" />
 	</div>
+	<div id="container">
 	<h2>기본 정보</h2>
     <hr>
     <div>
@@ -249,5 +256,6 @@
 <%--     	<button class="btn btn-primary"><a href="<c:url value='/member/updateForm.do' />">수정</a></button> --%>
 <%--     	<button class="btn btn-primary"><a href="<c:url value='/member/logout.do' />">로그아웃</a></button> --%>
 <!--     </div> -->
+	</div>
 </body>
 </html>

@@ -167,9 +167,21 @@ public class MemberController {
 //		return service.searchMember(memberSearch);
 //	}
 
-	@RequestMapping(value="/search.do")
+	@RequestMapping("/search.do")
 	public void searchMember(MemberSearch memberSearch, Model model) {
 //		System.out.println(memberSearch);
 		model.addAttribute("list", service.searchMember(memberSearch));
 	}
+	
+	@ResponseBody
+    @RequestMapping("/checkId.do")
+    public int idCheck(String memberId) {
+//        System.out.println("Controller.idCheck() 호출");
+        int result = 0;
+        Member member = service.CheckId(memberId);
+        if(member !=null) result = 1;
+//        else System.out.println("아이디사용가능");
+        return result;
+	}
+
 }

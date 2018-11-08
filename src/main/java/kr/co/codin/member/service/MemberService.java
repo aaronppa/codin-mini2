@@ -102,7 +102,14 @@ public interface MemberService {
 	/**
 	 * 관리자의 회원 검색에 대한 비즈니스 로직 처리
 	 * @param memberSearch
-	 * @return
+	 * @return List<Member>
 	 */
 	List<Member> searchMember(MemberSearch memberSearch);
+	
+	/**
+	 * 아이디 중복 체크에 대한 비즈니스 로직 처리
+	 * @param memberId
+	 * @return Member 객체
+	 */
+	Member CheckId(String memberId);
 }

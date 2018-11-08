@@ -100,4 +100,10 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.searchMember(memberSearch);
 	}
 
+	@Override
+	public Member CheckId(String memberId) {
+//		System.out.println(memberId);
+		return mapper.selectId(memberId);
+	}
+
 }

@@ -25,4 +25,5 @@ public interface MemberMapper {
 	void deleteCareer(MemberCareer memberCareer);
 	void deleteAccount(int memberNo);
 	List<Member> searchMember(MemberSearch memberSearch);
+	Member selectId(String memberId);
 }

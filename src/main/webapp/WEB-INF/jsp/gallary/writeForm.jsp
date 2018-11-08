@@ -39,7 +39,9 @@
 	.custom-file-label{
 		width:200px;
 	}
-	
+	#preview1:hover{
+		opacity:0.5;
+	}
 </style>
 </head>
 <body>

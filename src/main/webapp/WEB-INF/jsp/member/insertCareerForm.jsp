@@ -93,7 +93,14 @@
             </tr>
             <tr>
                 <th>회원구분</th>
-                <td>${member.memberGrade}</td>
+                <td>
+					<c:choose>
+                		<c:when test="${member.memberGrade eq '1'}">준회원</c:when>
+                		<c:when test="${member.memberGrade eq '2'}">정회원</c:when>
+                		<c:when test="${member.memberGrade eq '3'}">우수회원</c:when>
+                		<c:when test="${member.memberGrade eq 'a'}">관리자</c:when>
+                	</c:choose>
+				</td>
                 <th>가입일</th>
                 <td><fmt:formatDate value="${member.memberRegDate}" pattern="yyyy-MM-dd"/></td>
             </tr>
@@ -174,7 +181,7 @@
     </div>
     <h2>경력 사항</h2>
     <hr>
-	<button type="submit" form="addCareer" class="btn btn-primary col-md-offset-11 col-md-1">저장</button>
+	<button type="submit" form="addCareer" class="btn btn-primary col-md-offset-10">저장</button>
     <table class="info career">
 	    <c:forEach var="career" items="${memberCareer}">
 	        <tr>
@@ -238,9 +245,9 @@
 <!--             </td> -->
 <!--         </tr> -->
     </table>
-    <div class="col-md-offset-10 col-md-2 update-delete">
-    	<button class="btn btn-primary"><a href="<c:url value='/member/updateForm.do' />">수정</a></button>
-    	<button class="btn btn-primary"><a href="<c:url value='/member/logout.do' />">로그아웃</a></button>
-    </div>
+<!--     <div class="col-md-offset-10 col-md-2 update-delete"> -->
+<%--     	<button class="btn btn-primary"><a href="<c:url value='/member/updateForm.do' />">수정</a></button> --%>
+<%--     	<button class="btn btn-primary"><a href="<c:url value='/member/logout.do' />">로그아웃</a></button> --%>
+<!--     </div> -->
 </body>
 </html>

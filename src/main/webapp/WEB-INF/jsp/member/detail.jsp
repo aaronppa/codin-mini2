@@ -89,7 +89,14 @@
             </tr>
             <tr>
                 <th>회원구분</th>
-                <td>${member.memberGrade}</td>
+                <td>
+					<c:choose>
+                		<c:when test="${member.memberGrade eq '1'}">준회원</c:when>
+                		<c:when test="${member.memberGrade eq '2'}">정회원</c:when>
+                		<c:when test="${member.memberGrade eq '3'}">우수회원</c:when>
+                		<c:when test="${member.memberGrade eq 'a'}">관리자</c:when>
+                	</c:choose>
+				</td>
                 <th>가입일</th>
                 <td><fmt:formatDate value="${member.memberRegDate}" pattern="yyyy-MM-dd"/></td>
             </tr>
@@ -182,7 +189,7 @@
 	            <th>부서</th>
 	            <td>${career.careerDepartment}</td>
 	            <th>근무기간</th>
-	            <td>${career.careerStart} ~ ${career.careerEnd}</td>
+	            <td><fmt:formatDate value="${career.careerStart}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${career.careerEnd}" pattern="yyyy-MM-dd"/></td>
 	        </tr>
 	        <tr>
 	            <th>담당업무</th>

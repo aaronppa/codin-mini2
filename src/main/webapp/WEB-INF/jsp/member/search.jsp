@@ -103,7 +103,14 @@
 	            		<td>${member.memberEmail}</td>
 	            		<td>${member.memberGender}</td>
 	            		<td><fmt:formatDate value="${member.memberRegDate}" pattern="yyyy-MM-dd"/></td>
-	            		<td>${member.memberGrade}</td>
+	            		<td>
+	            			<c:choose>
+		                		<c:when test="${member.memberGrade eq '1'}">준회원</c:when>
+		                		<c:when test="${member.memberGrade eq '2'}">정회원</c:when>
+		                		<c:when test="${member.memberGrade eq '3'}">우수회원</c:when>
+		                		<c:when test="${member.memberGrade eq 'a'}">관리자</c:when>
+		                	</c:choose>
+	            		</td>
 	            		<td><a href="<c:url value='/member/deleteAccount.do?memberNo=' />${member.memberNo}">강퇴</a></td>
 	            	</tr>
 	            </c:forEach>

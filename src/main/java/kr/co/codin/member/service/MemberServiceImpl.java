@@ -36,6 +36,7 @@ public class MemberServiceImpl implements MemberService {
 	public void editProfile(Member member, MemberSkill memberSkill, MemberCareer memberCareer) {
 		mapper.updateMember(member);
 		mapper.deleteMemberSkill();
+//		System.out.println("service : " + memberSkill.getMemberSkillNoList());
 //		System.out.println(memberSkill.getMemberSkillNoList());
 		if (memberSkill.getMemberSkillNoList() != null) {
 			for(int memberSkillNo:memberSkill.getMemberSkillNoList()) {

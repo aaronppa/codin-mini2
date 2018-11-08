@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
@@ -83,9 +84,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/edit.do")
-	public String editProfile(Member member, MemberSkill memberSkill, MemberCareer memberCareer) {
+	public String editProfile(Member member, MemberSkill memberSkill, @RequestParam(value="memberSkillNo", required=false) List<Integer> memberSkillNoList, MemberCareer memberCareer) {
 //		System.out.println(member);
-//		System.out.println(memberSkill);
+//		System.out.println(memberSkillNoList);
+		if (memberSkillNoList != null) {
+				memberSkill.setMemberSkillNoList(memberSkillNoList);
+		}
+//		System.out.println("controller : " + memberSkill.getMemberSkillNoList());
 		service.editProfile(member, memberSkill, memberCareer);
 		return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "myPage.do";
 	}
@@ -101,6 +106,7 @@ public class MemberController {
 	public void updateMemberForm (int memberNo, Model model) {
 		model.addAttribute("member", service.memberInfo(memberNo));
 		model.addAttribute("memberSkill", service.myskill(memberNo));
+		model.addAttribute("memberCareer", service.mycareer(memberNo));
 	}
 	
 	@RequestMapping("/upgrade.do")

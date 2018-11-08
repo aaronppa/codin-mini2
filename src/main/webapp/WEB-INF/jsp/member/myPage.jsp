@@ -82,7 +82,7 @@
 	<div id="top-menu">
 	<c:import url="../include/top.jsp" />
 	</div>
-	<h2>기본 정보<button class="btn btn-primary col-md-offset-9"><a href="<c:url value='/member/deleteAccount.do?memberNo=' />${member.memberNo}">탈퇴</a></button></h2>
+	<h2>기본 정보</h2>
     <hr>
     <div>
         <table class="info basics">
@@ -97,7 +97,14 @@
             </tr>
             <tr>
                 <th>회원구분</th>
-                <td>${member.memberGrade}</td>
+                <td>
+                	<c:choose>
+                		<c:when test="${member.memberGrade eq '1'}">준회원</c:when>
+                		<c:when test="${member.memberGrade eq '2'}">정회원</c:when>
+                		<c:when test="${member.memberGrade eq '3'}">우수회원</c:when>
+                		<c:when test="${member.memberGrade eq 'a'}">관리자</c:when>
+                	</c:choose>
+                </td>
                 <th>가입일</th>
                 <td><fmt:formatDate value="${member.memberRegDate}" pattern="yyyy-MM-dd"/></td>
             </tr>
@@ -176,9 +183,13 @@
             </tr>
         </table>
     </div>
+    <div class="col-md-offset-10">
+    	<button class="btn btn-primary"><a href="<c:url value='/member/updateForm.do' />">수정</a></button>
+    	<button class="btn btn-primary"><a href="<c:url value='/member/deleteAccount.do?memberNo=' />${member.memberNo}">탈퇴</a></button>
+    </div>
     <h2>경력 사항</h2>
     <hr>
-   	<button class="btn btn-primary col-md-offset-9"><a href="<c:url value='/member/insertCareerForm.do' />">추가</a></button>
+   	<button class="btn btn-primary col-md-offset-10"><a href="<c:url value='/member/insertCareerForm.do' />">추가</a></button>
    	<c:choose>
    		<c:when test="${empty memberCareer[0]}">
    		</c:when>
@@ -231,10 +242,7 @@
 <!--             </td> -->
 <!--         </tr> -->
     </table>
-    <div class="col-md-offset-10 col-md-2 update-delete">
-    	<button class="btn btn-primary"><a href="<c:url value='/member/updateForm.do' />">수정</a></button>
-    	<button class="btn btn-primary"><a href="<c:url value='/member/logout.do' />">로그아웃</a></button>
-    </div>
+
     <script>
     	$("#deleteCareer").click(function() {
 			var memberNo = $(this).data('writer');

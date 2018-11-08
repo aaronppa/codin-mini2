@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,11 +19,15 @@
     }
 
     .login {
-        margin-left: 110px;
+        margin-left: 88px;
     }
     
     .btn {
         margin-top: 10px;
+    }
+    a {
+    	text-decoration: none;
+    	color: black;
     }
 </style>
 </head>
@@ -39,7 +44,7 @@
                 <input type="password" class="form-control" placeholder="password" name="memberPassword" />
             </div>
             <br>
-            <button type="reset" class="btn btn-default">취소</button>
+            <button type="button" class="btn btn-default"><a href="<c:url value='/member/signupForm.do'/>">회원가입</a></button>
             <button type="submit" class="btn btn-primary login">로그인</button>
         </form>
     </div>

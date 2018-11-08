@@ -91,7 +91,14 @@
 	            </tr>
 	            <tr>
 	                <th>회원구분</th>
-	                <td><input type="text" name="memberGrade" value="${member.memberGrade}" /></td>
+	                <td>
+	                	<select class="form-control" id="memberGrade" name="memberGrade">
+		                	<option value="0">선택해주세요.</option>
+		                    <option value="1">준회원</option>
+		                    <option value="2">정회원</option>
+		                    <option value="3">우수회원</option>
+		                </select>
+	                </td>
 	                <th>가입일</th>
 	                <td><fmt:formatDate value="${member.memberRegDate}" pattern="yyyy-MM-dd"/></td>
 	            </tr>
@@ -190,24 +197,27 @@
 	    <h2>경력 사항</h2>
 	    <hr>
 	    <table class="info career">
+	        <c:forEach var="career" items="${memberCareer}">
 	        <tr>
+<%-- 	        	<td rowspan="3"><button class="btn btn-primary" id="deleteCareer" data-no="${career.careerNo}" data-writer="${member.memberNo}">삭제</button></td> --%>
 	            <th>회사명</th>
-	            <td>비트캠프</td>
+	            <td>${career.careerCompany}</td>
 	            <th>직위</th>
-	            <td>사원</td>
+	            <td>${career.careerPosition}</td>
 	        </tr>
 	        <tr>
 	            <th>부서</th>
-	            <td>개발</td>
+	            <td>${career.careerDepartment}</td>
 	            <th>근무기간</th>
-	            <td>2017-01-01 ~ 2018-01-01</td>
+	            <td><fmt:formatDate value="${career.careerStart}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${career.careerEnd}" pattern="yyyy-MM-dd"/></td>
 	        </tr>
 	        <tr>
 	            <th>담당업무</th>
-	            <td>유지보수</td>
+	            <td>${career.careerJob}</td>
 	            <th></th>
 	            <td></td>
 	        </tr>
+	    </c:forEach>
 <!-- 	        <tr> -->
 <!-- 	            <th>개발언어</th> -->
 <!-- 	            <td> -->

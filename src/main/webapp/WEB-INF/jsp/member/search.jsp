@@ -29,7 +29,10 @@
     #top-menu {
     	height: 50px;
     }
-   
+   	
+   	table {
+   		margin-top: 50px;
+   	}
 </style>
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
@@ -40,7 +43,7 @@
 	<div id="top-menu">
 	<c:import url="../include/top.jsp" />
 	</div>
-	<form class="form-horizontal" id="search-form" action="search.do">
+	<form class="form-horizontal" id="search-form" action="search.do" method="post">
         <div class="form-group">
             <label for="memberGrade" class="col-md-2 control-label">회원 구분</label>
             <div class="col-md-2">

@@ -57,7 +57,6 @@
     }
     
     .update-delete {
-    	text-align: right;
     	margin-top: 50px;
     }
     
@@ -219,9 +218,9 @@
 <!-- 	            </td> -->
 <!-- 	        </tr> -->
     </table>
-    <div class="col-md-offset-9 col-md-2 update-delete">
+    <div class="col-md-offset-10 update-delete">
     	<button class="btn btn-primary"><a href="<c:url value='/member/updateMemberForm.do?memberNo='/>${member.memberNo}">수정</a></button>
-    	<button class="btn btn-primary"><a href="<c:url value='/member/logout.do' />">로그아웃</a></button>
+    	<button class="btn btn-primary"><a href="<c:url value='/member/list.do'/>">목록</a></button>
     </div>
 </body>
 </html>

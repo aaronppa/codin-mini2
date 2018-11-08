@@ -95,7 +95,7 @@
         <table class="info basics">
             <tr>
                 <td rowspan="5" class="imgTd">
-                    <img src="./동편11G.PNG" width="150px" height="150px" id="profile" />
+                    <img src="../resources/ticketImg/people1.jpg" width="150px" height="150px" id="profile" />
                 </td>
                 <th>회원번호</th>
                 <td>${member.memberNo}</td>
@@ -192,7 +192,7 @@
     </div>
     <h2>경력 사항</h2>
     <hr>
-	<button type="submit" form="addCareer" class="btn btn-primary col-md-offset-10">저장</button>
+	<button type="submit" form="addCareer" class="btn btn-primary col-md-offset-10" id="saveCareer">저장</button>
     <table class="info career">
 	    <c:forEach var="career" items="${memberCareer}">
 	        <tr>
@@ -226,7 +226,7 @@
 	            <th>부서</th>
 	            <td><input type="text" name="careerDepartment"/></td>
 	            <th>근무기간</th>
-	            <td><input type="text" name="careerStart"/> ~ <input type="text" name="careerEnd"/></td>
+	            <td><input type="date" name="careerStart" id="careerStart"/> ~ <input type="date" name="careerEnd" id="careerEnd"/></td>
 	        </tr>
 	        <tr>
 	            <th>담당업무</th>
@@ -261,5 +261,27 @@
 <%--     	<button class="btn btn-primary"><a href="<c:url value='/member/logout.do' />">로그아웃</a></button> --%>
 <!--     </div> -->
 	</div>
+	
+	<script>
+// 		$("#saveCareer").on("click", function(e) {
+// 			if (checkDate(careerStart) == false) {
+// 				e.preventDefault();
+// 				alert('올바른 날짜 형식("YYYY-MM-DD")으로 입력하세요.');
+// 				$("#careerStart").focus();
+// 			} else if (checkDate(careerEnd) == false) {
+// 				e.preventDefault();
+// 				alert('올바른 날짜 형식("YYYY-MM-DD")으로 입력하세요.');
+// 				$("#careerEnd").focus();
+// 			}
+			
+// 			$("#addCareer").submit();
+// 		});
+		
+// 		function checkDate(date) {
+// 			var patt = new RegExp(/\b\d{4}[\-]\d{2}[\-]\d{2}\b/);
+// 			return patt.test(date);
+// 		}
+	</script>
 </body>
 </html>
+

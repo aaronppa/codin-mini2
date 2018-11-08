@@ -90,7 +90,7 @@
         <table class="info basics">
             <tr>
                 <td rowspan="5" class="imgTd">
-                    <img src="./동편11G.PNG" width="150px" height="150px" id="profile" />
+                    <img src="../resources/ticketImg/people1.jpg" width="150px" height="150px" id="profile" />
                 </td>
                 <th>회원번호</th>
                 <td>${member.memberNo}</td>

@@ -93,7 +93,7 @@
 	        <table class="info basics">
 	            <tr>
 	                <td rowspan="5" class="imgTd">
-	                    <img src="./동편11G.PNG" width="150px" height="150px" id="profile" />
+	                    <img src="../resources/ticketImg/people1.jpg" width="150px" height="150px" id="profile" />
 	                </td>
 	                <th>회원번호</th>
 	                <td>${member.memberNo}</td>
@@ -224,7 +224,7 @@
 		            <th>부서</th>
 		            <td><input type="text" name="careerDepartment" value="${career.careerDepartment}" /></td>
 		            <th>근무기간</th>
-		            <td><input type="text" name="careerStart" value="<fmt:formatDate value='${career.careerStart}' pattern='yyyy-MM-dd'/>" /> ~ <input type="text" name="careerEnd" value="<fmt:formatDate value='${career.careerEnd}' pattern='yyyy-MM-dd'/>" /></td>
+		            <td><input type="date" name="careerStart" id="careerStart" value="<fmt:formatDate value='${career.careerStart}' pattern='yyyy-MM-dd'/>"/> ~ <input type="date" name="careerEnd" id="careerEnd" value="<fmt:formatDate value='${career.careerEnd}' pattern='yyyy-MM-dd'/>"/></td>
 		        </tr>
 		        <tr>
 		            <th>담당업무</th>

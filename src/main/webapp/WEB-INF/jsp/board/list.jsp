@@ -97,11 +97,11 @@ $(document).ready(function(){
  			console.log("result:"+result);
  			for(var i=1; i<=result;i++ ){
  			//	console.log(i);
- 				$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/listForm.do?pageNo="+i+"'>"+i+"</a></li>");
+ 				$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/list.do?pageNo="+i+"'>"+i+"</a></li>");
  			}
  			
  			
- 			$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/listForm.do?pageNo="+result+"'>>></a></li>");
+ 			$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/list.do?pageNo="+result+"'>>></a></li>");
  		}).fail(function(result){
  			alert("실패")
  		})
@@ -223,7 +223,7 @@ $(document).ready(function(){
 	<script>
 		//$("#pagingDiv > .pagination > li:nth(1)").before("<li><a href='/codin_mini/board/listForm.do?pageNo=1'>sdfsdfsdf<</a></li>")
 		
-		$("#pagingDiv > .pagination").prepend("<li><a href='/codin_mini/board/listForm.do?pageNo=1'><<</a></li>");
+		$("#pagingDiv > .pagination").prepend("<li><a href='/codin_mini/board/list.do?pageNo=1'><<</a></li>");
 		//$("#pagingDiv > .pagination >li:nth-(last)").append("<li><a href='#'>>></a></li>");
 		//$("#pagingDiv > .pagination").children("li").html("dd")
 	</script>

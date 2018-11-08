@@ -16,15 +16,18 @@
 		align-content: center;
 	}
 	img{
-
+/* 		width:25em; */
+/* 		height:13em; */
 		margin-left: auto;
 		margin-right: auto;
+		transition: .5s;
 	}
 	img:hover{
 
 		margin-left: auto;
 		margin-right: auto;
 		opacity: 0.5;
+		transform: scale(1.1);
 	}
 	table{
 		width: 80%;
@@ -40,6 +43,7 @@
 		margin-right: auto;
 		width:50px;
 	}
+
 	
 </style>
 <script src="<c:url value='/resources/js/jquery-dateformat.js'/>"></script>	

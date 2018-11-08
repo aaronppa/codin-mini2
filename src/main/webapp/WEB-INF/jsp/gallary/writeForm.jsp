@@ -67,7 +67,7 @@
 		</div>
 		<!-- 이미지가 보이는 영역 -->
 		<div id="imgPre">
-			<img type="hidden" id="preview1" src="" width="300" alt="pic" >
+			<img type="hidden" id="preview1" src="/codin_mini/gallimg/no-image.jpg" width="380px" height="300px" alt="pic" >
 		</div>
 		<br>
 		<br>
@@ -81,7 +81,6 @@
 		<div class="custom-file" id="fileContent">
 		  <input type="file" class="custom-file-input" name="attach" id="customFile" >
 		  <label class="custom-file-label" for="#customFile" name="msg">file</label>
-		
 		</div>
 		<div id="il">
 			 <input class="btn btn-primary" type="submit" value="Submit">
@@ -109,7 +108,8 @@
 	   
 	    reader.onload = function  () {
 	        document.querySelector('#preview1').src = reader.result ;
-	    	
+	        $("#preview1").css("width","400px");
+	    	$("#preview1").css("height","300px");
 	    }; 
 
 	}; 

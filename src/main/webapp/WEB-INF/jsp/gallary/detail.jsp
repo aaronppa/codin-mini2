@@ -47,9 +47,11 @@
 		width:600px;
 	}
 	#imgPre{
-		width:400px;
-		height: 300px
+		transition: .5s;
 	}
+	#imgPre:hover{
+		opacity: 0.5;
+		}
 
   </style>
 </head>
@@ -79,7 +81,9 @@
 
 <!-- 슬라이드 끝 -->
 	<div id="main">
-		 <img id="imgPre" src="/codin_mini/gallimg/server${gall.gallNo}.jpg">
+		 <img id="imgPre" src="/codin_mini/gallimg/server${gall.gallNo}.jpg" width="400px" height="300px">
+		 <br>
+		 <br>
 		 <br>
 		 ${gall.gallContent}
 		 <hr>
@@ -191,6 +195,21 @@
 //  	 		alert(result);
 // 	 	});
 	
+		$("#delBtn").on("click", function(e){
+			console.dir($(this).parent().parent().parent().parent())
+			console.dir($(this).parent().parent().parent().parent().data('commentno'))
+			e.preventDefault();
+			console.log($("#comTable").data("commentno")+" = 댓글번호")
+			console.log($("#delBtn").data("btnno")+"= 버튼번호호")
+			console.log($("#gallComNo").val()+"= 버튼번호호호")
+			$.ajax({
+				url:"<c:url value='/gallary/deleteCom.do'/>",
+				data : {gallComNo : $(this).parent().parent().parent().parent().data('commentno')}
+				}).done(function (result){
+						$(this).parent().parent().parent().parent().remove();
+				});
+			return false;
+		});
 // 		$(".close.deleteComment").on("click", function(e){
 // 			console.dir($(this).parent().parent().parent().parent())
 // 			console.dir($(this).parent().parent().parent().parent().data('commentno'))
@@ -204,22 +223,7 @@
 // 				}).done(function (result){
 // 						$(this).parent().parent().parent().parent().remove();
 // 				});
-// 			return false;
 // 		});
-		$(".close.deleteComment").on("click", function(e){
-			console.dir("commentno : "+$("#comTable").data('commentno'))
-			console.dir($(this).parent().parent().parent().parent().data('commentno'))
-			e.preventDefault();
-			console.log($("#comTable").data("commentno")+" = 댓글번호")
-			console.log($("#delBtn").data("btnno")+"= 버튼번호호")
-			console.log($("#gallComNo").val()+"= 버튼번호호호")
-			$.ajax({
-				url:"<c:url value='/gallary/deleteCom.do'/>",
-				data : {gallComNo : $(this).parent().parent().parent().parent().data('commentno')}
-				}).done(function (result){
-						$(this).parent().parent().parent().parent().remove();
-				});
-		});
 		
 		
 		

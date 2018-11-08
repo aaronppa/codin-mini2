@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="<c:url value='/resources/script/sweet/sweetalert2.css'/>">
 	<link rel="stylesheet" href="<c:url value='/resources/css/ticket/ticketIssue.css'/>">
+	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 	<script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -139,10 +140,11 @@
    			for (let i = 0; i < $memberId.length; i++) {
    				$("#form").append($("<input class='groupMember' type='hidden', name=groupMember>").val($memberId[i].textContent))
    			}
-   			
+   			console.log($("#form").serialize())
             $.ajax({
             	url: "<c:url value='/ticket/submit.do'/>",
             	type: 'POST',
+            	beforeSend: emptyCheck,
             	data: $("#form").serialize()
             }).done(function(){
             	$(".groupMember").remove();
@@ -157,6 +159,40 @@
             })
         })
         
+        function inputFalse() {
+			swal({
+				type: 'error',
+				title: "입력 확인",
+				text: "입력되지 않은 항목이 있습니다."
+			})
+			return false;
+		}
+        
+        function emptyCheck() {
+			console.dir($("form")[0][4])
+        	var notNull = [1, 12, 13, 14]
+        	for (let i = 0; i < notNull.length; i++) {
+				if($("form")[0][notNull[i]].value == "") {
+					return inputFalse();
+				}
+        	}
+        	if ($("form")[0][11].value == 0) {
+				return inputFalse();
+        	}
+        	if ($(".people").length == 0) {
+        		return inputFalse();
+        	}
+			
+        	var count = 0;
+        	
+			for (let i = 4; i <= 10; i++) {
+        		if($("form")[0][i].checked == true) count++
+        	}
+        	
+       		if(count == 0) return inputFalse()
+       		
+       		count = 0;
+        }
 	    
     </script>
 </body>

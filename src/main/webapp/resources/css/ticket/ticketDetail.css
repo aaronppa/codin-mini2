@@ -1,6 +1,12 @@
+body{
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 1.2em;
+}
+
 span{
     font-style: bold;
 }
+
 #container {
     width: 880px;
     margin: auto;

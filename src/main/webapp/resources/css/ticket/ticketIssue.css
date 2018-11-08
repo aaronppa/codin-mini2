@@ -3,8 +3,10 @@ body{
 	font-size: 1.2em;
 }
 
-.ui-menu-item-wrapper {
-	font-size: 1.0em;	
+.ui-menu-item {
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 15px;
+
 }
 
 span{

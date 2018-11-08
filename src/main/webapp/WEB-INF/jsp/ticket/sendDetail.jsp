@@ -9,6 +9,7 @@
 <title>Insert title here</title>
     <link rel="stylesheet" href="<c:url value='/resources/script/sweet/sweetalert2.min.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/ticket/ticketSendDetail.css'/>">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
     <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -139,6 +140,8 @@
         })
         
         $("#submit").click(function() {
+        	if (!emptyCheck()) return false;
+
         	swal({
       		  title: '저장하시겠습니까?',
       		  text: "저장하지 않은 내용은 손실됩니다.",
@@ -171,7 +174,36 @@
         $("#progressNum").mouseup(function() {
             $("#progress").html($("#progressNum").val())
         })
-
+        
+       	function inputFalse() {
+			swal({
+				type: 'error',
+				title: "입력 확인",
+				text: "입력되지 않은 항목이 있습니다."
+			})
+			return false;
+		}
+        
+        function emptyCheck() {
+			console.dir($("#form")[0][4])
+        	var notNull = [3, 5]
+        	for (let i = 0; i < notNull.length; i++) {
+				if($("#form")[0][notNull[i]].value == "") {
+					return inputFalse();
+				}
+        	}
+			
+        	var count = 0;
+        	
+			for (let i = 8; i <= 14; i++) {
+        		if($("#form")[0][i].checked == true) count++
+        	}
+        	
+       		if(count == 0) return inputFalse()
+       		
+       		count = 0;
+        }
+        
     </script>
 </body>
 </html>

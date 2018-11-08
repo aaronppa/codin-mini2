@@ -9,6 +9,7 @@
 <title>Insert title here</title>
     <link rel="stylesheet" href="<c:url value='/resources/script/sweet/sweetalert2.min.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/ticket/ticketDetail.css'/>">
+	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
     <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta charset='utf-8'>
-  <title>자유게시판</title>
+  <title>Gallary - 글 수정 - Codin</title>
   <%@ include file="/WEB-INF/jsp/include/basicInclude.jsp" %>
   <script
   src="https://code.jquery.com/jquery-3.3.1.js"

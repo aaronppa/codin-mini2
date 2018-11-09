@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Gallary - 글 등록 - Codin</title>
 <%@ include file="/WEB-INF/jsp/include/basicInclude.jsp" %>
 <style>
 	#header{

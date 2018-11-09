@@ -10,7 +10,7 @@
 		<result column="board_id" property="boardId"/>
 		<result column="board_date" property="boardDate"/>
 		<result column="category_no" property="categoryNo"/>	
-		<result column="board_viewCnt" property="boardViewCnt"/>
+		<result column="board_view_cnt" property="boardViewCnt"/>
 	</resultMap>
 
 	
@@ -21,7 +21,7 @@
 		<result column="comment_date" property="commentDate"/>
 		<result column="board_date" property="boardDate"/>
 		<result column="board_no" property="boardNo"/>	
-		<result column="board_viewCnt" property="boardViewCnt"/>
+		<result column="board_view_cnt" property="boardViewCnt"/>
 	</resultMap>
 	
 	
@@ -58,7 +58,7 @@
 	<!-- 조회수 증가 -->
 	<update id="updateViewCnt" parameterType="int" >
 	update board 
-	set board_viewCnt=board_viewCnt+1
+	set board_view_cnt=board_view_cnt+1
 	where board_no=#{boardNo}
 	</update>
 	

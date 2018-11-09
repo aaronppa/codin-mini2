@@ -45,4 +45,62 @@ public class MsgPaging {
 		public int getBegin() {
 			return (pageNo - 1) * pageNum +1;
 		}
+
+		public int getMsgId() {
+			return msgId;
+		}
+
+		public void setMsgId(int msgId) {
+			this.msgId = msgId;
+		}
+
+		public int getTypeId() {
+			return typeId;
+		}
+
+		public void setTypeId(int typeId) {
+			this.typeId = typeId;
+		}
+
+		public int getToUserNo() {
+			return toUserNo;
+		}
+
+		public void setToUserNo(int toUserNo) {
+			this.toUserNo = toUserNo;
+		}
+
+		public int getFromUserNo() {
+			return fromUserNo;
+		}
+
+		public void setFromUserNo(int fromUserNo) {
+			this.fromUserNo = fromUserNo;
+		}
+
+		public int getTrashRecipient() {
+			return trashRecipient;
+		}
+
+		public void setTrashRecipient(int trashRecipient) {
+			this.trashRecipient = trashRecipient;
+		}
+
+		public int getTrashWriter() {
+			return trashWriter;
+		}
+
+		public void setTrashWriter(int trashWriter) {
+			this.trashWriter = trashWriter;
+		}
+
+		public int getPageNum() {
+			return pageNum;
+		}
+
+		public void setPageNum(int pageNum) {
+			this.pageNum = pageNum;
+		}
+		
+		
 	}

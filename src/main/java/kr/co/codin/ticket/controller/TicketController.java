@@ -35,7 +35,7 @@ public class TicketController {
 	@RequestMapping("list.do")
 	public void list(Model model, HttpSession session, @RequestParam(value="pageNo", defaultValue="1") int pageNo) {
 
-		int ticketNum = 10;
+		int ticketNum = 5;
 		int pageNum = 10;
 		
 		TicketPage page = new TicketPage(ticketNum);
@@ -144,7 +144,7 @@ public class TicketController {
 	public void sendList(Model model, HttpSession session, @RequestParam(value="pageNo", defaultValue="1") int pageNo) {
 		
 		// 초기 설정 
-		int ticketNum = 10;
+		int ticketNum = 5;
 		int pageNum = 10;
 		
 		TicketPage page = new TicketPage(ticketNum);

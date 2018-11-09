@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Gallary - 글 목록 - Codin</title>
 <%@ include file="/WEB-INF/jsp/include/basicInclude.jsp" %>
 <style>
 	h2{

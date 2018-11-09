@@ -59,7 +59,14 @@ select, .date{
     margin: 5px 10px;
     display: inline-block;
     position: relative;
+    overflow: hidden;
 }
+
+.people > span {
+	font-size: 10px;
+}
+
+
 .delete {
     position: absolute;
     top: 0px;

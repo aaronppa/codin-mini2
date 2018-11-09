@@ -22,7 +22,11 @@ public class BoardServiceImpl implements BoardService{
 		//System.out.println(PageNo);
 		// TODO Auto-generated method stub
 	//	System.out.println("맥스 모스NO:"+mapper.MaxBoardNo());
-		return mapper.selectBoard((PageNo-1)*20);
+		if(PageNo == 1 ) {
+			 return mapper.selectBoard((PageNo));
+		}else {
+			return mapper.selectBoard((PageNo-1)*20);
+		}
 	}
 
 	@Override

@@ -13,7 +13,7 @@ $(window).bind("load", function(e){
 		})
 		.done(function(result){
 			console.dir("mailreplyall result: ",result)
-			var recipientLabel="";
+			var recipientLabel="<li class='removelabel' id='rToUserNo"+result.fromUserNo+"' onclick='removeLabel(this)'>"+result.fromUserName+"("+result.fromUserId+")<i class='fas fa-user-times' id='remove-recipient' data='wToUserNo"+result.fromUserNo+"'><input type='hidden' class='form-control info' id='rToUserNo"+result.fromUserNo+"' name='toUserNo' value='"+result.fromUserNo+"'></i></li>"
 			for(var recipient of result.recipients){
 				recipientLabel += "<li class='removelabel' id='rToUserNo"+recipient.toUserNo+"' onclick='removeLabel(this)'>"+recipient.toUserName+"("+recipient.toUserId+")<i class='fas fa-user-times' id='remove-recipient' data='wToUserNo"+recipient.toUserNo+"'><input type='hidden' class='form-control info' id='rToUserNo"+recipient.toUserNo+"' name='toUserNo' value='"+recipient.toUserNo+"'></i></li>"
 			}			

@@ -129,7 +129,9 @@ $(document).ready(function(){
  		
  			var Mathnanugi = result%10;
  	
- 			if(NowPageChecking != rTotalPage){
+ 			if(isNaN(rTotalPage)){
+ 	             
+ 	          }else if(NowPageChecking != rTotalPage){
  				var pageNo = NowPageChecking*10;
  		
 		 		for(var i=1; i<=10;i++ ){
@@ -295,6 +297,8 @@ $(document).ready(function(){
 	<script>
 		//$("#pagingDiv > .pagination > li:nth(1)").before("<li><a href='/codin_mini/board/listForm.do?pageNo=1'>sdfsdfsdf<</a></li>")
 		var prev = $(location).attr('search').substring(8)-1;
+		if(prev == -1)$("#prevPage").remove();
+        $("#moveFirstpage").remove();
 		
 		$("#pagingDiv > .pagination").prepend("<li ><a id='moveFirstpage'  href='/codin_mini/board/list.do?pageNo=1'><<</a></li><li><a id='prevPage' href='/codin_mini/board/list.do?pageNo="+prev+"'><");
 		

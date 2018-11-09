@@ -84,7 +84,7 @@
                    <textarea name="boardContent" id="summernote" style="resize: none; overflow-y: auto;"></textarea>
                  
                 <button id="writeBTN" type="submit"><img src="/codin_mini/resources/img/KakaoTalk20181028221348368.gif" style="height: 40px;"></button>
-                 <a href="list.do?PageNo=1"><img src="/codin_mini/resources/img/KakaoTalk20181028221340213.gif" style="height: 40px;"></a>
+                 <a href="list.do?pageNo=1"><img src="/codin_mini/resources/img/KakaoTalk20181028221340213.gif" style="height: 40px;"></a>
               
             </form>
      

@@ -63,6 +63,7 @@ select, .date{
     margin: 5px 10px;
     display: inline-block;
     position: relative;
+    overflow: hidden;
 }
 .delete {
     position: absolute;

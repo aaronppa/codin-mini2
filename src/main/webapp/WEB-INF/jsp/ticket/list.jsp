@@ -129,7 +129,7 @@
 	   	
 	   	$(".detail").click(function() {
 			var ticketNo = $(this).parent().parent().children(".ticketNo").html()
-	   		window.open("/codin_mini/ticket/detail.do?ticketNo="+ticketNo, "detail", "width=1030, height=700, location=no");		
+	   		window.open("/codin_mini/ticket/detail.do?ticketNo="+ticketNo, "detail", "width=1030, height=750, location=no");		
 	   	})
 	   	
 	   		   	

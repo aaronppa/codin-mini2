@@ -145,10 +145,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/deleteAccount.do")
-	@ResponseBody
 	public String deleteAccount(HttpSession session, int memberNo) {
-		session.invalidate();
 		service.deleteAccount(memberNo);
+		Member member = (Member)session.getAttribute("user");
+		System.out.println("memberGrade : " + member.getMemberGrade());
+		if (member.getMemberGrade().equals("a")) {
+			return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "list.do";
+		}
+			session.invalidate();
 		return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "loginForm.do";
 	}
 	

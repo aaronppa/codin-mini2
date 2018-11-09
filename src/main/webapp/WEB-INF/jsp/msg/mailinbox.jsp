@@ -105,7 +105,7 @@ window.onload = displayinbox(2);
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="<c:url value='/msg/write.do'/>" method="post" autocomplete="off" onSubmit="return checkR();">
+					<form action="<c:url value='/msg/write.do'/>" method="post" autocomplete="off" onsubmit="return checkR()">
 						<div class="form-group info ui-front">
 							<!-- 수신자 검색 자동완성 추가 필요 -->
 							<input type="hidden" class="form-control info" id="wfromUserNo" name="fromUserNo" value="${user.memberNo}">
@@ -158,5 +158,14 @@ window.onload = displayinbox(2);
 
 <!-- Search User -->
 <script src="<c:url value="/resources/script/msg/searchMember.js"/>" ></script>
+<script>
+function checkR(){
+	console.log($("input[name='toUserNo']").val());
+	if($("input[name='toUserNo']").val()==undefined){
+		return false;
+	}
+	return true;
+}
+</script>
 </body>
 </html>

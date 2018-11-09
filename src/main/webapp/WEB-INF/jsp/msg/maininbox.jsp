@@ -12,7 +12,6 @@
 <style>
 </style>
 </head>
-
 <body>
 <c:import url="/WEB-INF/jsp/include/top.jsp" />
     <div class="container-fluid">
@@ -35,7 +34,7 @@
         </div>
         <div class="container-body col-10">
            <div class="searchcontainer">
-               <form class="searchform" method="get" id="aso_search_form_anchor">
+               <form class="searchform" method="get" role="search" id="aso_search_form_anchor">
                     <div class="searchbox" gh="sb">
                      <input class="searchkeyword" aria-label="Search mail" autocomplete="off" placeholder="Search mail" value="" name="q" type="text" dir="ltr" spellcheck="false" aria-haspopup="true" aria-live="off" aria-owns="gs_sbt50" aria-activedescendant="gs_anrs50_0">
                     <button class="clearsearch" aria-label="Clear search" type="button">
@@ -103,8 +102,8 @@ window.onload = displayinbox(0);
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form action="<c:url value='/msg/write.do'/>" method="post" autocomplete="off" onSubmit="return checkR();">
 				<div class="modal-body">
+					<form action="<c:url value='/msg/write.do'/>" method="post" autocomplete="off">
 						<div class="form-group info ui-front">
 							<!-- 수신자 검색 자동완성 추가 필요 -->
 							<input type="hidden" class="form-control info" id="wfromUserNo" name="fromUserNo" value="${user.memberNo}">
@@ -154,17 +153,6 @@ window.onload = displayinbox(0);
 		// 이를 처리하기 위해서 사용하는 코드 
 		$("#searchRecipient").autocomplete("option", "appendTo", "#writeFormModal");
 	});
-</script>
-
-<script>
-function checkR(){
-	console.log("되라...");
-	if(form.toUserNo.val()!=""){
-		return true;
-	}
-	alert("수신자 미입력!");
-	return false;
-};
 </script>
 
 <!-- Search User -->

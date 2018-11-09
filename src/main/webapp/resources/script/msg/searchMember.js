@@ -75,3 +75,9 @@ $("#recipientAddedLabel").on("click",'.removelabel', function(){
 	$(this).remove();
 });
 
+function checkR(){
+	if($("input[name='toUserNo']").val()==undefined){
+		return false;
+	}
+	return true;
+};

@@ -102,7 +102,7 @@ window.onload = displayinbox(3);
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="<c:url value='/msg/write.do'/>" method="post" autocomplete="off">
+					<form action="<c:url value='/msg/write.do'/>" method="post" autocomplete="off" onSubmit="return checkR();">
 						<div class="form-group info ui-front">
 							<!-- 수신자 검색 자동완성 추가 필요 -->
 							<input type="hidden" class="form-control info" id="wfromUserNo" name="fromUserNo" value="${user.memberNo}">

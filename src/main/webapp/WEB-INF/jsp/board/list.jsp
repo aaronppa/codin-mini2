@@ -160,7 +160,7 @@ $(document).ready(function(){
  			console.log(location.href);
  			console.log("d"+"http://localhost:8000/codin_mini/board/list.do?pageNo="+result);
  			if(location.href=="http://localhost:8000/codin_mini/board/list.do?pageNo="+result){
- 				console.log("왜안오ㅓ?");
+ 			
  				$("#nextPage").remove();
  				$("#moveLastPage").remove();
  			}
@@ -303,21 +303,20 @@ $(document).ready(function(){
 		$("#pagingDiv > .pagination").prepend("<li ><a id='moveFirstpage'  href='/codin_mini/board/list.do?pageNo=1'><<</a></li><li><a id='prevPage' href='/codin_mini/board/list.do?pageNo="+prev+"'><");
 		
 		$("#button").click(function(){
-				console.log("씨발");
+				
 		  		$.ajax({
 		 			url:"<c:url value='/board/listForm.do'/>",
 		 			data:{boardId:boardId},
 		 			type:"post"
 		 		}).done(function(result){
 		 			
-		 			console.log("성공");
+	
 		 		}).fail(function(result){
-		 			console.log("실패");
+		 
 		 		}) 
 		 	}) 
 				
-		 	
-		 	console.log("씨발");
+	
 		
 
 		//$("#pagingDiv > .pagination >li:nth-(last)").append("<li><a href='#'>>></a></li>");

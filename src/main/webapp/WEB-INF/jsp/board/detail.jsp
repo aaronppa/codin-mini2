@@ -89,8 +89,8 @@ $(document).ready(function(){
  		var object = Object.keys(result)
  		var length = object.length;
  		//console.log(result[0].commentDate);
- 		var date = new Date(result[0].commentDate);
- 		console.log(date);
+ 	//	var date = new Date(result[0].commentDate);
+ 		//console.log(date);
  		//console.log("시간"+sysdate);
  		//var length = result.length();
  		//console.log(length);

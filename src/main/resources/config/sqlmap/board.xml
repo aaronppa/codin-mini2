@@ -9,7 +9,7 @@
 		<result column="board_content" property="boardContent"/>
 		<result column="board_id" property="boardId"/>
 		<result column="board_date" property="boardDate"/>
-		<result column="category_no" property="boardNo"/>	
+		<result column="category_no" property="categoryNo"/>	
 		<result column="board_viewCnt" property="boardViewCnt"/>
 	</resultMap>
 

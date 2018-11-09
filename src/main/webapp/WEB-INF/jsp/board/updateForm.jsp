@@ -90,7 +90,7 @@
      
  			
     </div>
-     <div>${user.memberId} </div>
+    
     <script>
         	
     

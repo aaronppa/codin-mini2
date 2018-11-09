@@ -30,9 +30,9 @@ public class BoardController {
 	
 	@RequestMapping("list.do")
 	
-	public void listForm(Model model,int pageNo,BoardPage boardpage) throws Exception{
+	public void list(Model model,int pageNo,BoardPage boardpage) throws Exception{
 		System.out.println("listForm의 PageNo:"+pageNo);
-	
+		
 		//service.listBoard(pageNo);//여기서 터졌음
 		
 		//service.MaxPageNo();
@@ -95,33 +95,18 @@ public class BoardController {
 	
 	@RequestMapping("ajaxPaingList.do")
 	@ResponseBody
-	public int PageList(Integer pageNo){
-		
+	public int PageList(Integer pageNo,String boardId){
+		System.out.println(boardId);
 		System.out.println("pageList에서 찍은 pageNo:"+pageNo);
 		
 	
 		
 		if(service.checkingContentCnt()%20 ==0) {
-//			int k=(int)pageNo/10;
-//			Map<String, Integer> list= new HashMap<String, Integer>();
-//			//	String AfrestPage= new InnerPage().AfirstPage();
-//				list.put("firstPage", k+1);
-//				list.put("lastPage", k+9);
-		System.out.println("첫번째if 걸림");
-		
+
 		return (int)Math.floor(service.checkingContentCnt()/20);//라스트 페이지
 		//return  list;
 		}else {
-			int k=(int)pageNo/10;
-			Map<String, Integer> list= new HashMap<String, Integer>();
-			//	String AfrestPage= new InnerPage().AfirstPage();
-				list.put("firstPage", k+1);
-				list.put("lastPage", k+9);
-		System.out.println(new BoardPage().getEndPage());
-
-		System.out.println("else걸림");
-
-		System.out.println("endPage"+new BoardPage().getEndPage());
+		
 		return (int)Math.floor(service.checkingContentCnt()/20+1);
 		//return list;
 	}

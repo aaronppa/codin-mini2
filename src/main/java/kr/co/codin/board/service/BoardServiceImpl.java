@@ -28,10 +28,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void write(Board board) {
 		mapper.insertBoard(board);
-		System.out.println(board.getBoardTitle());
-		System.out.println(board.getBoardId());
-		System.out.println(board.getBoardContent());
-		String ddd=board.getBoardContent();
+	
 		
 	}
 
@@ -44,10 +41,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void CommentWrite(BoardComment comment) {
-		System.out.println("서비스 접근완료");
-		System.out.println(comment.getCommentContent());
-		System.out.println(comment.getCommentId());
-		System.out.println(comment.getBoardNo());
+		
 		mapper.insertComment(comment);
 	}
 
@@ -59,17 +53,14 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void deleteContent(Board Board) {
-//		System.out.println(boardNo);
+
 		mapper.DeleteBoard(Board);
 		
 	}
 
 	@Override
 	public void updateContent(Board board) {
-		System.out.println(board.getBoardContent());
-		System.out.println(board.getBoardNo());
-		System.out.println(board.getBoardWriter());
-		// TODO Auto-generated method stub
+		
 		 mapper.updateBoard(board);
 		
 	

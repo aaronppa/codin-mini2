@@ -10,8 +10,7 @@
 <title>Insert title here</title>
 
 <%@ include file="/WEB-INF/jsp/include/basicInclude.jsp"%>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
 
@@ -53,16 +52,20 @@ table>thead>tr>th, table>tbody>tr>td {
 	width: 60%;
 	margin-left: 20%;
 	height: 30px;
+	
 }
 
 #selectList {
-	width: 30px;
-	margin-top: 50px;
+	width: 100%;
+	margin-top: 30px;
 }
 
 #selectForm {
 	width: 440px;
-	float: right;
+	
+	position:relative;
+	left:509px;
+	
 }
 
 #reportList {
@@ -71,6 +74,8 @@ table>thead>tr>th, table>tbody>tr>td {
 	position: relative;
 	float: left;
 }
+
+
 </style>
 <script>
 
@@ -92,7 +97,7 @@ $(document).ready(function(){
  			data:{pageNo:pageNo},
  			type:"get"
  		}).done(function(result){
- 			console.log("result"+result);//총페잊
+ 		//	console.log("result"+result);//총페잊
   			//result 총 페이지
   			//result
   			
@@ -129,7 +134,7 @@ $(document).ready(function(){
  		
 		 		for(var i=1; i<=10;i++ ){
 		 			++pageNo;
-		 			$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/list.do?pageNo="+pageNo+"'>"+pageNo+"</a></li>");
+		 			$("#pagingDiv > .pagination").append("<li ><a id='pageIndex"+pageNo+"' href='/codin_mini/board/list.do?pageNo="+pageNo+"'>"+pageNo+"</a></li>");
 		 		}		
 		 			
 		 			$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/list.do?pageNo="+NextPage+"'>><li><a href='/codin_mini/board/list.do?pageNo="+result+"'>>></a></li>");
@@ -144,10 +149,29 @@ $(document).ready(function(){
  					//var elsePage= pageNo
  					for(var i=1; i<=lastPage;i++ ){
  				 		++pageNo;
- 			 			$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/list.do?pageNo="+pageNo+"'>"+pageNo+"</a></li>");
+ 			 			$("#pagingDiv > .pagination").append("<li ><a id='pageIndex"+pageNo+"'  href='/codin_mini/board/list.do?pageNo="+pageNo+"'>"+pageNo+"</a></li>");
  			 		}			
- 			 			$("#pagingDiv > .pagination").append("<li><a href='/codin_mini/board/list.do?pageNo="+NextPage+"'>><li><a href='/codin_mini/board/list.do?pageNo="+result+"'>>></a></li>");
+ 			 			$("#pagingDiv > .pagination").append("<li><a id='nextPage' href='/codin_mini/board/list.do?pageNo="+NextPage+"'>><li><a id='moveLastPage' href='/codin_mini/board/list.do?pageNo="+result+"'>>></a></li>");
  				}
+ 			
+ 			console.log(result);
+ 			console.log(location.href);
+ 			console.log("d"+"http://localhost:8000/codin_mini/board/list.do?pageNo="+result);
+ 			if(location.href=="http://localhost:8000/codin_mini/board/list.do?pageNo="+result){
+ 				console.log("왜안오ㅓ?");
+ 				$("#nextPage").remove();
+ 				$("#moveLastPage").remove();
+ 			}
+ 			if(location.href=="http://localhost:8000/codin_mini/board/list.do?pageNo=1"){
+ 				console.log("왜안오ㅓ?");
+ 				$("#prevPage").remove();
+ 				$("#moveFirstpage").remove();
+ 			}
+ 			
+ 			console.log(pageNo);
+ 			console.log($(location).attr('search').substring(8));
+ 			//$("#pageIndex"+$(location).attr('search').substring(8)).addClass('active');
+ 		$("#pageIndex"+$(location).attr('search').substring(8)).closest("li").addClass("active");
 		 }).fail(function(result){
 		 			alert("실패");
 		 })
@@ -155,37 +179,39 @@ $(document).ready(function(){
  	
 
  	}).fail(function(result){
- 		alert(result);
+ 	//	alert(result);
+ 		
  		
  	})
+
 })
 </script>
 </head>
 <body>
 	<c:import url="/WEB-INF/jsp/include/top.jsp" />
-	<div style="position: relative;top 100px;">${user.memberId}
+	<div style="position: relative;top 100px;">
 		</div>
 	<div id="selectorMenu">
 
 
 
-		<span id="selectList">
+		
 
-			<form id="reportList">
+	<!-- 		<form id="reportList">
 				<button>
 					<img src="/codin_mini/resources/img/KakaoTalk20181028224537696.gif"
 						style="height: 25px;">
 				</button>
-			</form>
+			</form> -->
 
 			<form id="selectForm" method="post">
-				<select id="item" style="height: 30px;">
-					<option>제목</option>
-					<option>닉네임</option>
-					<option>내용</option>
+				<select id="dd"  style="height: 30px;">
+					<option id="boardTitle">제목</option>
+					<option id="boardId">닉네임</option>
+					<option id="boardContent" >내용</option>
 					<option>내가 쓴 글 검색</option>
-				</select> <input type="text" name="search" style="height: 30px;"> <select
-					id="selectDate" style="height: 30px;">
+				</select> <input type="text" name="search" style="height: 30px;"> 
+				<select id="selectDate" style="height: 30px;">
 					<option>기간선택</option>
 					<option>최근 1개월</option>
 					<option>최근 3개월</option>
@@ -198,7 +224,7 @@ $(document).ready(function(){
 						style="height: 25px;">
 				</button>
 			</form>
-		</span>
+		
 	</div>
 
 
@@ -270,8 +296,26 @@ $(document).ready(function(){
 		//$("#pagingDiv > .pagination > li:nth(1)").before("<li><a href='/codin_mini/board/listForm.do?pageNo=1'>sdfsdfsdf<</a></li>")
 		var prev = $(location).attr('search').substring(8)-1;
 		
-		$("#pagingDiv > .pagination").prepend("<li><a href='/codin_mini/board/list.do?pageNo=1'><<</a></li><li><a href='/codin_mini/board/list.do?pageNo="+prev+"'><");
+		$("#pagingDiv > .pagination").prepend("<li ><a id='moveFirstpage'  href='/codin_mini/board/list.do?pageNo=1'><<</a></li><li><a id='prevPage' href='/codin_mini/board/list.do?pageNo="+prev+"'><");
 		
+		$("#button").click(function(){
+				console.log("씨발");
+		  		$.ajax({
+		 			url:"<c:url value='/board/listForm.do'/>",
+		 			data:{boardId:boardId},
+		 			type:"post"
+		 		}).done(function(result){
+		 			
+		 			console.log("성공");
+		 		}).fail(function(result){
+		 			console.log("실패");
+		 		}) 
+		 	}) 
+				
+		 	
+		 	console.log("씨발");
+		
+
 		//$("#pagingDiv > .pagination >li:nth-(last)").append("<li><a href='#'>>></a></li>");
 		//$("#pagingDiv > .pagination").children("li").html("dd")
 	</script>

@@ -85,9 +85,6 @@
 <!-- Display Msg Script-->
 <script  src="<c:url value="/resources/script/msg/displayinbox.js"/>" ></script>
 <script>
-$(".trashicon.tooltip").tooltipster(function(){
-	/* alert("보낸메일은 삭제되어도 본인 보낸메일함에서만 해당 메세지가 이동한 것이고 수신자의 메세지함에는 영향이 없습니다.") */
-})
 const thisUserNo = ${user.memberNo};
 window.onload = displaydrafsentbox(1); 
 </script>

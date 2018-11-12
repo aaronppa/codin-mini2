@@ -15,6 +15,7 @@ $(window).bind("load", function(e){
 			console.dir("mailreplyall result: ",result)
 			var recipientLabel="<li class='removelabel' id='rToUserNo"+result.fromUserNo+"' onclick='removeLabel(this)'>"+result.fromUserName+"("+result.fromUserId+")<i class='fas fa-user-times' id='remove-recipient' data='wToUserNo"+result.fromUserNo+"'><input type='hidden' class='form-control info' id='rToUserNo"+result.fromUserNo+"' name='toUserNo' value='"+result.fromUserNo+"'></i></li>"
 			for(var recipient of result.recipients){
+				if(recipient.toUserNo==thisUserNo){continue;}
 				recipientLabel += "<li class='removelabel' id='rToUserNo"+recipient.toUserNo+"' onclick='removeLabel(this)'>"+recipient.toUserName+"("+recipient.toUserId+")<i class='fas fa-user-times' id='remove-recipient' data='wToUserNo"+recipient.toUserNo+"'><input type='hidden' class='form-control info' id='rToUserNo"+recipient.toUserNo+"' name='toUserNo' value='"+recipient.toUserNo+"'></i></li>"
 			}			
 			$(".replyfn").replaceWith(

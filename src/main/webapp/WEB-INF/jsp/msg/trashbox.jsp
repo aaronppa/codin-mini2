@@ -49,7 +49,7 @@
             </div>
             <div class="table-wrapper canvasboard">
 	            <div class="restoreicon">
-	           	<i class="far fa-trash-alt"></i>
+	           	<i class="fas fa-redo-alt"></i>
 	           	</div>
                 <div class="msglist">
                     <table class="table table-hover">
